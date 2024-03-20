@@ -102,7 +102,9 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
     /// \brief data
     /// \return
     ///
-    const Data_t* data() const { return m_buffer.data(); }
+    const Data_t* data() const {
+        return m_buffer.data();
+    }
 
     ///
     /// \brief hasType
@@ -174,7 +176,9 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
     ///
     /// \brief toString
     ///
-    constexpr auto toString() const { return name() + " = " + m_buffer.toString(); }
+    constexpr auto toString() const {
+        return name() + " = " + m_buffer.toString();
+    }
 
     ///
     /// \brief get
@@ -212,7 +216,9 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
     /// \param mat
     /// \return
     ///
-    bool operator==( const Matrix& mat ) { return getMatrix() == mat; }
+    bool operator==( const Matrix& mat ) {
+        return getMatrix() == mat;
+    }
 
   private:
     // Buffer<Type, Capacity> m_buffer;

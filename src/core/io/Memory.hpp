@@ -84,11 +84,28 @@ class MemoryT : public InputOutputT
 
     void close() override {};
 
-    bool isOpen() const override { return true; }
+    ///
+    /// \brief isOpen
+    /// \return
+    ///
+    bool isOpen() const override {
+        return true;
+    }
 
-    bool isEnd() const override { return m_data.empty(); }
+    ///
+    /// \brief isEnd
+    /// \return
+    ///
+    bool isEnd() const override {
+        return m_data.empty();
+    }
 
-    void clear() override { m_data.clear(); }
+    ///
+    /// \brief clear
+    ///
+    void clear() override {
+        m_data.clear();
+    }
 
     void setRetain( bool retained ) override {}
 

@@ -85,9 +85,21 @@ class ArchiveT : public InputOutputT
 
     void close() override {};
 
-    bool isOpen() const override { return true; }
+    ///
+    /// \brief isOpen
+    /// \return
+    ///
+    bool isOpen() const override {
+        return true;
+    }
 
-    bool isEnd() const override { return m_datas.empty(); }
+    ///
+    /// \brief isEnd
+    /// \return
+    ///
+    bool isEnd() const override {
+        return m_datas.empty();
+    }
 
     void clear() override {
         while ( !m_datas.empty() )
@@ -101,7 +113,9 @@ class ArchiveT : public InputOutputT
     /// \return
     ///
 #ifndef HUB_NON_BUILD_IO
-    const Header& getHeader() const { return m_header; }
+    const Header& getHeader() const {
+        return m_header;
+    }
 #endif
 
 #ifdef DEBUG
@@ -110,13 +124,17 @@ class ArchiveT : public InputOutputT
     /// Able to compare stats between other IO implements.
     /// \return The number of io calls.
     ///
-    size_t getNCall() const { return m_nCall; }
+    size_t getNCall() const {
+        return m_nCall;
+    }
 
     ///
     /// \brief Get the latest io call size.
     /// \return The latest io call size.
     ///
-    size_t getLastCallSize() const { return m_lastCallSize; }
+    size_t getLastCallSize() const {
+        return m_lastCallSize;
+    }
 #endif
 
   private:

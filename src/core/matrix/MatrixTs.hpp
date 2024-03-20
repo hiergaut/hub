@@ -100,13 +100,17 @@ requires( sizeof...( Types ) > 1 )
     /// \brief data
     /// \return
     ///
-    const Data_t* data() const { return m_buffer.data(); }
+    const Data_t* data() const {
+        return m_buffer.data();
+    }
 
     ///
     /// \brief data
     /// \return
     ///
-    Data_t* data() { return m_buffer.data(); };
+    Data_t* data() {
+        return m_buffer.data();
+    };
 
     ///
     /// \brief hasType
@@ -248,13 +252,17 @@ requires( sizeof...( Types ) > 1 )
     /// \brief name
     /// \return
     ///
-    static CONSTEXPR20 std::string name() { return printName<Types...>(); }
+    static CONSTEXPR20 std::string name() {
+        return printName<Types...>();
+    }
 
     ///
     /// \brief toString
     /// \return
     ///
-    constexpr auto toString() const { return name() + " = " + m_buffer.toString(); }
+    constexpr auto toString() const {
+        return name() + " = " + m_buffer.toString();
+    }
 
     ///
     /// \brief getOffset
@@ -272,7 +280,9 @@ requires( sizeof...( Types ) > 1 )
     /// \brief serialize
     /// \param mat
     ///
-    void serialize( Matrix& mat ) const { serialize_<Types...>( mat ); }
+    void serialize( Matrix& mat ) const {
+        serialize_<Types...>( mat );
+    }
 
     ///
     /// \brief getMatrix
@@ -290,7 +300,9 @@ requires( sizeof...( Types ) > 1 )
     /// \param mat
     /// \return
     ///
-    bool operator==( const Matrix& mat ) const { return getMatrix() == mat; }
+    bool operator==( const Matrix& mat ) const {
+        return getMatrix() == mat;
+    }
 
  // private:
     ///
