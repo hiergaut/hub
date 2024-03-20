@@ -268,6 +268,13 @@ add_custom_target(
     COMMENT "Format sources")
 custom_target_added(format)
 
+add_custom_target(
+    hub-cleanup
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMAND scripts/cleanup-project.sh
+    COMMENT "Cleanup project")
+custom_target_added(cleanup)
+
 option(HUB_ENABLE_WRAPPER "Enable wrapper" OFF)
 if(HUB_ENABLE_WRAPPER)
     add_subdirectory(wrapper)
