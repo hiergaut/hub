@@ -128,7 +128,20 @@ if(NOT DEFINED CMAKE_INSTALL_PREFIX)
 endif()
 
 set(HUB_PROJECT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-add_definitions(-DHUB_PROJECT_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/\")
+add_definitions(-DHUB_PROJECT_DIR=\"${HUB_PROJECT_DIR}/\")
+
+set(HUB_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
+add_definitions(-DHUB_BUILD_DIR=\"${HUB_BUILD_DIR}/\")
+
+option(HUB_SAVE_STATS "Save build/test statistics" ON)
+set(HUB_STATS_DIR "")
+if(HUB_SAVE_STATS)
+    add_definitions(-DHUB_SAVE_STATS=true)
+    set(HUB_STATS_DIR "${HUB_BUILD_DIR}/stats/")
+else()
+    add_definitions(-DHUB_SAVE_STATS=false)
+endif()
+add_definitions(-DHUB_STATS_DIR=\"${HUB_STATS_DIR}\")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
