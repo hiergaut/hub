@@ -27,6 +27,7 @@ Current head v.2.1.0 rc
   * Check project use as external project (#53)
 - Tests
   * Fix timeout error on macos (#33)
+  * Check coverage decline (#46)
 - Documentation
   * Fix doxygen (#20)
   * Fix sphinx (#26)
