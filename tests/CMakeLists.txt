@@ -2,6 +2,7 @@
 
 project(tests LANGUAGES CXX)
 
+
 set(LINK_LIBRARIES Catch2::Catch2WithMain hub)
 set(INCLUDE_LIBRARIES)
 
