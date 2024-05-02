@@ -59,6 +59,7 @@ jobs:
             -DCMAKE_CXX_COMPILER=${{ inputs.cxx }} -DCMAKE_BUILD_TYPE=${{ inputs.build-type }}
             -DCMAKE_INSTALL_PREFIX="install" -DHUB_ENABLE_TESTS=ON
             -DHUB_ENABLE_COVERAGE=${{ inputs.coverage }}
+            # -DHUB_STATS_DIR="${{ env.build_dir }}/stats"
 
     - name: Build
       run: cmake --build ${{ env.build_dir }} --config ${{ inputs.build-type }}
