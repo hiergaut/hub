@@ -87,6 +87,7 @@ std::string ViewerClient::headerMsg() const {
 
 void ViewerClient::notifyNewStreamer( const StreamerClient* streamer ) {
 
+    // todo catch exception if streamer socket is dead
     m_socket.write( hub::io::StreamBase::ServerMessage::VIEWER_NEW_STREAMER );
     m_socket.write( streamer->m_streamName );
 
@@ -112,6 +113,9 @@ void ViewerClient::notifyNewStreamer( const StreamerClient* streamer ) {
 
 void ViewerClient::notifyDelStreamer( const std::string& streamName ) {
     if ( m_viewerClosed ) return;
+
+    if (! m_socket.isOpen())
+        return;
 
     try {
         m_socket.write( hub::io::StreamBase::ServerMessage::VIEWER_DEL_STREAMER );
