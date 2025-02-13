@@ -16,7 +16,7 @@ env:
 
 jobs:
 
-  cppCheck:
+  CppCheck:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
         && cmake --build ${{github.workspace}}/build --target hub-cppCheck
    
 
-  doxygen:
+  Doxygen:
     runs-on: ubuntu-latest
 
     steps:
@@ -50,7 +50,7 @@ jobs:
         cmake --build ${{github.workspace}}/build --target hub-doc-doxygen
 
 
-  format:
+  Format:
     runs-on: ubuntu-latest
 
     steps:
@@ -76,7 +76,7 @@ jobs:
 
 
   Ubuntu_gcc:
-    needs: [cppCheck, doxygen, format]
+    needs: [CppCheck, Doxygen, Format]
     uses: ./.github/workflows/all.yml
     with:
       name: Ubuntu gcc
@@ -88,7 +88,7 @@ jobs:
       icon: Linux
 
   Windows_MSVC:
-    needs: [cppCheck, doxygen, format]
+    needs: [CppCheck, Doxygen, Format]
     uses: ./.github/workflows/all.yml
     with:
       name: Windows MSVC
@@ -99,7 +99,7 @@ jobs:
       icon: Windows
 
   MacOS_clang:
-    needs: [cppCheck, doxygen, format]
+    needs: [CppCheck, Doxygen, Format]
     uses: ./.github/workflows/all.yml
     with:
       name: MacOS clang
