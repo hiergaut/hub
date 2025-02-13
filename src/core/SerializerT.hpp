@@ -15,10 +15,11 @@
 
 #pragma once
 
+#include <cstring>
+
 #include "core/Base.hpp"
 #include "core/InputBase.hpp"
 #include "core/OutputBase.hpp"
-#include "cstring"
 
 namespace hub {
 
@@ -315,10 +316,9 @@ class SRC_API SerializerT
     /// \param ts
     /// \return
     ///
-    template <class... Ts>
-    // REQUIRES(, Serializables<Ts...>, void )
-    typename std::enable_if_t<Serializables<Ts...>, void>
     // cppcheck-suppress missingReturn
+    template <class... Ts>
+    typename std::enable_if_t<Serializables<Ts...>, void>
     writeAll( const Ts&... ts ) {
         const auto lastPosition = m_serializer.outPosition();
 
@@ -326,6 +326,8 @@ class SRC_API SerializerT
 
         const auto newPosition = m_serializer.outPosition();
         m_dataWrote += newPosition - lastPosition;
+
+        return; // weird cppcheck missingReturn (2.7)
     }
 
     ///
@@ -334,14 +336,15 @@ class SRC_API SerializerT
     /// \param ts
     /// \return
     ///
-    template <class T, class... Ts>
-    // REQUIRES(, (!Serializables<T, Ts...>), void )
-    typename std::enable_if_t<(!Serializables<T, Ts...>), void>
     // cppcheck-suppress missingReturn
+    template <class T, class... Ts>
+    typename std::enable_if_t<(!Serializables<T, Ts...>), void>
     writeAll( const T& t,
                                                                           const Ts&... ts ) {
         write( t );
         if constexpr ( sizeof...( Ts ) > 0 ) { writeAll( ts... ); }
+
+        return; // weird cppcheck missingReturn (2.7)
     }
 
     /////////////////////////////////// READ ALL ////////////////////////////////
@@ -351,10 +354,9 @@ class SRC_API SerializerT
     /// \param ts
     /// \return
     ///
-    template <class... Ts>
-    // REQUIRES(, Serializables<Ts...>, void )
-    typename std::enable_if_t<Serializables<Ts...>, void>
     // cppcheck-suppress missingReturn
+    template <class... Ts>
+    typename std::enable_if_t<Serializables<Ts...>, void>
     readAll( Ts&... ts ) {
         const auto lastPosition = m_serializer.inPosition();
 
@@ -362,6 +364,8 @@ class SRC_API SerializerT
 
         const auto newPosition = m_serializer.inPosition();
         m_dataReaded += newPosition - lastPosition;
+
+        return; // weird cppcheck missingReturn (2.7)
     }
 
     ///
@@ -370,13 +374,14 @@ class SRC_API SerializerT
     /// \param ts
     /// \return
     ///
-    template <class T, class... Ts>
-    // REQUIRES(, (!Serializables<T, Ts...>), void )
-    typename std::enable_if_t<(!Serializables<T, Ts...>), void>
     // cppcheck-suppress missingReturn
+    template <class T, class... Ts>
+    typename std::enable_if_t<(!Serializables<T, Ts...>), void>
     readAll( T& t, Ts&... ts ) {
         read( t );
         if constexpr ( sizeof...( Ts ) > 0 ) { readAll( ts... ); }
+
+        return; // weird cppcheck missingReturn (2.7)
     }
 
     /////////////////////////////////// TEMPLATE ////////////////////////////////////
@@ -429,10 +434,9 @@ class SRC_API SerializerT
     /// \param t
     /// \return
     ///
-    template <class T>
-    // REQUIRES(, ! Writable_v<T>, void )
-    typename std::enable_if_t<!Writable_v<T>, void>
     // cppcheck-suppress missingReturn
+    template <class T>
+    typename std::enable_if_t<!Writable_v<T>, void>
     write( const T& t ) {
 
         const auto lastPosition = m_serializer.outPosition();
@@ -449,6 +453,7 @@ class SRC_API SerializerT
         DEBUG_MSG( "<---" << HEADER << "\033[1;36mwrite\033[0m(serial: " << TYPE_NAME( t ) << ") = "
                           << t << " (" << lastPosition << "->" << newPosition << ")" << data );
 #endif
+        return; // weird cppcheck missingReturn (2.7)
     }
 
     //////////////////////////////////
@@ -502,10 +507,9 @@ class SRC_API SerializerT
     /// \param t
     /// \return
     ///
-    template <class T>
-    // REQUIRES(, ! Readable_v<T>, void )
-    typename std::enable_if_t<!Readable_v<T>, void>
     // cppcheck-suppress missingReturn
+    template <class T>
+    typename std::enable_if_t<!Readable_v<T>, void>
     read( T& t ) {
 #ifdef HUB_DEBUG_INPUT
         // DEBUG_MSG( "\t--->" << HEADER << "\033[1;36mread\033[0m(serial: " << TYPE_NAME( t )
@@ -526,6 +530,7 @@ class SRC_API SerializerT
                             << ") = " << t << " (" << lastPosition << "->" << newPosition << ")"
                             << data );
 #endif
+        return; // weird cppcheck missingReturn (2.7)
     }
 
     /////////////////////////////////// CHAR PTR //////////////////////////////////////////////////
@@ -647,11 +652,11 @@ class SRC_API SerializerT
     typename std::enable_if_t<(!Serializables<T, U>), void>
     read( std::map<T, U>& map ) {
 
-        uint64_t nbEl = 0;
+        uint64_t nbEl = 1;
         read( nbEl );
         map.clear();
 
-        for ( int i = 0; i < nbEl; ++i ) {
+        for ( size_t i = 0; i < nbEl; ++i ) {
             std::pair<T, U> pair;
             read( pair );
             assert( map.find( pair.first ) == map.end() );

@@ -283,12 +283,11 @@ void ServerImpl::addViewer( ViewerClient* viewer ) {
 
 #if ( __cplusplus >= 201703L )
     for ( const auto& [streamName, streamer] : m_streamName2streamer ) {
+        (void)streamName;
 #else
     for ( const auto& pair : m_streamName2streamer ) {
-        const auto& streamName = pair.first;
         const auto& streamer   = pair.second;
 #endif
-
         viewer->notifyNewStreamer( streamer );
     }
 
