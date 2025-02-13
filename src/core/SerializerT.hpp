@@ -15,10 +15,11 @@
 
 #pragma once
 
+#include <cstring>
+
 #include "core/Base.hpp"
 #include "core/InputBase.hpp"
 #include "core/OutputBase.hpp"
-#include "cstring"
 
 namespace hub {
 
@@ -651,11 +652,11 @@ class SRC_API SerializerT
     typename std::enable_if_t<(!Serializables<T, U>), void>
     read( std::map<T, U>& map ) {
 
-        uint64_t nbEl = 0;
+        uint64_t nbEl = 1;
         read( nbEl );
         map.clear();
 
-        for ( int i = 0; i < nbEl; ++i ) {
+        for ( size_t i = 0; i < nbEl; ++i ) {
             std::pair<T, U> pair;
             read( pair );
             assert( map.find( pair.first ) == map.end() );

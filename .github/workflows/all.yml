@@ -35,13 +35,16 @@ jobs:
 
     - name: Configure CMake
       run: cmake -B "${{github.workspace}}/build" -DCMAKE_C_COMPILER=${{ inputs.cc }} -DCMAKE_CXX_COMPILER=${{ inputs.cxx }}
-                -DCMAKE_BUILD_TYPE=${{inputs.build-type}} -DCMAKE_INSTALL_PREFIX=install -DHUB_ENABLE_TESTS=ON -DHUB_ENABLE_EXAMPLES=ON
+                -DCMAKE_BUILD_TYPE=${{inputs.build-type}} -DCMAKE_INSTALL_PREFIX=install -DHUB_ENABLE_TESTS=ON
+      # run: echo configure
 
     - name: Build
       run: cmake --build "${{github.workspace}}/build" --config ${{inputs.build-type}}
+      # run: echo build
 
     - name: Install
       run: cmake --install "${{github.workspace}}/build" --config ${{inputs.build-type}}
+      # run: echo install
 
   test:
     needs: build
@@ -54,5 +57,6 @@ jobs:
 
     - name: Test
       run: cmake --build "${{github.workspace}}/build" --target hub-tests-bin
+      # run: echo tests
       timeout-minutes: 10
   
