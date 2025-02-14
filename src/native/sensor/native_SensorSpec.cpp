@@ -50,7 +50,6 @@ int sensorSpec_getDimension( const sensor::SensorSpec* sensorSpec,
     return dims.at( iDimension );
 }
 
-
 void sensorSpec_getSensorName( const sensor::SensorSpec* sensorSpec,
                                char* sensorName,
                                int* strLen ) {
@@ -94,7 +93,6 @@ void freeSensorSpec( sensor::SensorSpec* sensorSpec ) {
 const MetaData* sensorSpec_getMetaData( const sensor::SensorSpec* sensorSpec ) {
     return &sensorSpec->getMetaData();
 }
-
 
 void sensorSpec_toString( const sensor::SensorSpec* sensorSpec, char* output, int* strLen ) {
     const auto& str = sensorSpec->toString();

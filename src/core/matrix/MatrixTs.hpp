@@ -206,8 +206,7 @@ class MatrixTs
     /// \return
     ///
     template <class Type, int i = 0, class RawType = std::remove_cvref_t<Type>>
-    typename std::enable_if_t<(!std::is_pointer_v<Type>), Type>
-    get() {
+    typename std::enable_if_t<(!std::is_pointer_v<Type>), Type> get() {
         static_assert( hasType<RawType>() && i < nType<RawType>() );
         const auto offset = getOffset<i, 0, RawType, Types...>();
         static_assert( 0 <= offset && offset < Size );
@@ -321,9 +320,7 @@ class MatrixTs
     // REQUIRES( static constexpr, isMatrix<Matrix>, Size_t )
     static constexpr typename std::enable_if_t<isMatrix<Matrix>, Size_t> getOffset() {
         if constexpr ( Matrix::template hasType<targetType>() ) {
-            if ( ith == i ) {
-                return Matrix::template getOffset<targetType>();
-            }
+            if ( ith == i ) { return Matrix::template getOffset<targetType>(); }
             else {
                 if constexpr ( sizeof...( Types_ ) > 0 ) {
                     return Matrix::Size + getOffset<ith, i + 1, targetType, Types_...>();

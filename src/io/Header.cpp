@@ -13,32 +13,27 @@ Header::Header( Size_t dataSize, const Datas_t& userDefined ) :
     m_dataSize( dataSize ), m_userDefined( userDefined ) {
     m_headerSize = getSize();
 
-
 #ifdef WIN32
-    sprintf_s(
-        m_magicNumber.data(),
-        m_magicNumber.size(),
-        "%c%c%c %d.%d.%d",
-        'H',
-        'U',
-        'B',
-        s_versionMajor,
-        s_versionMinor,
-        s_versionPatch
-    );
+    sprintf_s( m_magicNumber.data(),
+               m_magicNumber.size(),
+               "%c%c%c %d.%d.%d",
+               'H',
+               'U',
+               'B',
+               s_versionMajor,
+               s_versionMinor,
+               s_versionPatch );
 #else
 #    ifdef OS_MACOS
-    snprintf(
-        m_magicNumber.data(),
-        m_magicNumber.size(),
-        "%c%c%c %d.%d.%d",
-        'H',
-        'U',
-        'B',
-        s_versionMajor,
-        s_versionMinor,
-        s_versionPatch
-    );
+    snprintf( m_magicNumber.data(),
+              m_magicNumber.size(),
+              "%c%c%c %d.%d.%d",
+              'H',
+              'U',
+              'B',
+              s_versionMajor,
+              s_versionMinor,
+              s_versionPatch );
 #    else
     sprintf( m_magicNumber.data(),
              "%c%c%c %d.%d.%d",
@@ -47,8 +42,7 @@ Header::Header( Size_t dataSize, const Datas_t& userDefined ) :
              'B',
              s_versionMajor,
              s_versionMinor,
-             s_versionPatch
-    );
+             s_versionPatch );
 #    endif
 #endif
 
@@ -57,7 +51,6 @@ Header::Header( Size_t dataSize, const Datas_t& userDefined ) :
     assert( strLen < sizeof( m_magicNumber ) );
     std::fill( m_magicNumber.begin() + strLen, m_magicNumber.end(), joker );
     m_magicNumber.back() = '\n';
-
 }
 
 void Header::checkMagicNumber() const {

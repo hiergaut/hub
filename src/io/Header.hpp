@@ -146,10 +146,8 @@ class SRC_API Header
 template <class T>
 Header make_header( const T& t ) {
 
-
     Memory memory;
     memory.write( t );
-
 
     Header header( t.dataSize(), memory.getData() );
 

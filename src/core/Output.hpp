@@ -37,7 +37,6 @@ class SRC_API OutputT : public OutputBase
 
     virtual ~OutputT() = default;
 
-
     ///
     /// \brief write
     /// \tparam T

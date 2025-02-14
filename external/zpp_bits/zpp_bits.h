@@ -353,7 +353,7 @@ struct access
                              std::remove_cvref_t<decltype(try_serialize(
                                  item))>::members>>;
             }) {
-            return std::remove_cvref_t<decltype(try_serialize(
+            return std::__remove_cvref_t<decltype(try_serialize(
                 std::declval<Type>()))>::value;
         } else {
             static_assert(!sizeof(Type));

@@ -7,8 +7,6 @@
 #include "test_common.hpp"
 #include "test_core_io_common.hpp"
 
-//#include <core/Macros.hpp>
-//#include <core/Traits.hpp>
 #include <core/io/Archive.hpp>
 #include <core/io/InputOutput.hpp>
 

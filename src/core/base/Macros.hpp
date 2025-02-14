@@ -163,7 +163,6 @@ namespace hub {
 // Dll import/export.
 // You must define SRC_STATIC to force static link for external use (.lib)
 
-
 #ifdef OS_WINDOWS
 #    if defined SRC_STATIC
 #        define SRC_API

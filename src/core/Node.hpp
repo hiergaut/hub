@@ -127,9 +127,7 @@ static Node make_node(
     // Data_t * data
 ) {
     auto size = hub::sizeOf<Type>() * N;
-    if constexpr ( sizeof...( Ns ) > 0 ) {
-        size *= ( ... * Ns );
-    }
+    if constexpr ( sizeof...( Ns ) > 0 ) { size *= ( ... * Ns ); }
     return Node( std::move( Dims { N, Ns... } ), TYPE_NAME( Type() ), size, TYPE_ID( Type ) );
 }
 
@@ -169,7 +167,6 @@ inline std::string Node::toString( bool pretty ) const {
     }
     return str;
 }
-
 
 inline bool Node::operator==( const Node& other ) const {
     return m_dims == other.m_dims && m_typeName == other.m_typeName && m_size == other.m_size;

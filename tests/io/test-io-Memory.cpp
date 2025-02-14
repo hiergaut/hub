@@ -5,7 +5,6 @@
 
 #include <sensor/SensorSpec.hpp>
 
-
 TEST_CASE( "Test io memory" ) {
     TEST_BEGIN()
 
@@ -14,28 +13,18 @@ TEST_CASE( "Test io memory" ) {
     const hub::data::Mesh mesh( meshPath + "sensor" );
 
     hub::MetaData metaData;
-    // metaData["asset"] = mesh;
 
-    // using Resolution   = hub::MatrixTs<int, bool, hub::MatrixXD<char, 10>>;
-    using Resolution   = int;
-    // using OutputSensor = hub::sensor::OutputSensorT<Resolution, hub::output::OutputFile>;
-    // using OutputSensor = hub::sensor::OutputSensorT<Resolution>;
-
-    // using Acquisition  = OutputSensor::Acquisition;
-    // std::vector<Acquisition> refAcqs;
+    using Resolution = int;
 
     const hub::sensor::SensorSpec refSensorSpec( "AAA", Resolution(), metaData );
 
     hub::io::Memory memory;
-    const auto & datas = memory.getData();
-    CHECK(datas.size() == 0);
-    memory.write(refSensorSpec);
+    const auto& datas = memory.getData();
+    CHECK( datas.size() == 0 );
+    memory.write( refSensorSpec );
     std::cout << "memory : " << memory.getData() << std::endl;
 
     // const auto header = hub::io::make_header(refSensorSpec);
-    // std::cout << "header : " << header.getUserDefined() << std::endl;
-
-
 
     TEST_END()
 }

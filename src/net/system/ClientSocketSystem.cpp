@@ -222,7 +222,6 @@ void ClientSocketSystem::read( unsigned char* data, const size_t size ) {
                                << ")" );
 #endif
     } while ( size != downloadSize );
-
 }
 
 ////////////////////////////////////////////////////////////////

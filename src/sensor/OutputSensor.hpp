@@ -47,7 +47,6 @@ namespace sensor {
 class OutputSensor : public Sensor
 {
   public:
-
     // OutputSensor( const SensorSpec& sensorSpec,
 
     ///

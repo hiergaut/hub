@@ -20,7 +20,6 @@
 #include <string>
 #include <type_traits>
 
-
 #include "Array.hpp"
 #include "Map.hpp"
 #include "Span.hpp"

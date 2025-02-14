@@ -25,7 +25,6 @@ namespace hub {
 /////////////////////////////////////////// TEMPLATES
 /////////////////////////////////////////////////////
 
-
 ///
 /// \brief The MatrixXDBase class
 /// defined basic features of nd array
@@ -217,7 +216,6 @@ class MatrixXDBase
     Buffer<Data_t, Size> m_buffer;
 };
 static_assert( isMatrix<MatrixXDBase<int, 2>> );
-
 
 ///
 /// \brief The MatrixXD class

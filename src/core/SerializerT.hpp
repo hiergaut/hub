@@ -288,7 +288,6 @@ class SRC_API SerializerT
         assert( m_serializer.inPosition() == 0 );
         readAll( ts... );
 
-
         assert( m_dataReaded == m_serializer.inPosition() );
         assert( m_packSize == m_dataReaded );
     }
@@ -366,10 +365,6 @@ class SRC_API SerializerT
 
     /////////////////////////////////// TEMPLATE ////////////////////////////////////
 
-
-
-
-
     ///
     /// \brief write
     /// \param t
@@ -377,8 +372,7 @@ class SRC_API SerializerT
     ///
     template <class T>
     // REQUIRES(, Writable_v<T>, void )
-    typename std::enable_if_t<Writable_v<T>, void>
-    write( const T& t ) {
+    typename std::enable_if_t<Writable_v<T>, void> write( const T& t ) {
         static_assert( Writable_v<T> );
 #ifdef HUB_DEBUG_OUTPUT
         DEBUG_MSG( "<---" << HEADER << "\033[1mwrite\033[0m(writable: " << TYPE_NAME( t )
@@ -418,9 +412,6 @@ class SRC_API SerializerT
     }
 
     //////////////////////////////////
-
-
-
 
     ///
     /// \brief read

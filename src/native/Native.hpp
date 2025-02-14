@@ -16,7 +16,6 @@
 
 #pragma once
 
-
 #include "core/Configuration.hpp"
 
 #include "native_Any.hpp"

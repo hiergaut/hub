@@ -277,17 +277,13 @@ class SRC_API Mesh
     /// \brief Getter function
     /// \return Shapes of mesh
     ///
-    const std::vector<Shape>& getShapes() const {
-        return m_shapes;
-    }
+    const std::vector<Shape>& getShapes() const { return m_shapes; }
 
     ///
     /// \brief Getter function
     /// \return Materials of mesh
     ///
-    const std::vector<Material>& getMaterials() const {
-        return m_materials;
-    }
+    const std::vector<Material>& getMaterials() const { return m_materials; }
 
     ///
     /// \brief Print status information of mesh
@@ -340,7 +336,6 @@ class SRC_API Mesh
 #endif
 
   private:
-
     std::string m_name = "";
     std::vector<Shape> m_shapes;
     std::vector<Material> m_materials;

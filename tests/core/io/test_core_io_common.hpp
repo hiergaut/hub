@@ -7,7 +7,6 @@
 #include <type_traits>
 #include <vector>
 
-// #include "test_common.hpp"
 #include <catch2/catch_test_macros.hpp>
 
 #include <core/Serializer.hpp>
@@ -219,9 +218,7 @@ ReadWriteStat readWriteData( ReadInputFunc& readInputFunc,
 
 #if CPP_VERSION >= 20 // concept
 template <class T>
-concept getableNCall_v = requires( const T a ) {
-    a.getNCall();
-};
+concept getableNCall_v = requires( const T a ) { a.getNCall(); };
 
 #else
 template <typename T>

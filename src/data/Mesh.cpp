@@ -26,7 +26,6 @@ MeshImpl::~MeshImpl() {}
 
 // Mesh::Mesh( const Mesh& mesh ) :
 
-
 Mesh::Mesh( const std::string& filePath ) : Mesh( { filePath } ) {}
 
 // Mesh::~Mesh() = default;
@@ -248,11 +247,7 @@ Mesh::Mesh( std::initializer_list<std::string> filePaths ) : m_pimpl( new MeshIm
         m_total_draws += std::max( size_t( 1 ), mesh.nodes.size() );
     }
     m_nMesh = glbMeshes.size();
-
 }
-
-
-
 
 void Mesh::printStats() const {
 
