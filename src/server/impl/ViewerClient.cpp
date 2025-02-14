@@ -99,16 +99,18 @@ void ViewerClient::notifyNewStreamer( const StreamerClient* streamer ) {
     int iTry            = 0;
     // For some reason, it has been decided here that we must wait for the client to connect and
     // connect is that after the end of this function, if the client is not available and functions
-    while ( iTry < 20 && !m_clientStreamAdded ) // timeout: 200 ms
+    while ( iTry < 10 && !m_clientStreamAdded ) // timeout: 100 ms
     {
         std::cout << "[ViewerClient] waiting for streamer added ..." << std::endl;
-        std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+        std::this_thread::sleep_for( std::chrono::milliseconds( 20 ) );
         ++iTry;
     }
 }
 
 void ViewerClient::notifyDelStreamer( const std::string& streamName ) {
     if ( m_viewerClosed ) return;
+
+    if ( !m_socket.isOpen() ) return;
 
     try {
         m_socket.write( hub::io::StreamBase::ServerMessage::VIEWER_DEL_STREAMER );

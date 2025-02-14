@@ -218,7 +218,10 @@ Mesh::Mesh( std::initializer_list<std::string> filePaths ) : m_pimpl( new MeshIm
         assert( hasVertex );
 
         shapeIndices = mesh.indices;
-        shape.name   = shapeName;
+        for ( int i = 0; i < shapeIndices.size(); ++i ) {
+            assert( shapeIndices.at( i ) < shapeVertices.size() );
+        }
+        shape.name = shapeName;
 
         shape.material = -1;
         if ( mesh.material != nullptr ) {
