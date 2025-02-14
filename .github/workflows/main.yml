@@ -11,86 +11,25 @@ on:
   push:
     branches: [ main ]
 
-env:
-  BUILD_TYPE: Release
-  ENABLE_BUILD_AND_TEST: true
-
 jobs:
 
-  CppCheck:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Install cppCheck
-      run: sudo apt install -y cppcheck
-
-    - name: Configure CMake
-      run: cmake -B "${{github.workspace}}/build" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-
-    - name: CppCheck
-      run:
-        cppcheck --version
-        && cmake --build ${{github.workspace}}/build --target hub-cppCheck
-   
-
-  Doxygen:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - uses: ssciwr/doxygen-install@v1.3.0
-
-    - name: Configure CMake
-      run: cmake -B "${{github.workspace}}/build" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DHUB_BUILD_DOC=ON
-
-    - name: Doxygen
-      run:
-        doxygen --version &&
-        cmake --build ${{github.workspace}}/build --target hub-doc-doxygen
-
-
-  Format:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Install clang-format
-      run: 
-        sudo apt install -y clang-format
-        && clang-format --version
-        
-    - name: Install cmake-format
-      run: 
-        sudo apt install -y cmake-format
-        && echo "cmake-format version $(cmake-format --version)"
-        
-    - name: Configure CMake
-      run: cmake -B "${{github.workspace}}/build" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-
-        # todo please uncomment these above lines when project was fully formated
-    # - name: Format
-      # run: cmake --build ${{github.workspace}}/build --target hub-format
-        # && git diff --exit-code
-
+  CodeQuality:
+    uses: ./.github/workflows/codeQuality.yml
 
   Ubuntu_gcc:
-    needs: [CppCheck, Doxygen, Format]
-    uses: ./.github/workflows/all.yml
+    needs: CodeQuality
+    uses: ./.github/workflows/buildAndTest.yml
     with:
       name: Ubuntu gcc
       os: ubuntu-latest
-      # build-type: "${{env.BUILD_TYPE}}" todo: why not ?
       build-type: Release
       cc: gcc
       cxx: g++
       icon: Linux
 
   Windows_MSVC:
-    needs: [CppCheck, Doxygen, Format]
-    uses: ./.github/workflows/all.yml
+    needs: CodeQuality
+    uses: ./.github/workflows/buildAndTest.yml
     with:
       name: Windows MSVC
       os: windows-latest
@@ -100,8 +39,8 @@ jobs:
       icon: Windows
 
   MacOS_clang:
-    needs: [CppCheck, Doxygen, Format]
-    uses: ./.github/workflows/all.yml
+    needs: CodeQuality
+    uses: ./.github/workflows/buildAndTest.yml
     with:
       name: MacOS clang
       os: macos-latest
