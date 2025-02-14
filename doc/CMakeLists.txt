@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+# cmake_minimum_required(VERSION 3.5)
 
 project(doc)
 
@@ -17,7 +17,7 @@ if(HUB_BUILD_DOC)
         set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doxygen/Doxyfile.in)
         set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/doxygen/Doxyfile.out)
 
-        message(STATUS "${HEADER_MSG} Doxygen ${DOXYGEN_VERSION} found")
+        message(STATUS "${HEADER_MSG} Found Doxygen ${DOXYGEN_VERSION}")
 
         configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
 

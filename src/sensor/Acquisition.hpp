@@ -42,8 +42,8 @@ static inline Clock getClock() {
 ///
 /// \brief The Acquisition class
 /// represent sensor data acquired between start end end timestamps.
+/// todo move to protected (avoid the use of Matrix::clone() from Acquisition user class)
 class SRC_API Acquisition : public Matrix
-// Todo move to protected
 // class SRC_API Acquisition : protected Matrix
 {
   public:
@@ -71,7 +71,7 @@ class SRC_API Acquisition : public Matrix
     Acquisition& operator=( const Acquisition& ) = delete;
 
     ///
-    /// \brief clone
+    /// \brief copy
     /// \return
     ///
     Acquisition copy() const {

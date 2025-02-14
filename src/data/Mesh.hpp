@@ -335,6 +335,12 @@ class SRC_API Mesh
     }
 #endif
 
+    ///
+    /// \brief getName
+    /// \return
+    ///
+    const std::string& getName() const { return m_name; }
+
   private:
     std::string m_name = "";
     std::vector<Shape> m_shapes;

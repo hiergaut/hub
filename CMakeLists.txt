@@ -132,7 +132,7 @@ add_definitions(-DHUB_PROJECT_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/\")
 find_package(Boost QUIET NO_MODULE) # tcp socket communication
 if(Boost_FOUND)
     add_definitions(-DHUB_USE_BOOST)
-    message(STATUS "${HEADER_MSG} Boost ${Boost_VERSION} found")
+    message(STATUS "${HEADER_MSG} Found Boost ${Boost_VERSION}")
 endif()
 
 find_package(TBB QUIET)
@@ -232,7 +232,7 @@ if(cppcheck_FOUND)
     list(GET CPP_CHECK_VERSION_LIST 0 CPP_CHECK_VERSION_MAJOR)
     list(GET CPP_CHECK_VERSION_LIST 1 CPP_CHECK_VERSION_MINOR)
 
-    message(STATUS "${HEADER_MSG} Cppcheck ${CPP_CHECK_VERSION_MAJOR}.${CPP_CHECK_VERSION_MINOR} found")
+    message(STATUS "${HEADER_MSG} Found Cppcheck ${CPP_CHECK_VERSION_MAJOR}.${CPP_CHECK_VERSION_MINOR}")
 
     if(NOT ${CPP_CHECK_VERSION_MAJOR} EQUAL 2)
         message(FATAL_ERROR "${CPP_CHECK_OUTPUT} unsupported")

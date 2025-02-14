@@ -22,6 +22,9 @@ namespace hub {
 
 #ifndef HUB_CPP_SOURCE
 class MetaData;
+namespace data {
+class Mesh;
+}
 #endif
 
 namespace native {
@@ -60,6 +63,14 @@ extern "C"
     SRC_API bool metaData_getMat4( const MetaData* metaData, const char* metaName, float* output );
 
     ///
+    /// \brief metaData_getMesh
+    /// \param metaData
+    /// \param meshName
+    /// \return
+    ///
+    SRC_API const data::Mesh* metaData_getMesh( const MetaData* metaData, const char* meshName );
+
+    ///
     /// \brief metaData_getInt
     /// \param metaData
     /// \param metaName
@@ -74,6 +85,29 @@ extern "C"
     /// \return
     ///
     SRC_API double metaData_getDouble( const MetaData* metaData, const char* metaName );
+
+    ///
+    /// \brief metaData_getDataSize
+    /// \param metaData
+    /// \param metaName
+    /// \param type
+    /// \return
+    ///
+    SRC_API size_t metaData_getDataSize( const MetaData* metaData,
+                                         const char* metaName,
+                                         const char* type );
+
+    ///
+    /// \brief metaData_getData
+    /// \param metaData
+    /// \param metaName
+    /// \param type
+    /// \param data
+    ///
+    SRC_API void metaData_getData( const MetaData* metaData,
+                                   const char* metaName,
+                                   const char* type,
+                                   unsigned char* data );
 
 #ifdef __cplusplus
 } // end extern "C"
