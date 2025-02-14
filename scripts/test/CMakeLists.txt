@@ -4,6 +4,8 @@
 
 # # Still alive :
 
+add_subdirectory(hello)
+
 # Hello
 
 # # Still alive :

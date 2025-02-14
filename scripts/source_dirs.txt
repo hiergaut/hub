@@ -1,4 +1,4 @@
-* src/
+src/core/base
 * tests/
 * examples/
 * CMakeLists.txt
@@ -6,4 +6,4 @@
 * wrapper/
 * bin/
 * cmake/
-scripts/test/
+* scripts/test/

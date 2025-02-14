@@ -6,6 +6,10 @@
 // Still alive :
 /// comment
 
+void main() {
+    int a = 5;
+}
+
 // Still alive :
 // cppcheck-suppress noExplicitConstructor
 

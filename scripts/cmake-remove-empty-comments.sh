@@ -23,7 +23,7 @@ cd $(git rev-parse --show-toplevel)
 scripts/cmake-format-all.sh
 
 for file in $(find $(cat scripts/source_dirs.txt | grep -v '^*') -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \)); do
-	echo "$file"
+	echo "cmake clean: $file"
 
 	sed -i '/^[ \t]*# *$/d' $file
 	# sed -i '/^ *#[^ ].*$/d' $file

@@ -20,8 +20,10 @@ echo -n '//
 	// should be deleted
 ' >> "scripts/test/example.hpp"
 
+scripts/source-format-all.sh
+
 for file in $(find $(cat scripts/source_dirs.txt | grep -v '^*') -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.h" -o -name "*.inl" \)); do
-	echo "$file"
+	echo "source clean: $file"
 	
 	sed -i '/^[ \t]*\/\/[^ ^\/].*$/d' $file #         //a
 	# sed -i '/^ *\/\/ [ ].*$/d' $file
