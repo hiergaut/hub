@@ -206,8 +206,10 @@ if(HUB_BUILD_DOC)
 endif()
 
 option(HUB_ENABLE_TESTS "Enable tests" OFF)
+option(HUB_ENABLE_BINS "Enable binaries" OFF)
 if(HUB_ENABLE_TESTS)
     add_subdirectory(tests)
+    set(HUB_ENABLE_BINS ON CACHE BOOL "") # tests need server and viewer to run
 endif()
 
 option(HUB_ENABLE_EXAMPLES "Enable examples" OFF)
@@ -215,7 +217,6 @@ if(HUB_ENABLE_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-option(HUB_ENABLE_BINS "Enable binaries" ON)
 if(HUB_ENABLE_BINS)
     add_subdirectory(bin)
 endif()
