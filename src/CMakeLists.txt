@@ -1,6 +1,12 @@
 # cmake_minimum_required(VERSION 3.8)
 
+find_package(Git)
+include(GetVersionFromGitTag)
+
+set(HUB_LIBRARIES)
 set(REQUIRED_LIBS ${HUB_TBB_TARGET})
+
+message(STATUS "${HEADER_MSG} Version: ${${PROJECT_NAME}_VERSION}")
 
 if (HUB_ENABLE_TESTS)
     option(HUB_ENABLE_COVERAGE "Collect coverage from hub library (required tests enable)" OFF)
