@@ -146,7 +146,7 @@ if(TBB_FOUND)
         message(FATAL_ERROR "tbb target not found")
     endif()
 
-    if (NOT GNU) # warning with gcc : [Parallel STL message]: "Vectorized algorithm unimplemented, redirected to serial"
+    if(NOT GNU) # warning with gcc : [Parallel STL message]: "Vectorized algorithm unimplemented, redirected to serial"
         add_definitions(-DHUB_USE_TBB)
     endif()
 endif()
@@ -226,13 +226,11 @@ if(cppcheck_FOUND)
         COMMAND ${CPPCHECK_EXECUTABLE} --version
         RESULT_VARIABLE CPP_CHECK_FOUND
         OUTPUT_VARIABLE CPP_CHECK_OUTPUT
-        ERROR_VARIABLE CPP_CHECK_ERROR
-    )
+        ERROR_VARIABLE CPP_CHECK_ERROR)
 
     string(REGEX MATCHALL "-.*$|[0-9]+" CPP_CHECK_VERSION_LIST ${CPP_CHECK_OUTPUT})
     list(GET CPP_CHECK_VERSION_LIST 0 CPP_CHECK_VERSION_MAJOR)
     list(GET CPP_CHECK_VERSION_LIST 1 CPP_CHECK_VERSION_MINOR)
-    # list(GET CPP_CHECK_VERSION_LIST 2 CPP_CHECK_VERSION_PATCH)
 
     message(STATUS "${HEADER_MSG} Cppcheck ${CPP_CHECK_VERSION_MAJOR}.${CPP_CHECK_VERSION_MINOR} found")
 
@@ -240,7 +238,7 @@ if(cppcheck_FOUND)
         message(FATAL_ERROR "${CPP_CHECK_OUTPUT} unsupported")
     endif()
 
-    if (${CPP_CHECK_VERSION_MINOR} GREATER 10)
+    if(${CPP_CHECK_VERSION_MINOR} GREATER 10)
         add_custom_target(
             hub-cppCheck
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
@@ -252,9 +250,8 @@ if(cppcheck_FOUND)
         add_custom_target(
             hub-cppCheck
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-            COMMAND
-                cppcheck -DCPP_CHECK src -I src --error-exitcode=1 --enable=all
-                --suppress=missingInclude --suppress=unusedFunction --suppress=virtualCallInConstructor --inline-suppr
+            COMMAND cppcheck -DCPP_CHECK src -I src --error-exitcode=1 --enable=all --suppress=missingInclude
+                    --suppress=unusedFunction --suppress=virtualCallInConstructor --inline-suppr
             COMMENT "Running cppCheck")
     endif()
     custom_target_added(cppCheck)

@@ -17,23 +17,19 @@
 
 #define CONSTRUCT_BEGIN( name )                                                              \
     std::cout << "\033[1;32m[test] -------------------------------------------------> " name \
-              << "() ..."                                                                    \
-              << "\033[0m" << std::endl;
+              << "() ..." << "\033[0m" << std::endl;
 
 #define CONSTRUCT_END( name )                                                                   \
     std::cout << "\033[1;32m[test] -------------------------------------------------> " << name \
-              << "() done"                                                                      \
-              << "\033[0m" << std::endl;
+              << "() done" << "\033[0m" << std::endl;
 
-#define DESTRUCT_BEGIN( name )                                                          \
-    std::cout << "\033[1;31m[test] =================================================> " \
-              << "~" << name << "() ..."                                                \
-              << "\033[0m" << std::endl;
+#define DESTRUCT_BEGIN( name )                                                               \
+    std::cout << "\033[1;31m[test] ======================================================> " \
+              << "~" << name << "() ..." << "\033[0m" << std::endl;
 
-#define DESTRUCT_END( name )                                                            \
-    std::cout << "\033[1;31m[test] =================================================> " \
-              << "~" << name << "() done"                                               \
-              << "\033[0m" << std::endl;
+#define DESTRUCT_END( name )                                                                 \
+    std::cout << "\033[1;31m[test] ======================================================> " \
+              << "~" << name << "() done" << "\033[0m" << std::endl;
 
 #define TEST_BEGIN() auto start_test = std::chrono::high_resolution_clock::now();
 

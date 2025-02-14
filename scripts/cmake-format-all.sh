@@ -14,6 +14,7 @@ CI_CMAKE_FORMAT_VERSION="0.6.13"
 CMAKE_FORMAT_VERSION=$(cmake-format --version)
 if [ "$CMAKE_FORMAT_VERSION" != "$CI_CMAKE_FORMAT_VERSION" ]; then
 	echo "cmake-format need to be compatible with CI version : $CI_CMAKE_FORMAT_VERSION"
+	echo "current version is $CMAKE_FORMAT_VERSION"
 	exit 1
 fi
 
