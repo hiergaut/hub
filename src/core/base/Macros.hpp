@@ -18,13 +18,14 @@
 
 namespace hub {
 
+
 // Compiler identification
 #if defined( __clang__ )
 #    define COMPILER_CLANG
 #    define CLANG_VERSION __clang_major__
 
 #    if ( !defined( HUB_COMPILER_Clang ) ) && ( !defined( HUB_COMPILER_AppleClang ) )
-#        error "not clang compiler"
+#        warning "not clang compiler"
 #    endif
 
 #elif defined( __GNUC__ )
@@ -51,7 +52,7 @@ namespace hub {
 #    endif
 
 #    ifndef HUB_COMPILER_GNU
-#        error "not gnu compiler"
+#        warning "not gnu compiler"
 #    endif
 
 #elif defined( _MSC_VER )
@@ -60,18 +61,18 @@ namespace hub {
 #    define _USE_MATH_DEFINES
 
 #    ifndef HUB_COMPILER_MSVC
-#        error "not gnu compiler"
+#        warn "not msvc compiler"
 #    endif
 
 #elif defined( __llvm__ )
 
 #    ifndef HUB_COMPILER_LLVM
-#        error "not llvm compiler"
+#        warning "not llvm compiler"
 #    endif
 
 #else
 #    ifndef CPP_CHECK
-#        error unsupported compiler
+#        warning unsupported compiler
 #    endif
 #endif
 
