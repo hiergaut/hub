@@ -20,12 +20,6 @@
 
 namespace hub {
 
-/// \brief s_contributionStart
-extern const int s_contributionStart;
-
-/// \brief s_contributionEnd
-extern const int s_contributionEnd;
-
 /** @brief Returns major library version */
 extern const int s_versionMajor;
 /** @brief Returns minor library version */

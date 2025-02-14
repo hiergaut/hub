@@ -335,9 +335,11 @@ class SRC_API Mesh
     }
 #endif
 
-    const std::string & getName() const {
-        return m_name;
-    }
+    ///
+    /// \brief getName
+    /// \return
+    ///
+    const std::string& getName() const { return m_name; }
 
   private:
     std::string m_name = "";

@@ -26,7 +26,7 @@
 #include "native_ViewerHandler.hpp"
 
 #ifndef HUB_NON_BUILD_SENSOR
-#include "sensor/native_Acquisition.hpp"
+#    include "sensor/native_Acquisition.hpp"
 #    include "sensor/native_InputSensor.hpp"
 #    include "sensor/native_OutputSensor.hpp"
 #    include "sensor/native_SensorSpec.hpp"

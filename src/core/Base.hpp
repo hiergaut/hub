@@ -32,7 +32,6 @@
 
 #include "Configuration.hpp" // Todo move Configuration to base folder
 
-
 #if CPP_VERSION <= 14
 #else
 #    include <any>

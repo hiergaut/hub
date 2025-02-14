@@ -235,12 +235,13 @@ to_string( const Container& container ) {
     str += "<" + TYPE_NAME( T() ) + ">";
     str += "[";
 
-    const auto nFirstData = 30;
-    constexpr auto nLastData  = 8;
-    auto it                   = container.begin();
-    size_t i                  = 0;
+    const auto nFirstData    = 30;
+    constexpr auto nLastData = 8;
+    auto it                  = container.begin();
+    size_t i                 = 0;
     while ( it != container.end() ) {
-        if ( (str.length() > 50 && i < container.size() - 2) || (nFirstData < i && i < container.size() - nLastData) ) {
+        if ( ( str.length() > 50 && i < container.size() - 2 ) ||
+             ( nFirstData < i && i < container.size() - nLastData ) ) {
             if ( i == container.size() - nLastData - 1 ) { str += "... "; }
             ++it;
             ++i;

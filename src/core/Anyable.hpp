@@ -133,21 +133,22 @@ class SRC_API Anyable
     }
 
     /// todo change string to typeId
-    static inline std::map<std::string, AnyHelper> s_anyables = makeAnyHelperMap<void,
-                                                                                 int,
-                                                                                 double,
-                                                                                 bool,
-                                                                                 std::string,
-                                                                                 const char*,
-                                                                                 format::Mat4,
-                                                                                 format::Vec4,
-                                                                                 format::Vec3,
-                                                                                 std::vector<format::Vec3>
+    static inline std::map<std::string, AnyHelper> s_anyables =
+        makeAnyHelperMap<void,
+                         int,
+                         double,
+                         bool,
+                         std::string,
+                         const char*,
+                         format::Mat4,
+                         format::Vec4,
+                         format::Vec3,
+                         std::vector<format::Vec3>
 #ifndef HUB_NON_BUILD_DATA
-                                                                                 ,
-                                                                                 data::Mesh
+                         ,
+                         data::Mesh
 #endif
-                                                                                 >();
+                         >();
 
     template <class T>
     static void insertSupportedType() {
