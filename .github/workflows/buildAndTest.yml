@@ -34,17 +34,14 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Configure CMake
-      # run: cmake -B "${{github.workspace}}/build" -DCMAKE_C_COMPILER=${{ inputs.cc }} -DCMAKE_CXX_COMPILER=${{ inputs.cxx }}
-                # -DCMAKE_BUILD_TYPE=${{inputs.build-type}} -DCMAKE_INSTALL_PREFIX=install -DHUB_ENABLE_TESTS=ON
-      run: echo configure
+      run: cmake -B "${{github.workspace}}/build" -DCMAKE_C_COMPILER=${{ inputs.cc }} -DCMAKE_CXX_COMPILER=${{ inputs.cxx }}
+                -DCMAKE_BUILD_TYPE=${{inputs.build-type}} -DCMAKE_INSTALL_PREFIX=install -DHUB_ENABLE_TESTS=ON
 
     - name: Build
-      # run: cmake --build "${{github.workspace}}/build" --config ${{inputs.build-type}}
-      run: echo build
+      run: cmake --build "${{github.workspace}}/build" --config ${{inputs.build-type}}
 
     - name: Install
-      # run: cmake --install "${{github.workspace}}/build" --config ${{inputs.build-type}}
-      run: echo install
+      run: cmake --install "${{github.workspace}}/build" --config ${{inputs.build-type}}
 
   test:
     needs: build
@@ -56,7 +53,6 @@ jobs:
         key: ${{ runner.os }}-${{ runner.arch }}
 
     - name: Test
-      # run: cmake --build "${{github.workspace}}/build" --target hub-tests-bin
-      run: echo tests
+      run: cmake --build "${{github.workspace}}/build" --target hub-tests-bin
       timeout-minutes: 10
   
