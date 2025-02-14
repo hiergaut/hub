@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -57,8 +57,9 @@ class SRC_API ViewerHandler
     std::function<void( const char* ipv4, int port )> onServerDisconnected;
 
     ///
-    /// \brief Catched when new stream was connected to the server (after connection of OutputStream to the server)
-    /// Todo move header to input/output class avoid the use of data stream (change to deprecated)
+    /// \brief Catched when new stream was connected to the server (after connection of OutputStream
+    /// to the server) Todo move header to input/output class avoid the use of data stream (change
+    /// to deprecated)
     /// \param streamName [in] is the new connected stream available from server
     /// \param header [in] is the header of new connected stream available from server
     ///
@@ -66,7 +67,8 @@ class SRC_API ViewerHandler
 
 #ifndef HUB_NON_BUILD_SENSOR
     ///
-    /// \brief Catched when new sensor was connected to the server (after connection of OutputSensor to the server)
+    /// \brief Catched when new sensor was connected to the server (after connection of OutputSensor
+    /// to the server)
     /// \param streamName [in] is the name of new connected sensor to the server
     /// \param header [in] is sensor spec of new connected sensor to the server
     ///
@@ -77,8 +79,9 @@ class SRC_API ViewerHandler
     /// \brief Catched when new data comming from stream
     /// \param streamName [in] is the name of stream data is comming
     /// \param datas [in] represent comming data from active stream
-    /// \warning data comming from stream imply the stream is available from server (onNewStream called)
-    /// Todo move header to input/output classes avoid the use of data stream (change to deprecated)
+    /// \warning data comming from stream imply the stream is available from server (onNewStream
+    /// called) Todo move header to input/output classes avoid the use of data stream (change to
+    /// deprecated)
     ///
     std::function<void( const char* streamName, const Datas_t& datas )> onNewData;
 
@@ -93,8 +96,8 @@ class SRC_API ViewerHandler
 
     ///
     /// \brief Catched when stream or sensor are disconnected
-    /// \param streamName [in] is the name of stream which has been disconnected (unavailable from server)
-    /// Todo change to onDelSensor when header moved to input/output classes
+    /// \param streamName [in] is the name of stream which has been disconnected (unavailable from
+    /// server) Todo change to onDelSensor when header moved to input/output classes
     ///
     std::function<void( const char* streamName )> onDelStream;
 

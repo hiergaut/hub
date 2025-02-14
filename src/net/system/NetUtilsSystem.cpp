@@ -45,9 +45,8 @@ class NetManager
         std::cout << "[net] all socket closed" << std::endl;
 #endif
         // Todo fix
-//#ifndef WIN32
-#if defined( OS_LINUX ) || defined(OS_MACOS)
-		assert( m_sockets.empty() );
+#if defined( OS_LINUX ) || defined( OS_MACOS )
+        assert( m_sockets.empty() );
 #endif
     }
 #ifdef HUB_DEBUG_NET
@@ -190,7 +189,6 @@ bool isConnected( socket_fd sock ) {
 class ServerAddrImpl
 {
   public:
-
     void init( int port ) {
         memset( &m_sockAddr, 0, sizeof( m_sockAddr ) );
         m_sockAddr.sin_family      = AF_INET;

@@ -10,12 +10,12 @@
 #include <map>
 #include <memory>
 
-#include "core/Configuration.hpp"
-#include "io/StreamServer2.hpp"
-#include "net/ServerSocket.hpp"
 #include "Client.hpp"
 #include "StreamerClient.hpp"
 #include "ViewerClient.hpp"
+#include "core/Configuration.hpp"
+#include "io/StreamServer2.hpp"
+#include "net/ServerSocket.hpp"
 #include "server/ServerI.hpp"
 
 namespace hub {

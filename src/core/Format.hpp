@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -26,20 +26,20 @@ namespace hub {
 namespace Types {
 enum Format : TypeId_t {
     MAT4 = Cpp_Count, // 3
-    DENSITY, // 4
-    DISTANCE, // 5
-    RGB8, // 6
-    RGBA8, // 7
-    BGR8, // 8
-    Y8, // 9
-    Y16, // 10
-    Z16, // 11
-    POSITION, // 12
-    ORIENTATION, // 13
-    DOF6, // 14
-    XYZ32F, // 15
-    VEC3, // 16
-    VEC4, // 17
+    DENSITY,          // 4
+    DISTANCE,         // 5
+    RGB8,             // 6
+    RGBA8,            // 7
+    BGR8,             // 8
+    Y8,               // 9
+    Y16,              // 10
+    Z16,              // 11
+    POSITION,         // 12
+    ORIENTATION,      // 13
+    DOF6,             // 14
+    XYZ32F,           // 15
+    VEC3,             // 16
+    VEC4,             // 17
 
     Format_Count // 18
 };
@@ -49,9 +49,8 @@ static constexpr auto Count = Format_Count;
 
 namespace format {
 
-// static inline int nChannel(Types::Format format) {
-static inline int nChannel(TypeId_t format) {
-    switch (format) {
+static inline int nChannel( TypeId_t format ) {
+    switch ( format ) {
     case Types::Y8:
         return 1;
     case Types::Y16:
@@ -87,7 +86,6 @@ struct Mat4 {
     static struct {
     } packable;
 
-    // float data[16];
     ///
     /// \brief m_array
     ///
@@ -175,17 +173,13 @@ struct Mat4 {
     /// \param other
     /// \return
     ///
-    bool operator==( const Mat4& other ) const {
-        return m_array == other.m_array;
-    }
+    bool operator==( const Mat4& other ) const { return m_array == other.m_array; }
 
     ///
     /// \brief Getter function
     /// \return raw data pointer (row major)
     ///
-    const float* data() const {
-        return m_array.data();
-    }
+    const float* data() const { return m_array.data(); }
 
 #if CPP_VERSION <= 17
     ///
@@ -195,8 +189,7 @@ struct Mat4 {
     ///
     template <typename Archive, typename Self>
     static void serialize( Archive& archive, Self& self ) {
-        // archive( self.data );
-        archive(self.m_array);
+        archive( self.m_array );
     }
 #endif
 };
@@ -262,9 +255,7 @@ struct Vec3 {
     /// \brief name
     /// \return
     ///
-    static constexpr auto name() {
-        return "Vec3";
-    };
+    static constexpr auto name() { return "Vec3"; };
     ///
     /// \brief operator ==
     /// \param other
@@ -301,7 +292,8 @@ struct Vec4 {
     /// \brief Vec4
     /// \param value
     ///
-    explicit constexpr Vec4( float value = 0.0f ) : x { value }, y { value }, z { value }, w { value } {};
+    explicit constexpr Vec4( float value = 0.0f ) :
+        x { value }, y { value }, z { value }, w { value } {};
     ///
     /// \brief Vec4
     /// \param x_
@@ -337,9 +329,7 @@ struct Vec4 {
     /// \brief name
     /// \return
     ///
-    static constexpr auto name() {
-        return "Vec4";
-    };
+    static constexpr auto name() { return "Vec4"; };
     ///
     /// \brief operator ==
     /// \param other
@@ -361,7 +351,6 @@ struct Density {
     /// \brief id
     ///
     static constexpr auto id = Types::Format::DENSITY;
-    // uint32_t value;
     ///
     /// \brief value
     ///
@@ -410,7 +399,7 @@ struct RGB8 {
     ///
     /// \brief RGB8
     ///
-    RGB8()                   = default;
+    RGB8() = default;
     ///
     /// \brief RGB8
     /// \param _r
@@ -675,12 +664,12 @@ struct Dof6 {
     /// \param _w3
     ///
     explicit constexpr Dof6( float _x  = 0.0,
-                    float _y  = 0.0,
-                    float _z  = 0.0,
-                    float _w0 = 1.0,
-                    float _w1 = 0.0,
-                    float _w2 = 0.0,
-                    float _w3 = 0.0 ) :
+                             float _y  = 0.0,
+                             float _z  = 0.0,
+                             float _w0 = 1.0,
+                             float _w1 = 0.0,
+                             float _w2 = 0.0,
+                             float _w3 = 0.0 ) :
         x { _x }, y { _y }, z { _z }, w0 { _w0 }, w1 { _w1 }, w2 { _w2 }, w3 { _w3 } {}
 
     ///
@@ -701,7 +690,6 @@ struct Dof6 {
     }
 };
 static_assert( sizeof( Dof6 ) == 28 );
-
 
 ///
 /// \brief The XYZ32F class

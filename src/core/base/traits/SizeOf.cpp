@@ -1,15 +1,12 @@
 #include "SizeOf.hpp"
 
-//#include <string>
-//#include <string_view>
 #include <cmath>
 
 namespace hub {
 
 //// source : https://www.mbeckler.org/blog/?p=114
 //// Prints to the provided buffer a nice number of bytes (KB, MB, GB, etc)
-std::string pretty_bytes(hub::Size_t bytes) {
-    // std::string str;
+std::string pretty_bytes( hub::Size_t bytes ) {
 
     constexpr auto buffSize = 32;
     char buff[buffSize] { 0 };
@@ -34,8 +31,7 @@ std::string pretty_bytes(hub::Size_t bytes) {
 #    endif
 #endif
     }
-    else
-    {
+    else {
 #ifdef WIN32
         snprintf( buff, buffSize, "%.1f %s", count, suffixes[s].data() );
 #else
@@ -50,4 +46,4 @@ std::string pretty_bytes(hub::Size_t bytes) {
     return buff;
 }
 
-}
+} // namespace hub

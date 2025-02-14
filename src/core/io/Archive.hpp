@@ -1,27 +1,27 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
 #include <queue>
 
-#include "core/Base.hpp"
 #include "InputOutput.hpp"
+#include "core/Base.hpp"
 
 #ifndef HUB_NON_BUILD_IO
-#include "io/Header.hpp"
+#    include "io/Header.hpp"
 #endif
 
 namespace hub {
@@ -29,8 +29,8 @@ namespace io {
 
 ///
 /// \brief The ArchiveT class
-/// implements input/output features with a any serializer to save data locally in the unique archive.
-/// You can write or read in the archive.
+/// implements input/output features with a any serializer to save data locally in the unique
+/// archive. You can write or read in the archive.
 /// \warning When you read in the archive, the information is lost. The data is not retained.
 ///
 template <class SerializerT = Serializer, class InputOutputT = InputOutput<SerializerT>>
@@ -89,17 +89,13 @@ class ArchiveT : public InputOutputT
     /// \brief isOpen
     /// \return
     ///
-    bool isOpen() const override {
-        return true;
-    }
+    bool isOpen() const override { return true; }
 
     ///
     /// \brief isEnd
     /// \return
     ///
-    bool isEnd() const override {
-        return m_datas.empty();
-    }
+    bool isEnd() const override { return m_datas.empty(); }
 
     void clear() override {
         while ( !m_datas.empty() )
@@ -113,9 +109,7 @@ class ArchiveT : public InputOutputT
     /// \return
     ///
 #ifndef HUB_NON_BUILD_IO
-    const Header& getHeader() const {
-        return m_header;
-    }
+    const Header& getHeader() const { return m_header; }
 #endif
 
 #ifdef DEBUG
@@ -124,17 +118,13 @@ class ArchiveT : public InputOutputT
     /// Able to compare stats between other IO implements.
     /// \return The number of io calls.
     ///
-    size_t getNCall() const {
-        return m_nCall;
-    }
+    size_t getNCall() const { return m_nCall; }
 
     ///
     /// \brief Get the latest io call size.
     /// \return The latest io call size.
     ///
-    size_t getLastCallSize() const {
-        return m_lastCallSize;
-    }
+    size_t getLastCallSize() const { return m_lastCallSize; }
 #endif
 
   private:

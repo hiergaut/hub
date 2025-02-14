@@ -1,7 +1,5 @@
 #include "ViewerServer2.hpp"
 
-
-
 namespace hub {
 namespace client {
 
@@ -115,9 +113,7 @@ void ViewerServer2::threadRoutine() {
 
                     std::string streamIpv4;
                     m_sock.read( streamIpv4 );
-                    if (streamIpv4 == "127.0.0.1") {
-                        streamIpv4 = m_serverIpv4;
-                    }
+                    if ( streamIpv4 == "127.0.0.1" ) { streamIpv4 = m_serverIpv4; }
 
                     int streamPort;
                     m_sock.read( streamPort );
@@ -125,7 +121,8 @@ void ViewerServer2::threadRoutine() {
                     io::Header header;
                     m_sock.read( header );
 
-                    DEBUG_MSG( "[Viewer] new streamer '" << streamName << "', header size : " << PRETTY_BYTES(header.getSize())  );
+                    DEBUG_MSG( "[Viewer] new streamer '" << streamName << "', header size : "
+                                                         << PRETTY_BYTES( header.getSize() ) );
 
                     addStream( streamName, streamIpv4, streamPort, std::move( header ) );
                     m_sock.write( io::StreamBase::ClientMessage::VIEWER_CLIENT_STREAM_ADDED );

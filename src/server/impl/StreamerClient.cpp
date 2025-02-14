@@ -13,11 +13,11 @@ namespace hub {
 namespace server {
 
 StreamerClient::StreamerClient( ServerImpl* server,
-                                  int iClient,
-                                  hub::io::InputOutputSocket&& sock,
-                                  std::string streamName,
-                                  std::string streamIpv4,
-                                  int streamPort ) :
+                                int iClient,
+                                hub::io::InputOutputSocket&& sock,
+                                std::string streamName,
+                                std::string streamIpv4,
+                                int streamPort ) :
     Client( server, iClient ),
     m_streamName( std::move( streamName ) ),
     m_streamIpv4( std::move( streamIpv4 ) ),
@@ -76,9 +76,7 @@ StreamerClient::StreamerClient( ServerImpl* server,
                     m_server->delStreamViewer( this );
                 }
 
-                else {
-                    assert( false );
-                }
+                else { assert( false ); }
             }
         }
         catch ( net::system::SocketSystem::exception& ex ) {
@@ -120,7 +118,6 @@ StreamerClient::~StreamerClient() {
 
 std::string StreamerClient::headerMsg() const {
     return Client::clientMsg() + "[Streamer] ";
-    // return Client::headerMsg() + "[Streamer] ";
 }
 
 void StreamerClient::end( hub::io::StreamBase::ServerMessage message ) {

@@ -4,7 +4,6 @@
 #include <iostream>
 #include <set>
 
-//#include <cgltf.h>
 #include <cgltf/cgltf.h>
 #include <meshoptimizer/gltf/gltfpack.h>
 #include <meshoptimizer/meshoptimizer.h>
@@ -26,9 +25,7 @@ class MeshImpl
 MeshImpl::~MeshImpl() {}
 
 // Mesh::Mesh( const Mesh& mesh ) :
-//     m_pimpl( mesh.m_pimpl )
 
-// {}
 
 Mesh::Mesh( const std::string& filePath ) : Mesh( { filePath } ) {}
 
@@ -252,21 +249,12 @@ Mesh::Mesh( std::initializer_list<std::string> filePaths ) : m_pimpl( new MeshIm
     }
     m_nMesh = glbMeshes.size();
 
-    // std::vector<unsigned char> buff;
-    // m_shapes.clear();
-    // m_materials.clear();
 }
 
-// void Mesh::unpack( bool headerOnly ) const {
 
-//     const auto start = std::chrono::high_resolution_clock::now();
 
-//     std::vector<unsigned char> buff;
-// }
 
 void Mesh::printStats() const {
-    // if ( m_name == "" ) unpack();
-    // assert( m_name != "" );
 
     std::cout << "mesh statistics:" << std::endl;
     printf( "%s: %d mesh primitives (%d triangles, %d vertices); %d draw calls (%d instances, %lld "
@@ -282,8 +270,6 @@ void Mesh::printStats() const {
 }
 
 void Mesh::printInfo() const {
-    // if ( m_shapes.empty() ) unpack( false );
-    // assert( !m_shapes.empty() );
 
     const auto& shapes    = getShapes();
     const auto& materials = getMaterials();
@@ -308,14 +294,13 @@ void Mesh::printInfo() const {
     }
 }
 
-
-
-std::string Vertex::toString() const
-{
+std::string Vertex::toString() const {
     std::string str;
-    str += "x:" + std::to_string(px) + " y:" + std::to_string(py) + " z:" + std::to_string(pz);
-    str += "nx:" + std::to_string(nx) + " ny:" + std::to_string(ny) + " nz:" + std::to_string(nz);
-    str += "tx:" + std::to_string(tx) + " ty:" + std::to_string(ty);
+    str +=
+        "x:" + std::to_string( px ) + " y:" + std::to_string( py ) + " z:" + std::to_string( pz );
+    str += "nx:" + std::to_string( nx ) + " ny:" + std::to_string( ny ) +
+           " nz:" + std::to_string( nz );
+    str += "tx:" + std::to_string( tx ) + " ty:" + std::to_string( ty );
     return str;
 }
 

@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -28,8 +28,8 @@ namespace input {
 ///
 /// \brief The InputStreamServer2 class
 /// Describes an input communication from the server.
-/// \warning The communication is only possible if the stream (with the same name) is active within the server.
-/// That implies an OutputStream communicating data through the server.
+/// \warning The communication is only possible if the stream (with the same name) is active within
+/// the server. That implies an OutputStream communicating data through the server.
 ///
 class SRC_API InputStreamServer2 : public Input, public io::StreamServer2
 {
@@ -67,15 +67,15 @@ class SRC_API InputStreamServer2 : public Input, public io::StreamServer2
     /// Also occur when stream you want to link is not connected to the server.
     ///
     explicit InputStreamServer2( const std::string& streamName,
-                        int serverPort                = HUB_SERVICE_PORT,
-                        const std::string& serverIpv4 = HUB_SERVICE_IPV4 );
+                                 int serverPort                = HUB_SERVICE_PORT,
+                                 const std::string& serverIpv4 = HUB_SERVICE_IPV4 );
 
     InputStreamServer2( const InputStreamServer2& ) = delete;
 
     ///
     /// \brief Create from movable argument
     ///
-    InputStreamServer2( InputStreamServer2&& )      = default;
+    InputStreamServer2( InputStreamServer2&& ) = default;
 
     ///
     /// \brief Start catching information from peer

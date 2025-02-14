@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
@@ -67,7 +67,7 @@ class SRC_API Acquisition : public Matrix
     /// \brief operator =
     /// \return
     ///
-    Acquisition& operator=( Acquisition&& ) = default;
+    Acquisition& operator=( Acquisition&& )      = default;
     Acquisition& operator=( const Acquisition& ) = delete;
 
     ///
@@ -98,8 +98,6 @@ class SRC_API Acquisition : public Matrix
     /// \return
     ///
     Clock& start() {
-        // auto offset  = getOffset<Clock>( 0 );
-        // auto offset2 = getOffset<Clock>( 1 );
         assert( getOffset<Clock>( 0 ) == 0 );
         return get<Clock&>();
     }

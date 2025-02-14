@@ -3,9 +3,9 @@
 #include <string>
 
 // Include all core headers to check dll export
-#include "Base.hpp"
 #include "Any.hpp"
 #include "Anyable.hpp"
+#include "Base.hpp"
 #include "Buffer.hpp"
 #include "Configuration.hpp"
 #include "Format.hpp"
@@ -40,7 +40,6 @@
 #include "serializer/SerializerImpl2.hpp"
 #include "serializer/SerializerZpp.hpp"
 #include "serializer/SerializerZppBits.hpp"
-
 
 namespace hub {
 

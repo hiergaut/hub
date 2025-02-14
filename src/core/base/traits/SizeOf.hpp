@@ -1,48 +1,46 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
+ *******************************************************************************/
 
 #pragma once
 
-
-#include <type_traits>
 #include <string>
+#include <type_traits>
 
-#include "core/base/Macros.hpp"
-#include "core/base/Defines.hpp"
 #include "TypeId.hpp"
+#include "core/base/Defines.hpp"
+#include "core/base/Macros.hpp"
 
 namespace hub {
 
 ///
 /// \brief Sizeof_t
 ///
-using Sizeof_t = decltype(sizeof(int));
+using Sizeof_t = decltype( sizeof( int ) );
 
 #if CPP_VERSION >= 20
 
 template <class T>
 constexpr auto sizeOf() {
     if constexpr ( requires { T::Size; } ) { return T::Size; }
-    else {
-        return sizeof( T );
-    }
+    else { return sizeof( T ); }
 }
 
 template <class... Ts>
-requires( sizeof...( Ts ) > 1 ) constexpr auto sizeOf() {
+    requires( sizeof...( Ts ) > 1 )
+constexpr auto sizeOf() {
     return ( sizeOf<Ts>() + ... );
 }
 
@@ -83,7 +81,6 @@ struct has_size<T, std::void_t<has_size_t<T>>> : std::true_type {};
 
 template <typename T>
 static constexpr bool has_size_v = has_size<T>::value;
-
 
 ///
 /// \brief sizeOf
@@ -133,14 +130,13 @@ REQUIRES( constexpr, sizeof...( Ts ) > 0, Sizeof_t )
 sizeOf( const T& t, const Ts&... ts ) {
 
     if constexpr ( sizeof...( Ts ) > 0 ) { return sizeOf( t ) + sizeOf( ts... ); }
-    else {
-        return sizeOf( t );
-    }
+    else { return sizeOf( t ); }
 }
 
 #endif
 
-/////////////////////////////////////////////// PRETTY BYTES /////////////////////////////////////////////////
+/////////////////////////////////////////////// PRETTY BYTES
+////////////////////////////////////////////////////
 
 ///
 /// \brief pretty_bytes
@@ -150,4 +146,4 @@ sizeOf( const T& t, const Ts&... ts ) {
 std::string SRC_API pretty_bytes( hub::Size_t bytes );
 #define PRETTY_BYTES( t ) hub::pretty_bytes( t )
 
-}
+} // namespace hub

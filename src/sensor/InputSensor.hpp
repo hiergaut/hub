@@ -1,26 +1,26 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
-#include "core/Base.hpp"
-#include "core/Input.hpp"
 #include "Acquisition.hpp"
 #include "Sensor.hpp"
 #include "SensorSpec.hpp"
+#include "core/Base.hpp"
+#include "core/Input.hpp"
 
 // User friendly headers (classes can be used as input parameter of constructor)
 #include "io/input/InputFile.hpp"
@@ -102,7 +102,7 @@ class InputSensor : public Sensor
     ///
     template <class InputT>
 #if CPP_VERSION >= 20
-    requires std::is_base_of_v<Input, std::remove_cvref_t<InputT>>
+        requires std::is_base_of_v<Input, std::remove_cvref_t<InputT>>
 #endif
     // REQUIRES (std::is_base_of_v<Input, std::remove_cvref_t<InputT>>)
     explicit InputSensor( InputT&& input ) : Sensor( SensorSpec {} ) {
@@ -119,7 +119,7 @@ class InputSensor : public Sensor
     ///
     template <class InputT>
 #if CPP_VERSION >= 20
-    requires std::is_base_of_v<Input, std::remove_cvref_t<InputT>>
+        requires std::is_base_of_v<Input, std::remove_cvref_t<InputT>>
 #endif
     InputSensor( InputT&& input, InputT&& input2 ) : Sensor( SensorSpec {} ) {
         static_assert( std::is_base_of_v<Input, std::remove_cvref_t<InputT>> );
@@ -247,25 +247,19 @@ class InputSensor : public Sensor
     /// \brief getInput
     /// \return
     ///
-    const Input& getInput() const {
-        return *m_inputs.at( 0 );
-    }
+    const Input& getInput() const { return *m_inputs.at( 0 ); }
 
     ///
     /// \brief acqMsg
     /// \return
     ///
-    Acquisition acqMsg() const {
-        return make_acquisition( m_spec.getResolution() );
-    }
+    Acquisition acqMsg() const { return make_acquisition( m_spec.getResolution() ); }
 
     ///
     /// \brief getInput
     /// \return
     ///
-    Input& getInput() {
-        return *m_inputs.at( 0 );
-    }
+    Input& getInput() { return *m_inputs.at( 0 ); }
 
   private:
     std::vector<Input*> m_inputs;

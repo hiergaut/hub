@@ -1,26 +1,26 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
-#include "core/Base.hpp"
-#include "core/Output.hpp"
 #include "Acquisition.hpp"
 #include "Sensor.hpp"
 #include "SensorSpec.hpp"
+#include "core/Base.hpp"
+#include "core/Output.hpp"
 
 // User friendly headers (classes can be used as output parameter of constructor)
 #include "io/output/OutputFile.hpp"
@@ -47,23 +47,24 @@ namespace sensor {
 class OutputSensor : public Sensor
 {
   public:
-    // using Sensor::acqMsg;
 
     // OutputSensor( const SensorSpec& sensorSpec,
 
-        ///
-        /// \brief OutputSensor
-        /// \param sensorSpec
-        /// \param args
-        ///
+    ///
+    /// \brief OutputSensor
+    /// \param sensorSpec
+    /// \param args
+    ///
     template <class OutputT = output::OutputStream,
 #if CPP_VERSION >= 20
-              requires std::is_base_of_v<hub::Output, OutputT>
+                  requires std::is_base_of_v<hub::Output, OutputT>
 #endif
-    typename = typename std::enable_if_t<std::is_base_of_v<hub::Output, OutputT>>,
-    class... Args > OutputSensor( const SensorSpec& sensorSpec, const Args&... args ) :
+              typename = typename std::enable_if_t<std::is_base_of_v<hub::Output, OutputT>>,
+              class... Args>
+              OutputSensor( const SensorSpec& sensorSpec, const Args&... args ) :
         Sensor( sensorSpec ),
-    m_output( *( new OutputT( io::make_header( sensorSpec ), args... ) ) ), m_outputOwner( true ) {
+        m_output( *( new OutputT( io::make_header( sensorSpec ), args... ) ) ),
+        m_outputOwner( true ) {
         static_assert( std::is_base_of_v<hub::Output, OutputT> );
 
         assert( m_spec.getResolution().nType() > 0 );
@@ -76,12 +77,11 @@ class OutputSensor : public Sensor
     ///
     template <class OutputT,
 #if CPP_VERSION >= 20
-              requires std::is_base_of_v<hub::Output, OutputT>
+                  requires std::is_base_of_v<hub::Output, OutputT>
 #endif
-    typename = typename std::enable_if_t < std::is_base_of_v < hub::Output,
-    OutputT >>> OutputSensor( const SensorSpec& sensorSpec, OutputT& output ) :
-        Sensor( sensorSpec ),
-    m_output( output ) {
+              typename = typename std::enable_if_t<std::is_base_of_v<hub::Output, OutputT>>>
+              OutputSensor( const SensorSpec& sensorSpec, OutputT& output ) :
+        Sensor( sensorSpec ), m_output( output ) {
         static_assert( std::is_base_of_v<hub::Output, OutputT> );
 
 #ifdef DEBUG
@@ -102,12 +102,13 @@ class OutputSensor : public Sensor
     ///
     template <class OutputT,
 #if CPP_VERSION >= 20
-              requires std::is_base_of_v<hub::Output, OutputT>
+                  requires std::is_base_of_v<hub::Output, OutputT>
 #endif
-    typename = typename std::enable_if_t < std::is_base_of_v < hub::Output,
-    OutputT >>> OutputSensor( const SensorSpec& sensorSpec, OutputT&& output ) :
+              typename = typename std::enable_if_t<std::is_base_of_v<hub::Output, OutputT>>>
+              OutputSensor( const SensorSpec& sensorSpec, OutputT&& output ) :
         Sensor( sensorSpec ),
-    m_output( *( new OutputT( std::move( output ) ) ) ), m_outputOwner( true ) {
+        m_output( *( new OutputT( std::move( output ) ) ) ),
+        m_outputOwner( true ) {
         static_assert( std::is_base_of_v<hub::Output, OutputT> );
 
 #ifdef DEBUG
@@ -141,9 +142,7 @@ class OutputSensor : public Sensor
     /// \brief getOutput
     /// \return
     ///
-    Output& getOutput() const {
-        return m_output;
-    }
+    Output& getOutput() const { return m_output; }
 
     ///
     /// \brief acqMsg
@@ -157,12 +156,11 @@ class OutputSensor : public Sensor
     ///
     template <class Container,
               typename T = std::decay_t<decltype( *begin( std::declval<Container>() ) )>>
-    void fill(Container & ts) {
-        static_assert(std::is_same_v<T, Acquisition>);
-        for (const auto & t : ts) {
-            m_output.write(t.data(), t.size());
+    void fill( Container& ts ) {
+        static_assert( std::is_same_v<T, Acquisition> );
+        for ( const auto& t : ts ) {
+            m_output.write( t.data(), t.size() );
         }
-
     }
 
   private:
@@ -203,9 +201,7 @@ class OutputSensorT : protected Sensor
         if constexpr ( isMatrix<Resolution> ) {
             assert( Resolution().getMatrix() == m_spec.getResolution() );
         }
-        else {
-            assert( make_matrix<Resolution>() == m_spec.getResolution() );
-        }
+        else { assert( make_matrix<Resolution>() == m_spec.getResolution() ); }
 #endif
     }
 
@@ -228,17 +224,13 @@ class OutputSensorT : protected Sensor
     /// \brief acqMsg
     /// \return
     ///
-    Acquisition acqMsg() const {
-        return Acquisition();
-    }
+    Acquisition acqMsg() const { return Acquisition(); }
 
     ///
     /// \brief getOutput
     /// \return
     ///
-    Output& getOutput() const {
-        return m_output;
-    }
+    Output& getOutput() const { return m_output; }
 
   private:
     Output& m_output;

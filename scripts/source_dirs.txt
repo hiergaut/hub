@@ -1,4 +1,4 @@
-src/core/base
+src/
 * tests/
 * examples/
 * CMakeLists.txt

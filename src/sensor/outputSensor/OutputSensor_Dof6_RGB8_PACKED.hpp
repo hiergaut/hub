@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
+ *******************************************************************************/
 
 #pragma once
 
@@ -42,8 +42,8 @@ class OutputSensor_Dof6_RGB8_Packed : protected OutputSensor_Instance
         const hub::sensor::SensorSpec sensorSpec( FILE_NAME, Resolution(), metaData );
 
         hub::sensor::OutputSensorT<Resolution> outputSensor( sensorSpec, FILE_NAME );
-        auto & output = outputSensor.getOutput();
-        output.setRetain(true);
+        auto& output = outputSensor.getOutput();
+        output.setRetain( true );
         auto acq                 = outputSensor.acqMsg();
         auto& start              = acq.start();
         auto& end                = acq.end();
@@ -61,7 +61,6 @@ class OutputSensor_Dof6_RGB8_Packed : protected OutputSensor_Instance
             const auto startClock = std::chrono::high_resolution_clock::now();
             // const auto startClock = iAcq;
 
-            // start  = hub::sensor::getClock();
             start  = iAcq;
             dof6.y = iAcq * 10;
             assert( dof6.w0 == 1 );
@@ -84,21 +83,19 @@ class OutputSensor_Dof6_RGB8_Packed : protected OutputSensor_Instance
                     else { imgData[idx].b += 128; }
                 }
             }
-            // end = hub::sensor::getClock();
             end = iAcq;
             ++dec;
 
-            // std::cout << "acq: " << acq << std::endl;
             outputSensor << acq;
 
             const auto endClock =
                 startClock + std::chrono::microseconds( (int)( 1'000'000 / maxFps ) );
             std::this_thread::sleep_until( endClock );
         }
-        output.setRetain(false);
+        output.setRetain( false );
 
-        while (1) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        while ( 1 ) {
+            std::this_thread::sleep_for( std::chrono::milliseconds( 1000 ) );
             outputSensor << acq;
         }
     }

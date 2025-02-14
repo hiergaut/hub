@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
+ *******************************************************************************/
 
 #pragma once
 
@@ -23,9 +23,9 @@ namespace hub {
 #    define COMPILER_CLANG
 #    define CLANG_VERSION __clang_major__
 
-#if (! defined(HUB_COMPILER_Clang)) && (! defined(HUB_COMPILER_AppleClang))
-#error "not clang compiler"
-#endif
+#    if ( !defined( HUB_COMPILER_Clang ) ) && ( !defined( HUB_COMPILER_AppleClang ) )
+#        error "not clang compiler"
+#    endif
 
 #elif defined( __GNUC__ )
 #    define COMPILER_GCC
@@ -50,30 +50,29 @@ namespace hub {
 #        error "gcc version not supported"
 #    endif
 
-#ifndef HUB_COMPILER_GNU
-#error "not gnu compiler"
-#endif
+#    ifndef HUB_COMPILER_GNU
+#        error "not gnu compiler"
+#    endif
 
 #elif defined( _MSC_VER )
 
-//#if _MSC_VER >= 1900
 #    define COMPILER_MSVC
 #    define _USE_MATH_DEFINES
 
-#ifndef HUB_COMPILER_MSVC
-#error "not gnu compiler"
-#endif
+#    ifndef HUB_COMPILER_MSVC
+#        error "not gnu compiler"
+#    endif
 
 #elif defined( __llvm__ )
 
-#ifndef HUB_COMPILER_LLVM
-#error "not llvm compiler"
-#endif
+#    ifndef HUB_COMPILER_LLVM
+#        error "not llvm compiler"
+#    endif
 
 #else
-#ifndef CPP_CHECK
-#    error unsupported compiler
-#endif
+#    ifndef CPP_CHECK
+#        error unsupported compiler
+#    endif
 #endif
 
 // OS and architecture identification
@@ -98,9 +97,9 @@ namespace hub {
 #elif defined( __linux__ ) || defined( __CYGWIN__ ) // ---------------------- Linux
 #    define OS_LINUX
 #else
-#ifndef CPP_CHECK
-#    error unsupported OS
-#endif
+#    ifndef CPP_CHECK
+#        error unsupported OS
+#    endif
 #endif
 
 // Check arch for macos and linux
@@ -164,9 +163,6 @@ namespace hub {
 // Dll import/export.
 // You must define SRC_STATIC to force static link for external use (.lib)
 
-//#ifndef SRC_STATIC
-//#define SRC_STATIC
-//#endif
 
 #ifdef OS_WINDOWS
 #    if defined SRC_STATIC
@@ -215,7 +211,6 @@ namespace hub {
 #    define CONSTEXPR const
 #endif
 
-// #define HUB_DEBUG_INPUT_OUTPUT
 #ifdef HUB_DEBUG_INPUT_OUTPUT
 #    define HUB_DEBUG_INPUT
 #    define HUB_DEBUG_OUTPUT
@@ -223,7 +218,7 @@ namespace hub {
 #endif
 
 #ifdef WIN32
-#    define FILE_NAME                                                          \
+#    define FILE_NAME                                                                \
         std::string( "/\\" __FILE__ )                                                \
             .substr( std::max( std::string( "/\\" __FILE__ ).find_last_of( '\\' ),   \
                                std::string( "/\\" __FILE__ ).find_last_of( '/' ) ) + \
@@ -233,7 +228,7 @@ namespace hub {
 #    ifdef COMPILER_GCC
 
 #        if GCC_VERSION < 12
-#            define FILE_NAME                                                          \
+#            define FILE_NAME                                                                \
                 std::string( "/\\" __FILE__ )                                                \
                     .substr( std::max( std::string( "/\\" __FILE__ ).find_last_of( '\\' ),   \
                                        std::string( "/\\" __FILE__ ).find_last_of( '/' ) ) + \
@@ -259,7 +254,5 @@ namespace hub {
 #else
 #    define MAX_STACK_SIZE 100'000 // 100Ko
 #endif
-
-
 
 } // namespace hub

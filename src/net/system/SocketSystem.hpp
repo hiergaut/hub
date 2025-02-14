@@ -1,19 +1,19 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*   - François Gaits (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *   - François Gaits (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
@@ -23,8 +23,8 @@
 #include <list>
 #include <string>
 
-#include "core/Base.hpp"
 #include "NetUtilsSystem.hpp"
+#include "core/Base.hpp"
 
 namespace hub {
 namespace net {
@@ -91,7 +91,7 @@ class SRC_API SocketSystem
     SocketSystem( SocketSystem&& socket );
 
     SocketSystem& operator=( const SocketSystem& socket ) = delete;
-    SocketSystem&& operator=( SocketSystem&& socket ) = delete;
+    SocketSystem&& operator=( SocketSystem&& socket )     = delete;
 
   protected:
     ///
@@ -107,7 +107,7 @@ class SRC_API SocketSystem
     ///
     /// \brief m_moved
     ///
-    bool m_moved      = false;
+    bool m_moved = false;
 };
 
 } // namespace system

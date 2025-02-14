@@ -16,20 +16,17 @@ Client::~Client() {
     if ( m_server != nullptr ) m_server->removeClient( this );
 }
 
-std::string Client::clientMsg() const
-{
+std::string Client::clientMsg() const {
     const std::string str = "\t\033[" + std::to_string( 31 + m_iClient % 7 ) + "m" +
                             "[Client:" + std::to_string( m_iClient ) + "/" +
                             std::to_string( m_server->m_nActiveClient ) + "]\033[0m";
     return str;
 }
 
-constexpr int g_margin  = 45;
+constexpr int g_margin = 45;
 
 constexpr int g_margin2 = 20;
 
-// std::string Client::headerMsg() const {
-// }
 
 void Client::printStatusMessage( const std::string& message ) const {
     if ( m_server == nullptr ) {

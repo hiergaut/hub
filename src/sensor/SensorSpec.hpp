@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
@@ -21,11 +21,11 @@
 
 //// #include "io/output/Output.hpp"
 //// #include "io/input/Input.hpp"
-#include "core/Base.hpp"
-#include "core/Any.hpp"
-#include "core/MetaData.hpp"
-#include "core/Matrix.hpp"
 #include "Acquisition.hpp"
+#include "core/Any.hpp"
+#include "core/Base.hpp"
+#include "core/Matrix.hpp"
+#include "core/MetaData.hpp"
 
 namespace hub {
 namespace sensor {
@@ -71,9 +71,7 @@ class SRC_API SensorSpec
                 const MetaData& metaData = {} ) :
         m_sensorName { sensorName }, m_metaData { metaData } {
         if constexpr ( isMatrix<Resolution> ) { m_resolution = Resolution().getMatrix(); }
-        else {
-            m_resolution = make_matrix<Resolution>();
-        }
+        else { m_resolution = make_matrix<Resolution>(); }
     }
 
     ///
@@ -94,7 +92,6 @@ class SRC_API SensorSpec
         return m_sensorName == other.m_sensorName && m_resolution == other.m_resolution &&
                m_metaData == other.m_metaData;
     }
-
 
     SensorSpec() = default;
 
@@ -166,9 +163,7 @@ class SRC_API SensorSpec
     ///
     SensorSpec& operator+=( const SensorSpec& other ) {
         if ( m_sensorName == "" ) { *this = other; }
-        else {
-            *this = *this + other;
-        }
+        else { *this = *this + other; }
         return *this;
     }
 
@@ -176,7 +171,7 @@ class SRC_API SensorSpec
     /// \brief getSensorName
     /// \return
     ///
-    const std::string & getSensorName() const { return m_sensorName; }
+    const std::string& getSensorName() const { return m_sensorName; }
 
     ///
     /// \brief getResolution

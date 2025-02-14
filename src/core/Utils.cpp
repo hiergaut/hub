@@ -70,22 +70,21 @@ void sleep( const double t ) {
 
 HWND g_mainWindow = 0;
 
-    static std::map<int, Key> s_input2key {
-//          {VK_SHIFT, Key::Shift},
-            {VK_OEM_PERIOD, Key::Dot},
-            {VK_SPACE, Key::Space},
-            {VK_ESCAPE, Key::Escape},
-            {VK_RIGHT, Key::RightArrow},
-            {VK_LEFT, Key::LeftArrow},
-            {VK_UP, Key::UpArrow},
-            {VK_DOWN, Key::DownArrow},
-            {VK_F1, Key::F1},
-            {VK_F2, Key::F2},
-            {VK_F5, Key::F5},
-            {'A', Key::A},
-            {'B', Key::B},
-            {'H', Key::H},
-            };
+static std::map<int, Key> s_input2key {
+    { VK_OEM_PERIOD, Key::Dot },
+    { VK_SPACE, Key::Space },
+    { VK_ESCAPE, Key::Escape },
+    { VK_RIGHT, Key::RightArrow },
+    { VK_LEFT, Key::LeftArrow },
+    { VK_UP, Key::UpArrow },
+    { VK_DOWN, Key::DownArrow },
+    { VK_F1, Key::F1 },
+    { VK_F2, Key::F2 },
+    { VK_F5, Key::F5 },
+    { 'A', Key::A },
+    { 'B', Key::B },
+    { 'H', Key::H },
+};
 
 Key key_press() {
 #    ifndef HUB_BUILD_UWP
