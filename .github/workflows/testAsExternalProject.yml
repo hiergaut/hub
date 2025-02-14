@@ -41,7 +41,7 @@ jobs:
     steps:
 
     - name: Checkout gh-testAsExternalProject
-      run: git clone --branch gh-testAsExternalProject https://github.com/T-PLAY/hub.git "${{github.workspace}}/hub"
+      run: git clone --branch gh-testAsExternalProject https://github.com/hiergaut/hub.git "${{github.workspace}}/hub"
 
     - name: Configure CMake (install hub)
       run: cmake "${{github.workspace}}/hub" -B "${{github.workspace}}/hub/build" -DCMAKE_C_COMPILER=${{ matrix.config.cc }} -DCMAKE_CXX_COMPILER=${{ matrix.config.cxx }} -DHUB_BUILD_STATIC=${{ matrix.config.hub_static }} -DHUB_BUILD_SHARED=${{ matrix.config.hub_shared }}
