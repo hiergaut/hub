@@ -22,7 +22,7 @@ if(NOT ${EXTERNAL_NAME}_FOUND)
     include(FetchContent)
    FetchContent_Declare(
                hub
-               GIT_REPOSITORY https://github.com/T-PLAY/hub.git
+               GIT_REPOSITORY https://github.com/hiergaut/hub.git
                GIT_TAG ${EXTERNAL_BRANCH_NAME}
                GIT_PROGRESS TRUE
                GIT_SHALLOW TRUE
