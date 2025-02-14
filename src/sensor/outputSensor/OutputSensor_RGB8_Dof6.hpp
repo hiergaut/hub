@@ -22,6 +22,9 @@ namespace hub {
 namespace sensor {
 namespace outputSensor {
 
+///
+/// \brief The OutputSensor_RGB8_Dof6 class
+///
 class OutputSensor_RGB8_Dof6 : protected OutputSensor_Instance
 {
   public:
@@ -29,6 +32,9 @@ class OutputSensor_RGB8_Dof6 : protected OutputSensor_Instance
     using OutputSensor_Instance::run;
     using OutputSensor_Instance::stop;
 
+    ///
+    /// \brief routine
+    ///
     void routine() override {
         hub::MetaData metaData;
         metaData["manufactor"] = "UPS";

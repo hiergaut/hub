@@ -22,6 +22,9 @@ namespace hub {
 namespace sensor {
 namespace outputSensor {
 
+///
+/// \brief The OutputSensor_Dof6_RGB8 class
+///
 class OutputSensor_Dof6_RGB8 : protected OutputSensor_Instance
 {
   public:
@@ -29,6 +32,9 @@ class OutputSensor_Dof6_RGB8 : protected OutputSensor_Instance
     using OutputSensor_Instance::run;
     using OutputSensor_Instance::stop;
 
+    ///
+    /// \brief routine
+    ///
     void routine() override {
         hub::MetaData metaData;
         constexpr int width  = 512;

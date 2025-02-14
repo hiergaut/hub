@@ -22,6 +22,9 @@ namespace hub {
 namespace sensor {
 namespace outputSensor {
 
+///
+/// \brief The OutputSensor_Dof6_RGB8_Packed_Updated class
+///
 class OutputSensor_Dof6_RGB8_Packed_Updated : protected OutputSensor_Instance
 {
   public:
@@ -29,6 +32,9 @@ class OutputSensor_Dof6_RGB8_Packed_Updated : protected OutputSensor_Instance
     using OutputSensor_Instance::run;
     using OutputSensor_Instance::stop;
 
+    ///
+    /// \brief routine
+    ///
     void routine() override {
         constexpr int nAcq = 50;
 
