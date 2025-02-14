@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -23,7 +23,8 @@
 namespace hub {
 namespace io {
 
-// Todo move to core input/output ios class, all stream data need versioning to be aware of compatibility
+// Todo move to core input/output ios class, all stream data need versioning to be aware of
+// compatibility
 ///
 /// \brief The Header class
 /// allow versionning and initializing of any communication
@@ -31,7 +32,6 @@ namespace io {
 class SRC_API Header
 {
   public:
-    // using MagicNumber = std::array<char, 128>;
     ///
     /// \brief Allow to check compatibility with different communications
     ///
@@ -84,8 +84,9 @@ class SRC_API Header
             // cppcheck-suppress useStlAlgorithm
             str += number;
         }
-        return str + "header size: " + std::to_string( m_headerSize ) + "\ndata size: " + std::to_string( m_dataSize ) + "\nuser defined: " +
-               hub::to_string( m_userDefined );
+        return str + "header size: " + std::to_string( m_headerSize ) +
+               "\ndata size: " + std::to_string( m_dataSize ) +
+               "\nuser defined: " + hub::to_string( m_userDefined );
     }
 
     ///
@@ -94,7 +95,7 @@ class SRC_API Header
     ///
     template <class Output>
     void write( Output& output ) {
-        output.write( reinterpret_cast<Data_t*>(m_magicNumber.data()), m_magicNumber.size() );
+        output.write( reinterpret_cast<Data_t*>( m_magicNumber.data() ), m_magicNumber.size() );
         output.writeAll( m_headerSize, m_dataSize, m_userDefined );
     }
 
@@ -104,7 +105,7 @@ class SRC_API Header
     ///
     template <class Input>
     void read( Input& input ) {
-        input.read( reinterpret_cast<Data_t*>(m_magicNumber.data()), m_magicNumber.size() );
+        input.read( reinterpret_cast<Data_t*>( m_magicNumber.data() ), m_magicNumber.size() );
 
         checkMagicNumber();
 
@@ -145,16 +146,11 @@ class SRC_API Header
 template <class T>
 Header make_header( const T& t ) {
 
-    // std::cout << "[Header] make_header() making header ..." << std::endl;
-
     Memory memory;
     memory.write( t );
 
-    // std::cout << "[Header] make_header() memory : " << memory.getData() << std::endl;
-
     Header header( t.dataSize(), memory.getData() );
 
-    // std::cout << "[Header] make_header() done" << std::endl;
     return header;
 }
 

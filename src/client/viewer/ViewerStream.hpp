@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -31,16 +31,14 @@
 #    ifdef DEBUG_MSG
 #        undef DEBUG_MSG
 #    endif
-#    define DEBUG_MSG( _params )                                         \
-        do {                                                             \
-            if ( m_viewerHandler.onLogMessage ) {                        \
-                std::stringstream _sstr;                                 \
-                _sstr << m_iStreamer << ":" << _params;                  \
-                m_viewerHandler.onLogMessage( _sstr.str().c_str() );     \
-            }                                                            \
-            else {                                                       \
-                std::cout << m_iStreamer << ":" << _params << std::endl; \
-            }                                                            \
+#    define DEBUG_MSG( _params )                                              \
+        do {                                                                  \
+            if ( m_viewerHandler.onLogMessage ) {                             \
+                std::stringstream _sstr;                                      \
+                _sstr << m_iStreamer << ":" << _params;                       \
+                m_viewerHandler.onLogMessage( _sstr.str().c_str() );          \
+            }                                                                 \
+            else { std::cout << m_iStreamer << ":" << _params << std::endl; } \
         } while ( false );
 #endif
 
@@ -76,7 +74,7 @@ class ViewerStream
     ViewerStream( const ViewerStream& ) = delete;
 
     ViewerStream& operator=( const ViewerStream& ) = delete;
-    ViewerStream& operator=( ViewerStream&& ) = delete;
+    ViewerStream& operator=( ViewerStream&& )      = delete;
 
     ~ViewerStream();
 
@@ -113,7 +111,6 @@ class ViewerStream
 
     std::unique_ptr<InputStream> m_inputStream;
     const int m_iStreamer;
-
 };
 
 //////////////////////////////////// INLINE ////////////////////////////////////
@@ -195,10 +192,7 @@ void ViewerStream<InputStream>::startStream() {
 #ifdef HUB_DEBUG_VIEWER_STREAM
             // DEBUG_MSG( "[Viewer][Stream] starting streaming thread" );
 #endif
-            // assert(m_inputStream == nullptr);
-            // if (m_inputStream == nullptr) {
             m_inputStream = std::make_unique<InputStream>( m_streamPort, m_streamIpv4 );
-            // }
             assert( m_inputStream->isOpen() );
 
 #ifdef HUB_DEBUG_VIEWER_STREAM
@@ -241,8 +235,6 @@ void ViewerStream<InputStream>::startStream() {
                 }
             }
 #endif
-            // m_inputStream->close();
-            // m_inputStream.release();
         }
 #ifdef DEBUG
         catch ( std::exception& ex ) {

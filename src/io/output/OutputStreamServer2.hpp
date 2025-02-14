@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -84,7 +84,6 @@ class SRC_API OutputStreamServer2 : public Output, public io::StreamServer2
     ///
     void close() override;
 
-
     ///
     /// \brief isOpen
     /// \return
@@ -136,7 +135,7 @@ class SRC_API OutputStreamServer2 : public Output, public io::StreamServer2
         std::unique_ptr<std::thread> m_serverThread;
         bool m_shutdown       = false;
         long long m_byteWrote = 0;
-        size_t m_acqWrote = 0;
+        size_t m_acqWrote     = 0;
         std::chrono::high_resolution_clock::time_point m_lastClock =
             std::chrono::high_resolution_clock::now();
     };

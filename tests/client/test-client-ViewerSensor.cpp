@@ -109,7 +109,7 @@ TEST_CASE( "Viewer" ) {
             server.asyncRun();
 
             iTry = 0;
-            while ( (!viewer.isConnected() || nServerConnected == 0) && iTry < 20 ) {
+            while ( ( !viewer.isConnected() || nServerConnected == 0 ) && iTry < 20 ) {
                 std::cout << "[test] waiting for viewer connected" << std::endl;
                 std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
                 ++iTry;
@@ -125,13 +125,12 @@ TEST_CASE( "Viewer" ) {
                 hub::sensor::OutputSensor outputSensor( sensorSpec_ref, FILE_NAME, port );
                 CONSTRUCT_END( "OutputSensor" );
                 iTry = 0;
-                // while (viewer.nStream() == 0) {
                 while ( viewer.nStream() == 0 && iTry < 20 ) {
                     std::cout << "[test] waiting for viewer new stream ..." << std::endl;
                     std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
                     ++iTry;
                 }
-                CHECK(iTry < 20);
+                CHECK( iTry < 20 );
                 CHECK( viewer.nStream() == 1 );
                 CHECK( viewer.nStreaming() == 1 );
                 auto acq    = outputSensor.acqMsg();
@@ -165,7 +164,7 @@ TEST_CASE( "Viewer" ) {
             DESTRUCT_END( "OutputStream" );
 
             iTry = 0;
-            while ( (viewer.nStream() != 0 || nDelStreamer == 0) && iTry < 20 ) {
+            while ( ( viewer.nStream() != 0 || nDelStreamer == 0 ) && iTry < 20 ) {
                 std::cout << "[test] waiting for outputStream disconnected" << std::endl;
                 std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
                 ++iTry;

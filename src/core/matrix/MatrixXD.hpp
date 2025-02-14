@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -25,17 +25,15 @@ namespace hub {
 /////////////////////////////////////////// TEMPLATES
 /////////////////////////////////////////////////////
 
-// namespace _ {
-
 ///
 /// \brief The MatrixXDBase class
 /// defined basic features of nd array
 ///
 template <class Type, Size_t... Ns>
 #if CPP_VERSION >= 20
-requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
+    requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
 #endif
-    class MatrixXDBase
+class MatrixXDBase
 {
     static_assert( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) );
 
@@ -54,7 +52,7 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
     ///
     /// \brief Size
     ///
-    static constexpr auto Size     = sizeOf<Type>() * Capacity;
+    static constexpr auto Size = sizeOf<Type>() * Capacity;
 
     ///
     /// \brief capacity
@@ -86,9 +84,9 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
     ///
     template <Size_t i>
 #if CPP_VERSION >= 20
-    requires( 0 <= i && i < nDim() )
+        requires( 0 <= i && i < nDim() )
 #endif
-        static constexpr auto getDim() {
+    static constexpr auto getDim() {
         static_assert( 0 <= i && i < nDim() );
         auto j = 0;
         for ( auto dim : { Ns... } ) {
@@ -119,8 +117,7 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
     ///
     template <class... Types>
     // REQUIRES( static constexpr, sizeof...( Types ) > 1, bool )
-    static constexpr typename std::enable_if_t<(sizeof...( Types ) > 1), bool>
-    hasType() {
+    static constexpr typename std::enable_if_t<( sizeof...( Types ) > 1 ), bool> hasType() {
         return ( hasType<Types>() && ... );
     }
 
@@ -138,17 +135,17 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
     /// \return
     ///
     template <class Type_, int i = 0>
-    // REQUIRES( static constexpr, hasType<Type_>() && i < nType<Type_>(), Size_t )
-            static constexpr typename std::enable_if_t<hasType<Type_>() && i < nType<Type_>(), Size_t>
-    getOffset() {
+            // REQUIRES( static constexpr, hasType<Type_>() && i < nType<Type_>(), Size_t )
+            static constexpr typename std::enable_if_t < hasType<Type_>() &&
+        i<nType<Type_>(), Size_t> getOffset() {
         return 0;
     }
 
     template <Size_t ith>
 #if CPP_VERSION >= 20
-    requires( ith == 0 )
+        requires( ith == 0 )
 #endif
-        using getType = Type;
+    using getType = Type;
 
   public:
     template <class... Args>
@@ -220,22 +217,19 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
 };
 static_assert( isMatrix<MatrixXDBase<int, 2>> );
 
-// } // namespace _
-
 ///
 /// \brief The MatrixXD class
 /// represent nd array basic features
 ///
 template <class Type, Size_t... Ns>
 #if CPP_VERSION >= 20
-requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
+    requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
 #endif
-    class MatrixXD : public MatrixXDBase<Type, Ns...>
+class MatrixXD : public MatrixXDBase<Type, Ns...>
 {
     static_assert( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) );
 
   public:
-
     ///
     /// \brief n
     /// \return
@@ -259,9 +253,9 @@ requires( sizeof...( Ns ) > 0 && ( ( Ns > 1 ) && ... ) )
 ///
 template <class Type, Size_t N>
 #if CPP_VERSION >= 20
-requires( N > 1 )
+    requires( N > 1 )
 #endif
-    class MatrixXD<Type, N> : public MatrixXDBase<Type, N>
+class MatrixXD<Type, N> : public MatrixXDBase<Type, N>
 {
     static_assert( N > 1 );
 

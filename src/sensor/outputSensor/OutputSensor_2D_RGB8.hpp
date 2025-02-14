@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
+ *******************************************************************************/
 
 #pragma once
 
@@ -37,7 +37,7 @@ class OutputSensor_2D_RGB8 : public OutputSensor_Instance
     ///
     /// \brief width
     ///
-    static constexpr int width  = 640;
+    static constexpr int width = 640;
 
     ///
     /// \brief height
@@ -47,8 +47,7 @@ class OutputSensor_2D_RGB8 : public OutputSensor_Instance
     ///
     /// \brief Resolution
     ///
-    using Resolution            = hub::MatrixXD<hub::format::RGB8, width, height>;
-    // using Resolution            = hub::MatrixXD<hub::format::RGB8, 640, 480>;
+    using Resolution = hub::MatrixXD<hub::format::RGB8, width, height>;
 
     ///
     /// \brief init
@@ -66,18 +65,15 @@ class OutputSensor_2D_RGB8 : public OutputSensor_Instance
     /// \brief routine
     ///
     void routine() override {
-    // constexpr int width  = 640;
-    // constexpr int height = 480;
+        // constexpr int width  = 640;
+        // constexpr int height = 480;
 
-        // hub::sensor::OutputSensorT<Resolution> outputSensor( sensorSpec, FILE_NAME );
         std::unique_ptr<OutputSensor> outputSensor;
         if ( onNewAcq == nullptr ) {
             outputSensor =
                 std::make_unique<OutputSensor>( m_sensorSpec, getName(), m_port, m_ipv4 );
         }
 
-        // auto acq                 = outputSensor.acqMsg();
-        // auto acq = hub::sensor::make_acquisition(hub::make_matrix<Resolution>());
         auto acq                 = hub::sensor::make_acquisition( Resolution().getMatrix() );
         auto& start              = acq.start();
         auto& end                = acq.end();
@@ -97,9 +93,6 @@ class OutputSensor_2D_RGB8 : public OutputSensor_Instance
                 for ( int j = 0; j < width; ++j ) {
                     const auto idx = i * width + j;
                     assert( idx < imgSize );
-                    // imgData[idx].r = ( i + j + dec ) / 10 % 128;
-                    // imgData[idx].g = ( i + j + dec ) / 10 % 128;
-                    // imgData[idx].b = ( i + j + dec ) / 10 % 128;
                     imgData[idx].r = ( i + j + dec ) % 128;
                     imgData[idx].g = ( i + j + dec ) % 128;
                     imgData[idx].b = ( i + j + dec ) % 128;
@@ -115,7 +108,6 @@ class OutputSensor_2D_RGB8 : public OutputSensor_Instance
             end = hub::sensor::getClock();
             ++dec;
 
-            // outputSensor << acq;
             if ( onNewAcq ) { onNewAcq( m_streamName, acq ); }
             else { *outputSensor << acq; }
 

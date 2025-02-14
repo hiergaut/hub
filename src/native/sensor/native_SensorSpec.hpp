@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
@@ -106,7 +106,9 @@ extern "C"
     /// \param iDimension
     /// \return
     ///
-    SRC_API int sensorSpec_getDimension( const sensor::SensorSpec* sensorSpec, int iResolution, int iDimension);
+    SRC_API int sensorSpec_getDimension( const sensor::SensorSpec* sensorSpec,
+                                         int iResolution,
+                                         int iDimension );
 
     ///
     /// \brief sensorSpec_getAcquisitionSize
@@ -123,14 +125,15 @@ extern "C"
     SRC_API void sensorSpec_getMetaDataStr( const sensor::SensorSpec* sensorSpec,
                                             char* metaDataStr );
 
-    //SRC_API void to_string( const sensor::SensorSpec* sensorSpec );
+    // SRC_API void to_string( const sensor::SensorSpec* sensorSpec );
     ///
     /// \brief sensorSpec_toString
     /// \param sensorSpec
     /// \param output
     /// \param strLen
     ///
-    SRC_API void sensorSpec_toString( const sensor::SensorSpec* sensorSpec, char* output, int* strLen );
+    SRC_API void
+    sensorSpec_toString( const sensor::SensorSpec* sensorSpec, char* output, int* strLen );
 
     ///
     /// \brief sensorSpec_copy

@@ -17,23 +17,19 @@
 
 #define CONSTRUCT_BEGIN( name )                                                              \
     std::cout << "\033[1;32m[test] -------------------------------------------------> " name \
-              << "() ..."                                                                    \
-              << "\033[0m" << std::endl;
+              << "() ..." << "\033[0m" << std::endl;
 
 #define CONSTRUCT_END( name )                                                                   \
     std::cout << "\033[1;32m[test] -------------------------------------------------> " << name \
-              << "() done"                                                                      \
-              << "\033[0m" << std::endl;
+              << "() done" << "\033[0m" << std::endl;
 
-#define DESTRUCT_BEGIN( name )                                                          \
-    std::cout << "\033[1;31m[test] =================================================> " \
-              << "~" << name << "() ..."                                                \
-              << "\033[0m" << std::endl;
+#define DESTRUCT_BEGIN( name )                                                               \
+    std::cout << "\033[1;31m[test] ======================================================> " \
+              << "~" << name << "() ..." << "\033[0m" << std::endl;
 
-#define DESTRUCT_END( name )                                                            \
-    std::cout << "\033[1;31m[test] =================================================> " \
-              << "~" << name << "() done"                                               \
-              << "\033[0m" << std::endl;
+#define DESTRUCT_END( name )                                                                 \
+    std::cout << "\033[1;31m[test] ======================================================> " \
+              << "~" << name << "() done" << "\033[0m" << std::endl;
 
 #define TEST_BEGIN() auto start_test = std::chrono::high_resolution_clock::now();
 
@@ -42,8 +38,8 @@
     const auto duration =                                                                       \
         std::chrono::duration_cast<std::chrono::milliseconds>( end_test - start_test ).count(); \
     std::cout << "[" << FILE_NAME << "] duration : " << duration << " ms" << std::endl;         \
-    std::ofstream outFile( "duration_tests.txt", std::ios::app );                                  \
-    outFile << duration << " " << FILE_NAME << std::endl;                                          \
+    std::ofstream outFile( "duration_tests.txt", std::ios::app );                               \
+    outFile << duration << " " << FILE_NAME << std::endl;                                       \
     outFile.close();
 
 #define GET_RANDOM_PORT getRandomPort( __FILE__ )
@@ -147,7 +143,7 @@ static std::string s_latestFilename = "";
         const auto testName     = filenameStr.substr( first, last - first );       \
         std::cout << _params << std::endl;                                         \
         std::ofstream file( "report.txt", std::ios::app );                         \
-        CHECK( file.is_open() );                                                  \
+        CHECK( file.is_open() );                                                   \
         if ( filename != s_latestFilename ) {                                      \
             s_latestFilename = filename;                                           \
             file << std::endl;                                                     \

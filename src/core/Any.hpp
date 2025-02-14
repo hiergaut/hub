@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
@@ -21,8 +21,8 @@
 #include <memory>
 #include <string>
 
-#include "Serializer.hpp"
 #include "Anyable.hpp"
+#include "Serializer.hpp"
 
 namespace hub {
 
@@ -33,7 +33,6 @@ namespace hub {
 class SRC_API Any
 {
   public:
-
     ///
     /// \brief The AnyType enum
     /// allows to unify the data according to the different architecture (32, 64 bits).
@@ -98,14 +97,13 @@ class SRC_API Any
 #ifdef HUB_DEBUG_ANY
         std::cout << "[Any] Any(T&&) " << TYPE_NAME( t ) << std::endl;
 #endif
-        const auto & type_name = TYPE_NAME(std::any_cast<T>(m_any));
+        const auto& type_name = TYPE_NAME( std::any_cast<T>( m_any ) );
 
         if ( Anyable::s_anyables.find( type_name ) == Anyable::s_anyables.end() ) {
             Anyable::registerTypes<std::remove_cvref_t<T>>();
         }
         assert( Anyable::s_anyables.find( type_name ) != Anyable::s_anyables.end() );
-        m_anyHelper =
-            std::make_unique<Anyable::AnyHelper>( Anyable::s_anyables.at( type_name ) );
+        m_anyHelper = std::make_unique<Anyable::AnyHelper>( Anyable::s_anyables.at( type_name ) );
     }
 
     ///

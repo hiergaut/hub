@@ -7,7 +7,7 @@
 TEST_CASE( "Matrix compat OIIO test" ) {
     TEST_BEGIN()
 
-   // Todo check if hub matrix is compatible with OIIO matrix
+    // Todo check if hub matrix is compatible with OIIO matrix
 
     constexpr auto width  = 20;
     constexpr auto height = 10;

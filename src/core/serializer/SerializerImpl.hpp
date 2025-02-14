@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -23,12 +23,11 @@
 #include <tuple>
 #include <vector>
 
+#include "SerializerI.hpp"
 #include "core/Base.hpp"
 #include "core/InputBase.hpp"
 #include "core/OutputBase.hpp"
 #include "core/ios.hpp"
-#include "core/ios.hpp"
-#include "SerializerI.hpp"
 
 namespace hub {
 namespace serializer {
@@ -61,7 +60,6 @@ class [[deprecated]] SerializerImpl : public SerializerI
     bool m_reading                   = false;
 
   public:
-
     ///
     /// \brief pack
     /// \param output
@@ -188,7 +186,6 @@ class [[deprecated]] SerializerImpl : public SerializerI
     ByteView m_serialBuff = std::vector<Data_t>( BuffSize );
     Size_t m_position     = 0;
 };
-
 
 } // namespace serializer
 } // namespace hub

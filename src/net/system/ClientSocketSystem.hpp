@@ -1,19 +1,19 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*   - François Gaits (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *   - François Gaits (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
@@ -61,10 +61,10 @@ class SRC_API ClientSocketSystem : public ClientSocketI, public SocketSystem
     /// \brief ClientSocketSystem
     /// \param sock
     ///
-    ClientSocketSystem( ClientSocketSystem&& sock )      = default;
+    ClientSocketSystem( ClientSocketSystem&& sock ) = default;
 
     ClientSocketSystem& operator=( const ClientSocketSystem& sock ) = delete;
-    ClientSocketSystem&& operator=( ClientSocketSystem&& sock ) = delete;
+    ClientSocketSystem&& operator=( ClientSocketSystem&& sock )     = delete;
 
   public:
     ///
@@ -128,7 +128,6 @@ class SRC_API ClientSocketSystem : public ClientSocketI, public SocketSystem
     std::string toString() const { return m_ipv4 + "-" + std::to_string( m_port ); }
 
   public:
-
   private:
     void initServerAddress();
 

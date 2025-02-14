@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+# cmake_minimum_required(VERSION 3.8)
 
 find_package(Git)
 include(GetVersionFromGitTag)
@@ -8,7 +8,7 @@ set(REQUIRED_LIBS ${HUB_TBB_TARGET})
 
 message(STATUS "${HEADER_MSG} Version: ${${PROJECT_NAME}_VERSION}")
 
-if (HUB_ENABLE_TESTS)
+if(HUB_ENABLE_TESTS)
     option(HUB_ENABLE_COVERAGE "Collect coverage from hub library (required tests enable)" OFF)
     if(HUB_ENABLE_COVERAGE)
         include(CodeCoverage)
@@ -21,7 +21,7 @@ endif()
 option(HUB_BUILD_STATIC "Build static library" ON)
 option(HUB_BUILD_SHARED "Build shared library" ON)
 
-########################## OS/Compiler Specifics ###########################
+# ######################### OS/Compiler Specifics ###########################
 
 if(MINGW)
     if(CLANG)
@@ -78,11 +78,11 @@ else()
     message(FATAL_ERROR "unknown system")
 endif()
 
-if (REQUIRED_LIBS)
-        message(STATUS "${HEADER_MSG} Dependencies: ${REQUIRED_LIBS}")
+if(REQUIRED_LIBS)
+    message(STATUS "${HEADER_MSG} Dependencies: ${REQUIRED_LIBS}")
 endif()
 
-############################# Compile Externals #################################
+# ############################ Compile Externals #################################
 
 file(GLOB_RECURSE external_sources ${HUB_EXTERNAL_DIR}/*.cpp ${HUB_EXTERNAL_DIR}/*.c)
 file(GLOB_RECURSE external_headers ${HUB_EXTERNAL_DIR}/*.hpp ${HUB_EXTERNAL_DIR}/*.h)
@@ -102,13 +102,12 @@ install(
     FILES_MATCHING
     PATTERN "*.hpp"
     PATTERN "*.h"
-    PATTERN "*.inl"
-)
+    PATTERN "*.inl")
 
 set(SRC_TARGETS)
 list(APPEND SRC_TARGETS "$<TARGET_OBJECTS:external>")
 
-############################# Compile Modules #################################
+# ############################ Compile Modules #################################
 
 if(NOT XCODE) # unable to have object files as native build with Xcode
 
@@ -211,17 +210,16 @@ if(HUB_BUILD_STATIC)
                    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # Version.hpp
                    $<BUILD_INTERFACE:${HUB_EXTERNAL_DIR}>
                    $<INSTALL_INTERFACE:include>
-                   $<INSTALL_INTERFACE:include/external>
-        )
+                   $<INSTALL_INTERFACE:include/external>)
     endif() # (XCODE)
 
     target_compile_features(${PROJECT_NAME}_static PUBLIC cxx_std_17)
     target_compile_definitions(${PROJECT_NAME}_static PUBLIC -DSRC_STATIC)
     target_link_libraries(${PROJECT_NAME}_static PRIVATE ${REQUIRED_LIBS})
 
-    set_target_properties(${PROJECT_NAME}_static PROPERTIES
-        OUTPUT_NAME ${PROJECT_NAME}
-        ARCHIVE_OUTPUT_DIRECTORY static # conflict rules name with static and shared compilation on windows
+    set_target_properties(
+        ${PROJECT_NAME}_static PROPERTIES OUTPUT_NAME ${PROJECT_NAME}
+                                          ARCHIVE_OUTPUT_DIRECTORY static # conflict rules name with static and
     )
 
     if(MSVC)
@@ -229,32 +227,28 @@ if(HUB_BUILD_STATIC)
             target_compile_options(${PROJECT_NAME}_static PRIVATE /Zi)
 
             # Tell linker to include symbol data
-            set_target_properties(${PROJECT_NAME}_static PROPERTIES
-                LINK_FLAGS "/INCREMENTAL:NO /DEBUG /OPT:REF /OPT:ICF")
+            set_target_properties(${PROJECT_NAME}_static PROPERTIES LINK_FLAGS
+                                                                    "/INCREMENTAL:NO /DEBUG /OPT:REF /OPT:ICF")
 
             # Set file name & location
-            set_target_properties(${PROJECT_NAME}_static PROPERTIES
-                COMPILE_PDB_NAME ${PROJECT_NAME}_static
-                COMPILE_PDB_OUTPUT_DIR ${CMAKE_BINARY_DIR}
-            )
+            set_target_properties(${PROJECT_NAME}_static PROPERTIES COMPILE_PDB_NAME ${PROJECT_NAME}_static
+                                                                    COMPILE_PDB_OUTPUT_DIR ${CMAKE_BINARY_DIR})
         endif()
     endif()
 
-    ################################ INSTALL ###################################
+    # ############################### INSTALL ###################################
 
-    ################################ EXPORT ####################################
+    # ############################### EXPORT ####################################
 
     install(
         TARGETS ${PROJECT_NAME}_static
         EXPORT ${PROJECT_NAME}_static
-        DESTINATION ${ARCHITECTURE}/lib
-    )
+        DESTINATION ${ARCHITECTURE}/lib)
 
     install(
         EXPORT ${PROJECT_NAME}_static
         FILE ${PROJECT_NAME}StaticTargets.cmake
-        DESTINATION share/${PROJECT_NAME}/cmake
-    )
+        DESTINATION share/${PROJECT_NAME}/cmake)
 
     list(APPEND HUB_LIBRARIES static)
 
@@ -271,8 +265,7 @@ if(HUB_BUILD_SHARED)
             PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
                    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # Version.hpp
                    $<INSTALL_INTERFACE:include>
-            PRIVATE ${HUB_EXTERNAL_DIR}
-        )
+            PRIVATE ${HUB_EXTERNAL_DIR})
     else()
         add_library(${PROJECT_NAME}_shared SHARED ${SRC_TARGETS})
         target_include_directories(
@@ -281,20 +274,20 @@ if(HUB_BUILD_SHARED)
                    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # Version.hpp
                    $<BUILD_INTERFACE:${HUB_EXTERNAL_DIR}>
                    $<INSTALL_INTERFACE:include>
-                   $<INSTALL_INTERFACE:include/external>
-        )
+                   $<INSTALL_INTERFACE:include/external>)
     endif() # (XCODE)
 
     target_compile_features(${PROJECT_NAME}_shared PUBLIC cxx_std_17)
     target_compile_definitions(${PROJECT_NAME}_shared PUBLIC -DSRC_EXPORTS)
     target_link_libraries(${PROJECT_NAME}_shared PRIVATE ${REQUIRED_LIBS})
 
-    set_target_properties(${PROJECT_NAME}_shared PROPERTIES VERSION ${${PROJECT_NAME}_VERSION}
-                                                            SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR}
-                                                            OUTPUT_NAME ${PROJECT_NAME}
-    )
+    set_target_properties(
+        ${PROJECT_NAME}_shared
+        PROPERTIES VERSION ${${PROJECT_NAME}_VERSION}
+                   SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR}
+                   OUTPUT_NAME ${PROJECT_NAME})
 
-    ################################ INSTALL ###################################
+    # ############################### INSTALL ###################################
 
     if(MSVC)
         if(NOT ${CMAKE_BUILD_TYPE} STREQUAL "Release")
@@ -302,7 +295,7 @@ if(HUB_BUILD_SHARED)
         endif()
     endif()
 
-    ################################ EXPORT ####################################
+    # ############################### EXPORT ####################################
 
     install(
         TARGETS ${PROJECT_NAME}_shared
@@ -327,7 +320,6 @@ message(STATUS "${HEADER_MSG} Libraries: (${HUB_LIBRARIES})")
 if(HUB_BUILD_SHARED OR HUB_BUILD_STATIC)
     if(HUB_BUILD_SHARED AND HUB_BUILD_STATIC)
         add_library(hub ALIAS hub_static)
-        # add_library(hub ALIAS hub_shared) # hub.lib not found on windows (conflict with shared compilation, dll generate .lib file)
     elseif(HUB_BUILD_SHARED)
         add_library(hub ALIAS hub_shared)
     else()

@@ -6,9 +6,9 @@
 #include <Eigen/Core>
 
 TEST_CASE( "Matrix compat Eigen test" ) {
-   TEST_BEGIN()
+    TEST_BEGIN()
 
-   // Todo check if hub matrix is compatible with eigen matrix
+    // Todo check if hub matrix is compatible with eigen matrix
 
     constexpr auto width  = 20;
     constexpr auto height = 10;
@@ -27,5 +27,5 @@ TEST_CASE( "Matrix compat Eigen test" ) {
     }
     std::cout << std::endl;
 
-   TEST_END()
+    TEST_END()
 }

@@ -10,7 +10,7 @@ if(HUB_BUILD_DOC)
             CACHE STRING "User browser to see html docs and coverage")
     endif()
 
-    ############################ DOXYGEN #############################
+    # ########################### DOXYGEN #############################
 
     find_package(Doxygen QUIET)
     if(DOXYGEN_FOUND)
@@ -34,22 +34,22 @@ if(HUB_BUILD_DOC)
         message(WARNING "Doxygen have to be installed to generate the doxygen documentation")
     endif(DOXYGEN_FOUND)
 
-    ############################# SPHINX #############################
+    # ############################ SPHINX #############################
 
     find_package(Sphinx QUIET)
-    if (Sphinx_FOUND)
+    if(Sphinx_FOUND)
         set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/sphinx)
         set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx/html)
 
-        add_custom_target(hub-doc-sphinx
-              COMMAND ${SPHINX_EXECUTABLE} -b html ${SPHINX_SOURCE} ${SPHINX_BUILD}
-              COMMAND ${HUB_BROWSER} ${CMAKE_CURRENT_BINARY_DIR}/sphinx/html/api/index.html
-              COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/sphinx/_build/html ${CMAKE_CURRENT_BINARY_DIR}/sphinx/html/classes
-              COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/sphinx/index.html ${CMAKE_CURRENT_BINARY_DIR}/sphinx/html/
-              WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-              COMMENT "Generating documentation with Sphinx"
-              VERBATIM
-        )
+        add_custom_target(
+            hub-doc-sphinx
+            COMMAND ${SPHINX_EXECUTABLE} -b html ${SPHINX_SOURCE} ${SPHINX_BUILD}
+            COMMAND ${HUB_BROWSER} ${CMAKE_CURRENT_BINARY_DIR}/sphinx/html/api/index.html
+            COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/sphinx/_build/html ${CMAKE_CURRENT_BINARY_DIR}/sphinx/html/classes
+            COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/sphinx/index.html ${CMAKE_CURRENT_BINARY_DIR}/sphinx/html/
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Generating documentation with Sphinx"
+            VERBATIM)
         custom_target_added(doc-sphinx)
     endif()
 

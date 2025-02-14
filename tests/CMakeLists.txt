@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+# cmake_minimum_required(VERSION 3.5)
 
 project(tests LANGUAGES CXX)
 
@@ -39,8 +39,8 @@ if(HUB_BUILD_CORE)
         set(INCLUDE_LIBRARIES ${INCLUDE_LIBRARIES} ${EIGEN3_INCLUDE_DIR})
         # # message(STATUS "${HEADER_MSG} Eigen found: ${EIGEN3_INCLUDE_DIR}")
     else()
-       list(REMOVE_ITEM test_srcs ${CMAKE_CURRENT_SOURCE_DIR}/core/matrix/test-core-matrix-compatEigen3.cpp)
-       message(WARNING "core/matrix/test-core-matrix-compatEigen3 disabled")
+        list(REMOVE_ITEM test_srcs ${CMAKE_CURRENT_SOURCE_DIR}/core/matrix/test-core-matrix-compatEigen3.cpp)
+        message(WARNING "core/matrix/test-core-matrix-compatEigen3 disabled")
     endif()
 
     find_package(OpenCV QUIET COMPONENTS core imgproc)
@@ -49,8 +49,8 @@ if(HUB_BUILD_CORE)
         set(INCLUDE_LIBRARIES ${INCLUDE_LIBRARIES} ${OpenCV_INCLUDE_DIRS}/opencv2)
         # # message(STATUS "${HEADER_MSG} OpenCV found: ${OpenCV_INCLUDE_DIRS}")
     else()
-       list(REMOVE_ITEM test_srcs ${CMAKE_CURRENT_SOURCE_DIR}/core/matrix/test-core-matrix-compatOpenCV.cpp)
-       message(WARNING "core/matrix/test-core-matrix-compatOpenCV disabled")
+        list(REMOVE_ITEM test_srcs ${CMAKE_CURRENT_SOURCE_DIR}/core/matrix/test-core-matrix-compatOpenCV.cpp)
+        message(WARNING "core/matrix/test-core-matrix-compatOpenCV disabled")
     endif()
 
     find_package(OpenImageIO QUIET)
@@ -59,8 +59,8 @@ if(HUB_BUILD_CORE)
         set(INCLUDE_LIBRARIES ${INCLUDE_LIBRARIES} ${OpenImageIO_INCLUDE_DIR}/OpenImageIO)
         # # message(STATUS "${HEADER_MSG} OpenImageIO found: ${OpenImageIO_INCLUDE_DIR}/OpenImageIO")
     else()
-       list(REMOVE_ITEM test_srcs ${CMAKE_CURRENT_SOURCE_DIR}/core/matrix/test-core-matrix-compatOIIO.cpp)
-       message(WARNING "core/matrix/test-core-matrix-compatOIIO disabled")
+        list(REMOVE_ITEM test_srcs ${CMAKE_CURRENT_SOURCE_DIR}/core/matrix/test-core-matrix-compatOIIO.cpp)
+        message(WARNING "core/matrix/test-core-matrix-compatOIIO disabled")
     endif()
 endif()
 
@@ -132,10 +132,10 @@ foreach(testFile ${test_srcs})
     add_custom_target(
         hub-tests-bin-${test}
         COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                ${HUB_SERVER_TEST_BIN_PORT} --daemon
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port
-                ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
+        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                --daemon
+        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port ${HUB_SERVER_TEST_BIN_PORT}
+                --exitWhenServerLost
         COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-nativeViewer --port
                 ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
         COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V -R ${test}
@@ -149,10 +149,10 @@ if(HUB_BUILD_NATIVE)
     add_custom_target(
         hub-tests-bin
         COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                ${HUB_SERVER_TEST_BIN_PORT} --daemon
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port
-                ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
+        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                --daemon
+        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port ${HUB_SERVER_TEST_BIN_PORT}
+                --exitWhenServerLost
         COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-nativeViewer --port
                 ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
         COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
@@ -163,10 +163,10 @@ elseif(HUB_BUILD_CLIENT)
     add_custom_target(
         hub-tests-bin
         COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                ${HUB_SERVER_TEST_BIN_PORT} --daemon
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port
-                ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
+        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                --daemon
+        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port ${HUB_SERVER_TEST_BIN_PORT}
+                --exitWhenServerLost
         COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
         USES_TERMINAL
         COMMENT "Running server")
@@ -175,8 +175,8 @@ elseif(HUB_BUILD_SERVER)
     add_custom_target(
         hub-tests-bin
         COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                ${HUB_SERVER_TEST_BIN_PORT} --daemon
+        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                --daemon
         COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
         USES_TERMINAL
         COMMENT "Running server")

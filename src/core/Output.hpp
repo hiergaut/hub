@@ -1,27 +1,26 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
-#include "core/Base.hpp"
 #include "OutputBase.hpp"
 #include "Serializer.hpp"
+#include "core/Base.hpp"
 
 // Todo getHeader() = 0
-//#include "io/Header.hpp"
 
 namespace hub {
 
@@ -38,8 +37,6 @@ class SRC_API OutputT : public OutputBase
 
     virtual ~OutputT() = default;
 
-//    virtual const io::Header & getHeader() const = 0;
-
     ///
     /// \brief write
     /// \tparam T
@@ -53,9 +50,7 @@ class SRC_API OutputT : public OutputBase
 #endif
         assert( isOpen() );
         if constexpr ( isPacket<T> ) { write( t.data(), t.size() ); }
-        else {
-            write( reinterpret_cast<const Data_t*>( &t ), sizeof( T ) );
-        }
+        else { write( reinterpret_cast<const Data_t*>( &t ), sizeof( T ) ); }
     }
 
     ///

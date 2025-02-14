@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -33,9 +33,7 @@
             _sstr << m_nStreamer << "/" << m_streams.size() << ":" << _params; \
             m_viewerHandler.onLogMessage( _sstr.str().c_str() );               \
         }                                                                      \
-        else {                                                                 \
-            std::cout << m_nStreamer << ":" << _params << std::endl;           \
-        }                                                                      \
+        else { std::cout << m_nStreamer << ":" << _params << std::endl; }      \
     } while ( false );
 
 namespace hub {
@@ -43,17 +41,17 @@ namespace client {
 
 ///
 /// \brief The ViewerInterface class
-/// can be implement for user wanted to create own viewer using own server implement (ex: Mqtt viewer using mqtt service).
-/// This interface allow to compare performance of communication between different implements.
-/// For example we can compare the performance with the current server/viewer implements with Mqtt protocol during the tests.
-/// If you want to create your own server/viewer implements, please use this interface, we can integrate your implement
-/// if this one is better than the current implement. Thank you in advance.
+/// can be implement for user wanted to create own viewer using own server implement (ex: Mqtt
+/// viewer using mqtt service). This interface allow to compare performance of communication between
+/// different implements. For example we can compare the performance with the current server/viewer
+/// implements with Mqtt protocol during the tests. If you want to create your own server/viewer
+/// implements, please use this interface, we can integrate your implement if this one is better
+/// than the current implement. Thank you in advance.
 ///
 template <class InputStream>
 class ViewerInterface
 {
   public:
-
     ///
     /// \brief Construct viewer with unified parameters corresponding of viewer features
     /// \param name [in] is used to identify viewer instance from others in server logs.
@@ -61,12 +59,13 @@ class ViewerInterface
     /// \param serverIpv4 [in] is the ip of server you want to watch
     /// \param serverPort [in] is the port of server you want to watch
     /// \param autoConnect [in] is the startup option,
-    /// true if you want to check for server after creation, false if you don't want to connect to server now
+    /// true if you want to check for server after creation, false if you don't want to connect to
+    /// server now
     ///
     explicit ViewerInterface( const std::string& name,
                               ViewerHandler&& viewerHandler = ViewerHandler(),
-                              const std::string& serverIpv4       = HUB_SERVICE_IPV4,
-                              int serverPort                      = HUB_SERVICE_PORT,
+                              const std::string& serverIpv4 = HUB_SERVICE_IPV4,
+                              int serverPort                = HUB_SERVICE_PORT,
                               bool autoConnect              = true );
 
     virtual ~ViewerInterface();
@@ -104,7 +103,8 @@ class ViewerInterface
     ///
     /// \brief Setter function.
     /// \param autoConnect [in] is a common feature.
-    /// If auto connection is on, viewer is looking/pinging for current ip and port until server is connected.
+    /// If auto connection is on, viewer is looking/pinging for current ip and port until server is
+    /// connected.
     ///
     virtual void setAutoConnect( bool autoConnect );
 
@@ -175,12 +175,14 @@ class ViewerInterface
     std::set<std::string> getActiveStreams() const;
 
   protected:
-
     ///
-    /// \brief Helper function is about to add new stream (when new stream is connected to the server)
+    /// \brief Helper function is about to add new stream (when new stream is connected to the
+    /// server)
     /// \param streamName [in] is connected to the server
-    /// \param streamIpv4 [in] is the sensor stream ip corresponding of the stream process (data is not passing through server)
-    /// \param streamPort [in] is the sensor stream port corresponding of the stream process (data is not passing through server)
+    /// \param streamIpv4 [in] is the sensor stream ip corresponding of the stream process (data is
+    /// not passing through server)
+    /// \param streamPort [in] is the sensor stream port corresponding of the stream process (data
+    /// is not passing through server)
     /// \param header [in] corresponds to the stream header (additional information)
     ///
     void addStream( const std::string& streamName,
@@ -195,7 +197,8 @@ class ViewerInterface
     void delStream( const std::string& streamName );
 
     ///
-    /// \brief Unique string to identify viewer over all viewers that can be connected to the same server.
+    /// \brief Unique string to identify viewer over all viewers that can be connected to the same
+    /// server.
     ///
     std::string m_name;
 
@@ -353,14 +356,12 @@ void ViewerInterface<InputStream>::printStatus() const {
 
         const auto& stream = pair.second;
         if ( stream == nullptr ) { str += " (" + streamName + ",null)"; }
-        else {
-            str += " (" + streamName + "," + std::to_string( stream->isStreaming() ) + ")";
-        }
+        else { str += " (" + streamName + "," + std::to_string( stream->isStreaming() ) + ")"; }
     }
     // Todo fix for Hololens, no unicode \u001B
     // DEBUG_MSG( "\033[7m[Viewer] status : server connected:"
-    DEBUG_MSG( "[Viewer] status : server connected:"
-               << m_serverConnected << ", nStreamer:" << m_streams.size() << str );
+    DEBUG_MSG( "[Viewer] status : server connected:" << m_serverConnected
+                                                     << ", nStreamer:" << m_streams.size() << str );
 }
 
 template <class InputStream>

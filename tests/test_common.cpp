@@ -2,7 +2,6 @@
 
 #include "Version.hpp"
 
-
 void _checkValue( double value,
                   const std::string& name,
                   const std::string& unit,
@@ -145,12 +144,8 @@ void _checkValue( double value,
                           " " + deviationStr + "+- ";
 
                 if ( minDiff > epsilon ) { report += "\033[32m"; }
-                else if ( minDiff < -epsilon ) {
-                    report += "\033[31m";
-                }
-                else {
-                    report += "\033[33m";
-                }
+                else if ( minDiff < -epsilon ) { report += "\033[31m"; }
+                else { report += "\033[33m"; }
                 report += meanCompareStr + "\033[0m";
 
                 if ( iMean != std::log2( nEl ) ) { report += ", "; }
@@ -165,12 +160,8 @@ void _checkValue( double value,
                 curRatioStr          = curRatioStr.substr( 0, 5 );
 
                 if ( diff > epsilon ) { report += "\033[32m"; }
-                else if ( diff < -epsilon ) {
-                    report += "\033[31m";
-                }
-                else {
-                    report += "\033[33m";
-                }
+                else if ( diff < -epsilon ) { report += "\033[31m"; }
+                else { report += "\033[33m"; }
                 report += curRatioStr + "\033[0m";
 
                 if ( i != nEl - 1 ) { report += " "; }

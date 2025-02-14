@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -36,7 +36,6 @@ namespace output {
 class SRC_API OutputStreamMqtt : public Output, public io::StreamMqtt
 {
   public:
-
     ///
     /// \brief OutputStreamMqtt
     /// \param streamName
@@ -60,7 +59,6 @@ class SRC_API OutputStreamMqtt : public Output, public io::StreamMqtt
     void write( const sensor::SensorSpec& sensorSpec );
 
   protected:
-
     ///
     /// \brief write
     /// \param data
@@ -94,7 +92,7 @@ inline void OutputStreamMqtt::write( const unsigned char* data, size_t len ) {
     std::cout << DEBUG_OUTPUT_STREAM + m_name + " write(const unsigned char*, size_t) len = " << len
               << ", current topic = " << m_currentTopic << std::endl;
 #    endif
-    m_msgPtr->set_payload( reinterpret_cast<const char*>(data), len );
+    m_msgPtr->set_payload( reinterpret_cast<const char*>( data ), len );
     assert( m_msgPtr->get_qos() == 2 );
     assert( m_msgPtr->is_retained() );
     m_client->publish( m_msgPtr );

@@ -51,7 +51,7 @@ void ServerImpl::run() {
         SERVER_MSG( "new client" );
 
         m_mtxClients.lock();
-        Client* newClient = initClient( io::InputOutputSocket{std::move( sock )}, ++m_iClient );
+        Client* newClient = initClient( io::InputOutputSocket { std::move( sock ) }, ++m_iClient );
         if ( newClient == nullptr ) { --m_nActiveClient; }
         else {
             m_clients.push_back( newClient );
@@ -142,11 +142,11 @@ Client* ServerImpl::initClient( hub::io::InputOutputSocket&& sock, int iClient )
         streamPort = ( streamPort == 0 ) ? m_givingPort++ : streamPort;
         sock.write( streamPort );
         return new StreamerClient( this,
-                                    iClient,
-                                    std::move( sock ),
-                                    std::move( streamName ),
-                                    std::move( streamIpv4 ),
-                                    streamPort );
+                                   iClient,
+                                   std::move( sock ),
+                                   std::move( streamName ),
+                                   std::move( streamIpv4 ),
+                                   streamPort );
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -286,7 +286,7 @@ void ServerImpl::addViewer( ViewerClient* viewer ) {
         (void)streamName;
 #else
     for ( const auto& pair : m_streamName2streamer ) {
-        const auto& streamer   = pair.second;
+        const auto& streamer = pair.second;
 #endif
         viewer->notifyNewStreamer( streamer );
     }

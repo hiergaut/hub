@@ -1,17 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Gauthier Bouyjou
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Gauthier Bouyjou
+ *******************************************************************************/
 
 #pragma once
 
@@ -27,7 +27,6 @@
 #ifndef HUB_NON_BUILD_DATA
 #    include "data/Mesh.hpp"
 #endif
-
 
 namespace hub {
 
@@ -75,7 +74,7 @@ class SRC_API Anyable
                         char* val =
                             new char[80]; // leak, please do not use char *, use std::string instead
                         serializer.read( val );
-                        any = reinterpret_cast<const char*>(val);
+                        any = reinterpret_cast<const char*>( val );
                     };
                     compare = []( const std::any& any, const std::any& any2 ) {
                         return strcmp( std::any_cast<const char*>( any ),
@@ -125,9 +124,7 @@ class SRC_API Anyable
         if constexpr ( std::is_same_v<T, void> ) {
             return std::make_pair( "void", make_anyHelper<T>() );
         }
-        else {
-            return std::make_pair( TYPE_NAME( T() ), make_anyHelper<T>() );
-        }
+        else { return std::make_pair( TYPE_NAME( T() ), make_anyHelper<T>() ); }
     }
 
     template <class... T>
@@ -146,7 +143,8 @@ class SRC_API Anyable
                                                                                  format::Vec4,
                                                                                  format::Vec3
 #ifndef HUB_NON_BUILD_DATA
-                                                                                 , data::Mesh
+                                                                                 ,
+                                                                                 data::Mesh
 #endif
                                                                                  >();
 

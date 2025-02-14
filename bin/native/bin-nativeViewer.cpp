@@ -28,9 +28,7 @@ Run native viewer.
             std::cout << argv[0] << " usage: [--port <int>] [--exitWhenServerLost]" << std::endl;
             return 0;
         }
-        else if ( arg == "--exitWhenServerLost" ) {
-            exitWhenServerLost = true;
-        }
+        else if ( arg == "--exitWhenServerLost" ) { exitWhenServerLost = true; }
         else if ( arg == "--port" ) {
             assert( it + 1 != args.end() );
             const auto& nextArg = *( it + 1 );
@@ -66,9 +64,7 @@ Run native viewer.
         char buff[256];
         int strLen = 0;
         hub::native::sensorSpec_toString( sensorSpec, buff, &strLen );
-        std::cout << HEADER_MSG "onNewSensor : " << streamName << ", "
-                  //<< hub::native::toString( sensorSpec ) << std::endl;
-                  << buff << std::endl;
+        std::cout << HEADER_MSG "onNewSensor : " << streamName << ", " << buff << std::endl;
         return true;
     };
 #endif

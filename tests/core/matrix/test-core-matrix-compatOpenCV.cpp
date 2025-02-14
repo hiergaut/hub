@@ -8,7 +8,7 @@
 TEST_CASE( "Matrix compat OpenCV test" ) {
     TEST_BEGIN()
 
-   // Todo check if hub matrix is compatible with OpenCV matrix
+    // Todo check if hub matrix is compatible with OpenCV matrix
 
     constexpr auto width  = 20;
     constexpr auto height = 10;

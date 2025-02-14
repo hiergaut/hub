@@ -1,26 +1,24 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT, Toulouse Tech Transfer)
+ *******************************************************************************/
 
 #pragma once
 
-#include <type_traits>
-#include <string>
 #include <map>
-
-#include "core/base/Macros.hpp"
+#include <string>
+#include <type_traits>
 
 #include "Array.hpp"
 #include "Map.hpp"
@@ -37,9 +35,7 @@ namespace hub {
 #if CPP_VERSION >= 20
 
 template <class T>
-concept StringAddable = requires( std::string str, const T& t ) {
-    str += t;
-};
+concept StringAddable = requires( std::string str, const T& t ) { str += t; };
 
 #else
 
@@ -79,9 +75,7 @@ static_assert( !StringAddable<std::vector<unsigned char>> );
 
 #if CPP_VERSION >= 20
 template <class T>
-concept hasToString = requires( std::ostream& os, const T& t ) {
-    os << t.toString();
-};
+concept hasToString = requires( std::ostream& os, const T& t ) { os << t.toString(); };
 
 #else
 
@@ -107,18 +101,14 @@ static constexpr auto hasToString = has_toString_v<T>;
 
 #endif
 
-    ///////////////////////////////
+///////////////////////////////
 
 #if CPP_VERSION >= 20
 template <class T>
-concept StdToStringable = requires( std::ostream& os, const T& t ) {
-    std::to_string( t );
-};
+concept StdToStringable = requires( std::ostream& os, const T& t ) { std::to_string( t ); };
 
 template <class T>
-concept toStringable_v = requires( std::ostream& os, const T& t ) {
-    toString( t );
-};
+concept toStringable_v = requires( std::ostream& os, const T& t ) { toString( t ); };
 
 #else
 
@@ -328,9 +318,7 @@ static void to_string_reduce( std::string& str, const T& t, const Ts&... ts ) {
     str += to_string( t );
     if constexpr ( sizeof...( Ts ) > 0 ) {
         if constexpr ( delimiter == ' ' ) { str += delimiter; }
-        else {
-            str += std::string( " " ) + delimiter + " ";
-        }
+        else { str += std::string( " " ) + delimiter + " "; }
         to_string_reduce<delimiter>( str, ts... );
     }
 }
@@ -388,7 +376,6 @@ constexpr bool is_one_of() noexcept {
     return ( std::is_same<T1, Ts> {} || ... );
 }
 #endif
-
 
 } // namespace hub
 

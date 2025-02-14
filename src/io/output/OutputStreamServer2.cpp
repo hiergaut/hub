@@ -5,8 +5,8 @@
 #    include <execution>
 #endif
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 namespace hub {
 namespace output {
@@ -18,7 +18,7 @@ OutputStreamServer2::OutputStreamServer2( const io::Header& header, int streamPo
 
     m_data->m_header     = header;
     m_data->m_streamPort = streamPort;
-    m_data->m_writingFun = []( const Data_t*, Size_t  ) {};
+    m_data->m_writingFun = []( const Data_t*, Size_t ) {};
 
     startStreaming();
 }
@@ -32,7 +32,7 @@ OutputStreamServer2::OutputStreamServer2( const io::Header& header,
         std::make_unique<hub::io::InputOutputSocket>( net::ClientSocket( ipv4, port ) ) ) ) {
 
     m_data->m_header     = header;
-    m_data->m_writingFun = []( const Data_t* , Size_t  ) {};
+    m_data->m_writingFun = []( const Data_t*, Size_t ) {};
 
     tryConnectToServer();
     assert( m_data->m_serverConnected );
@@ -77,7 +77,6 @@ OutputStreamServer2::OutputStreamServer2( const io::Header& header,
                     std::cout << "[OutputStream] stream viewer inited" << std::endl;
 #endif
                     // Todo check if streamViewerInited is false before set to true
-//                    assert( !data->m_streamViewerInited );
                     data->m_streamViewerInited = true;
                 }
                 else if ( mess == hub::io::StreamBase::ServerMessage::STREAMER_INITED ) {
@@ -86,9 +85,7 @@ OutputStreamServer2::OutputStreamServer2( const io::Header& header,
 #endif
                     data->m_streamerInited = true;
                 }
-                else {
-                    assert( false );
-                }
+                else { assert( false ); }
             }
             catch ( net::system::SocketSystem::exception& ex ) {
                 std::cout << "[OutputStream] catch exception : " << ex.what() << std::endl;
@@ -247,14 +244,9 @@ void OutputStreamServer2::startStreaming() {
                 data->m_mtxClientSockets.unlock();
             }
             else if ( clientType == hub::io::StreamBase::ClientType::KILLER ) {
-//                if ( data->m_killed ) {}
-//                else {
-                    data->m_killed = true;
-//                }
+                data->m_killed = true;
             }
-            else {
-                assert( false );
-            }
+            else { assert( false ); }
         }
         data->m_isStreaming = false;
 
@@ -320,13 +312,13 @@ void output::OutputStreamServer2::write( const Data_t* data, Size_t size ) {
                 .count();
         if ( period > 1'000 ) { // 1 sec
             const auto bytePerSecond = ( 1000.0 * m_data->m_byteWrote ) / period;
-            const auto acqPerSecond = (1000.0 * m_data->m_acqWrote)  / period;
-            std::cout << "[" << m_name << "] " << std::setprecision(3) << acqPerSecond << " Hz, " << PRETTY_BYTES( bytePerSecond )
-                      << "/s, watched by " << m_data->m_streamViewerSocks.size() << " streamViewers"
-                      << std::endl;
+            const auto acqPerSecond  = ( 1000.0 * m_data->m_acqWrote ) / period;
+            std::cout << "[" << m_name << "] " << std::setprecision( 3 ) << acqPerSecond << " Hz, "
+                      << PRETTY_BYTES( bytePerSecond ) << "/s, watched by "
+                      << m_data->m_streamViewerSocks.size() << " streamViewers" << std::endl;
             m_data->m_lastClock = now;
             m_data->m_byteWrote = 0;
-            m_data->m_acqWrote = 0;
+            m_data->m_acqWrote  = 0;
         }
     }
 }
@@ -343,7 +335,6 @@ void OutputStreamServer2::setRetain( bool retain ) {
         };
     }
     else {
-        // todo = nullptr
         m_data->m_writingFun = []( const Data_t*, Size_t ) {};
     }
 }

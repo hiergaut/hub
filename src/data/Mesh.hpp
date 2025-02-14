@@ -1,25 +1,25 @@
 /*******************************************************************************
-* Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
-* Please visit https://www.irit.fr/tplay/.
-*
-* All rights reserved.
-* This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
-*
-* This Source Code Form is subject to the terms of the Mozilla Public
-* License, v. 2.0. If a copy of the MPL was not distributed with this
-* file, You can obtain one at https://mozilla.org/MPL/2.0/.
-*
-* Initial Contributors:
-*   - Nicolas Mellado (IRIT)
-*   - Gauthier Bouyjou (IRIT)
-*******************************************************************************/
+ * Copyright (c) 2021 IRIT, computer science research laboratory, Toulouse, France.
+ * Please visit https://www.irit.fr/tplay/.
+ *
+ * All rights reserved.
+ * This code belongs to tplay/hub project (https://github.com/T-PLAY/hub).
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * Initial Contributors:
+ *   - Nicolas Mellado (IRIT)
+ *   - Gauthier Bouyjou (IRIT)
+ *******************************************************************************/
 
 #pragma once
 
+#include <cstring>
 #include <memory>
 #include <string>
 #include <vector>
-#include <cstring>
 
 #include "core/Base.hpp"
 
@@ -73,8 +73,8 @@ struct Vertex {
         return !std::memcmp( this, &other, sizeof( Vertex ) );
     }
 };
-static_assert(sizeof(float) == 4);
-static_assert(sizeof(Vertex) == 4 * 8);
+static_assert( sizeof( float ) == 4 );
+static_assert( sizeof( Vertex ) == 4 * 8 );
 
 ///
 /// \brief The Shape class
@@ -122,7 +122,8 @@ struct Shape {
     ///
     auto toString() const {
         std::string str;
-        str += std::to_string(vertices.size()) + " " +  std::to_string(hasNormal) + " " + std::to_string(indices.size())  + " " + name + " " + std::to_string(material);
+        str += std::to_string( vertices.size() ) + " " + std::to_string( hasNormal ) + " " +
+               std::to_string( indices.size() ) + " " + name + " " + std::to_string( material );
         return str;
     }
 
@@ -132,11 +133,11 @@ struct Shape {
     /// \return
     ///
     bool operator==( const Shape& other ) const {
-    return vertices == other.vertices && hasNormal == other.hasNormal && indices == other.indices &&
-           name == other.name && material == other.material;
+        return vertices == other.vertices && hasNormal == other.hasNormal &&
+               indices == other.indices && name == other.name && material == other.material;
     }
 };
-static_assert(sizeof(unsigned int) == 4);
+static_assert( sizeof( unsigned int ) == 4 );
 
 ///
 /// \brief The Material class
@@ -172,11 +173,11 @@ struct Material {
     ///
     /// \brief Shininess factor
     ///
-    float Ns;    /* Shininess */
+    float Ns; /* Shininess */
     ///
     /// \brief Index of refraction
     ///
-    float Ni;    /* Index of refraction */
+    float Ni; /* Index of refraction */
     ///
     /// \brief Transmission filter color
     ///
@@ -184,11 +185,11 @@ struct Material {
     ///
     /// \brief Alpha factor
     ///
-    float d;     /* Disolve (alpha) */
+    float d; /* Disolve (alpha) */
     ///
     /// \brief Illumination model
     ///
-    int illum;   /* Illumination model */
+    int illum; /* Illumination model */
 
     ///
     /// \brief serialize
@@ -262,8 +263,6 @@ class SRC_API Mesh
     /// \return
     ///
     std::string toString() const {
-        // if ( m_name == "" ) unpack();
-        // assert( m_name != "" );
 
         std::string str = "";
         str += "'" + m_name + "'";
@@ -278,21 +277,13 @@ class SRC_API Mesh
     /// \brief Getter function
     /// \return Shapes of mesh
     ///
-    const std::vector<Shape>& getShapes() const {
-        // if ( m_shapes.empty() ) unpack( false );
-        // assert( !m_shapes.empty() );
-        return m_shapes;
-    }
+    const std::vector<Shape>& getShapes() const { return m_shapes; }
 
     ///
     /// \brief Getter function
     /// \return Materials of mesh
     ///
-    const std::vector<Material>& getMaterials() const {
-        // if (m_shapes.empty() ) unpack( false );
-        // assert( !m_shapes.empty() );
-        return m_materials;
-    }
+    const std::vector<Material>& getMaterials() const { return m_materials; }
 
     ///
     /// \brief Print status information of mesh
@@ -310,14 +301,13 @@ class SRC_API Mesh
     /// \return
     ///
     bool operator==( const Mesh& other ) const {
-    return m_name == other.m_name
-           && m_shapes == other.m_shapes &&
-           m_materials == other.m_materials && m_nVertice == other.m_nVertice &&
-           m_nTriangle == other.m_nTriangle && m_nDraw == other.m_nDraw &&
-           m_nMesh == other.m_nMesh && m_mesh_triangles == other.m_mesh_triangles &&
-           m_mesh_vertices == other.m_mesh_vertices &&
-           m_total_triangles == other.m_total_triangles &&
-           m_total_instances == other.m_total_instances && m_total_draws == other.m_total_draws;
+        return m_name == other.m_name && m_shapes == other.m_shapes &&
+               m_materials == other.m_materials && m_nVertice == other.m_nVertice &&
+               m_nTriangle == other.m_nTriangle && m_nDraw == other.m_nDraw &&
+               m_nMesh == other.m_nMesh && m_mesh_triangles == other.m_mesh_triangles &&
+               m_mesh_vertices == other.m_mesh_vertices &&
+               m_total_triangles == other.m_total_triangles &&
+               m_total_instances == other.m_total_instances && m_total_draws == other.m_total_draws;
     }
 
 #if CPP_VERSION >= 20
@@ -346,8 +336,6 @@ class SRC_API Mesh
 #endif
 
   private:
-    // void unpack( bool headerOnly = true ) const;
-
     std::string m_name = "";
     std::vector<Shape> m_shapes;
     std::vector<Material> m_materials;
