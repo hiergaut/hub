@@ -35,7 +35,7 @@ if(NOT ${EXTERNAL_NAME}_FOUND)
 
     ExternalProject_Add(
         ${EXTERNAL_NAME}
-        GIT_REPOSITORY https://github.com/T-PLAY/hub.git
+        GIT_REPOSITORY https://github.com/hiergaut/hub.git
         GIT_TAG ${EXTERNAL_BRANCH_NAME}
         # GIT_TAG installMinorFix
         GIT_SHALLOW ON
