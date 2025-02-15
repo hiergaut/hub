@@ -1,13 +1,11 @@
 
-name: Hub as external project
+name: External
 
 defaults:
   run:
     shell: bash
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
     branches: [ main ]
 
