@@ -13,39 +13,40 @@ on:
 
 jobs:
 
-  # CodeQuality:
-  #   uses: ./.github/workflows/codeQuality.yml
-  #
-  # Ubuntu_gcc:
-  #   needs: CodeQuality
-  #   uses: ./.github/workflows/buildAndTest.yml
-  #   with:
-  #     name: Ubuntu gcc
-  #     os: ubuntu-latest
-  #     build-type: Release
-  #     cc: gcc
-  #     cxx: g++
-  #     icon: Linux
-  #
-  # Windows_MSVC:
-  #   needs: CodeQuality
-  #   uses: ./.github/workflows/buildAndTest.yml
-  #   with:
-  #     name: Windows MSVC
-  #     os: windows-latest
-  #     build-type: Release
-  #     cc: cl
-  #     cxx: cl
-  #     icon: Windows
-  #
-  # MacOS_clang:
-  #   needs: CodeQuality
-  #   uses: ./.github/workflows/buildAndTest.yml
-  #   with:
-  #     name: MacOS clang
-  #     os: macos-latest
-  #     build-type: Release
-  #     cc: clang
-  #     cxx: clang++
-  #     icon: Apple
-  #
+  CodeQuality:
+    uses: ./.github/workflows/codeQuality.yml
+
+  Ubuntu_gcc:
+    needs: CodeQuality
+    uses: ./.github/workflows/buildAndTest.yml
+    with:
+      name: Ubuntu_gcc
+      os: ubuntu-latest
+      cc: gcc
+      cxx: g++
+      build-type: Release
+      # coverage: OFF
+      coverage: ON
+ 
+  Windows_MSVC:
+    needs: CodeQuality
+    uses: ./.github/workflows/buildAndTest.yml
+    with:
+      name: Windows_MSVC
+      os: windows-latest
+      cc: cl
+      cxx: cl
+      build-type: Release
+      coverage: OFF # always off because lcov to install
+
+  MacOS_clang:
+    needs: CodeQuality
+    uses: ./.github/workflows/buildAndTest.yml
+    with:
+      name: MacOS_clang
+      os: macos-latest
+      cc: clang
+      cxx: clang++
+      build-type: Release
+      coverage: OFF
+
