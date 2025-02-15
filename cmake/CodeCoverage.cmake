@@ -278,14 +278,14 @@ function(setup_target_for_coverage_lcov)
     add_custom_command(
         TARGET ${Coverage_NAME}
         POST_BUILD
-        COMMAND ;
+        COMMAND sleep 0;
         COMMENT "Lcov code coverage info report saved in ${Coverage_NAME}.info." ${GCOVR_XML_CMD_COMMENT})
 
     # Show info where to find the report
     add_custom_command(
         TARGET ${Coverage_NAME}
         POST_BUILD
-        COMMAND ;
+        COMMAND sleep 0;
         COMMENT "Open ./${Coverage_NAME}/index.html in your browser to view the coverage report.")
 
 endfunction() # setup_target_for_coverage_lcov
@@ -367,7 +367,7 @@ function(setup_target_for_coverage_gcovr_xml)
     add_custom_command(
         TARGET ${Coverage_NAME}
         POST_BUILD
-        COMMAND ;
+        COMMAND sleep 0;
         COMMENT "Cobertura code coverage report saved in ${Coverage_NAME}.xml.")
 endfunction() # setup_target_for_coverage_gcovr_xml
 
@@ -456,7 +456,7 @@ function(setup_target_for_coverage_gcovr_html)
     add_custom_command(
         TARGET ${Coverage_NAME}
         POST_BUILD
-        COMMAND ;
+        COMMAND sleep 0;
         COMMENT "Open ./${Coverage_NAME}/index.html in your browser to view the coverage report.")
 
 endfunction() # setup_target_for_coverage_gcovr_html
