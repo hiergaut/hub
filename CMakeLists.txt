@@ -171,14 +171,14 @@ endif()
 
 
 # cmake-format: off
-# # set(HUB_MODULES "core")
+set(HUB_MODULES "core")
 # # set(HUB_MODULES "core" "net")
 # # set(HUB_MODULES "core" "net" "io")
 # # set(HUB_MODULES "core" "net" "io" "server")
 # # set(HUB_MODULES "core" "net" "io" "server" "client")
 # # set(HUB_MODULES "core" "net" "io" "server" "client" "native")
 # # set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor")
-set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
+# # set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
 
 set(ALL_HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
 # cmake-format: on
@@ -188,7 +188,7 @@ foreach(MODULE ${ALL_HUB_MODULES})
     if(${MODULE} IN_LIST HUB_MODULES)
         set(HUB_BUILD_${UPPER_MODULE} 1)
     else()
-        message(STATUS "${HEADER_MSG} ${Red}module ${MODULE}${ColourReset} disabled")
+        message(STATUS "${HEADER_MSG} module ${MODULE} ${Red}disabled${CoulourReset}")
         add_definitions(-DHUB_NON_BUILD_${UPPER_MODULE})
         set(HUB_BUILD_${UPPER_MODULE} 0)
     endif()

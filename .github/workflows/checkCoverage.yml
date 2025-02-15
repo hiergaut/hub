@@ -30,7 +30,7 @@ jobs:
 
     - name: Restore stats
       run: mkdir -p "${{github.workspace}}/build"
-        && git clone --branch gh-stats https://github.com/T-PLAY/hub.git ${{github.workspace}}/build/decline
+        && git clone --branch gh-stats https://github.com/hiergaut/hub.git ${{github.workspace}}/build/decline
 
     - name: Install lcov
       run: sudo apt install lcov
@@ -51,11 +51,11 @@ jobs:
 
       # Save coverage stats only when pushing on main
     - name: Save coverage stats
-      if: github.event_name == 'push'
+      # if: github.event_name == 'push'
       run: cmake --build "${{github.workspace}}/build" --target hub-coverage-saveStats
 
     - name: Save stats
-      if: github.event_name == 'push'
+      # if: github.event_name == 'push'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: ${{github.workspace}}/build/decline # The folder the action should deploy.
