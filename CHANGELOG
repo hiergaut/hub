@@ -23,6 +23,8 @@ Current head v.2.1.0 rc
   * Add timeout for ci tests (#39)
   * Add clean code (format, cppcheck, doxygen) asynchronous checks (#1)
   * Cleanup project (clang-format and cmake-format) (#2)
+  * Check project use as submodule (#52)
+  * Check project use as external project (#53)
 - Tests
   * Fix timeout error on macos (#33)
 - Documentation

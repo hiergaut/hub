@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY False)
 
 set(HEADER_MSG "${Yellow}[hub]${ColourReset}")
+message(STATUS "${HEADER_MSG} CMake version: ${CMAKE_VERSION}")
 message(STATUS "${HEADER_MSG} CXX compiler: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "${HEADER_MSG} Processor: ${CMAKE_SYSTEM_PROCESSOR}")
 message(STATUS "${HEADER_MSG} CMake generator: ${CMAKE_GENERATOR}")
@@ -206,8 +207,13 @@ if(HUB_BUILD_DOC)
 endif()
 
 option(HUB_ENABLE_TESTS "Enable tests" OFF)
+option(HUB_ENABLE_BINS "Enable binaries" OFF)
 if(HUB_ENABLE_TESTS)
     add_subdirectory(tests)
+    # Tests need server and viewer to run
+    set(HUB_ENABLE_BINS
+        ON
+        CACHE BOOL "")
 endif()
 
 option(HUB_ENABLE_EXAMPLES "Enable examples" OFF)
@@ -215,7 +221,6 @@ if(HUB_ENABLE_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-option(HUB_ENABLE_BINS "Enable binaries" ON)
 if(HUB_ENABLE_BINS)
     add_subdirectory(bin)
 endif()

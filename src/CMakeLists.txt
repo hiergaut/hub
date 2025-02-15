@@ -272,7 +272,7 @@ if(HUB_BUILD_SHARED)
             ${PROJECT_NAME}_shared
             PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
                    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # Version.hpp
-                   $<BUILD_INTERFACE:${HUB_EXTERNAL_DIR}>
+                   $<BUILD_INTERFACE:${HUB_EXTERNAL_DIR}> # Version.hpp
                    $<INSTALL_INTERFACE:include>
                    $<INSTALL_INTERFACE:include/external>)
     endif() # (XCODE)
@@ -300,8 +300,8 @@ if(HUB_BUILD_SHARED)
     install(
         TARGETS ${PROJECT_NAME}_shared
         EXPORT ${PROJECT_NAME}_shared
-        # DESTINATION ${ARCHITECTURE}/lib # Linux, todo check
-        DESTINATION ${ARCHITECTURE}/bin # Linux
+        DESTINATION ${ARCHITECTURE}/lib # Linux, todo check
+        # DESTINATION ${ARCHITECTURE}/bin # Linux
         RUNTIME DESTINATION ${ARCHITECTURE}/bin # Windows
     )
 

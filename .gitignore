@@ -16,3 +16,4 @@ install/
 *.mp4
 !data/compat/*.glb
 *.gch
+hub
