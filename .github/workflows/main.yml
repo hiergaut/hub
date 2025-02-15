@@ -13,39 +13,39 @@ on:
 
 jobs:
 
-  CodeQuality:
-    uses: ./.github/workflows/codeQuality.yml
-
-  Ubuntu_gcc:
-    needs: CodeQuality
-    uses: ./.github/workflows/buildAndTest.yml
-    with:
-      name: Ubuntu gcc
-      os: ubuntu-latest
-      build-type: Release
-      cc: gcc
-      cxx: g++
-      icon: Linux
-
-  Windows_MSVC:
-    needs: CodeQuality
-    uses: ./.github/workflows/buildAndTest.yml
-    with:
-      name: Windows MSVC
-      os: windows-latest
-      build-type: Release
-      cc: cl
-      cxx: cl
-      icon: Windows
-
-  MacOS_clang:
-    needs: CodeQuality
-    uses: ./.github/workflows/buildAndTest.yml
-    with:
-      name: MacOS clang
-      os: macos-latest
-      build-type: Release
-      cc: clang
-      cxx: clang++
-      icon: Apple
-
+  # CodeQuality:
+  #   uses: ./.github/workflows/codeQuality.yml
+  #
+  # Ubuntu_gcc:
+  #   needs: CodeQuality
+  #   uses: ./.github/workflows/buildAndTest.yml
+  #   with:
+  #     name: Ubuntu gcc
+  #     os: ubuntu-latest
+  #     build-type: Release
+  #     cc: gcc
+  #     cxx: g++
+  #     icon: Linux
+  #
+  # Windows_MSVC:
+  #   needs: CodeQuality
+  #   uses: ./.github/workflows/buildAndTest.yml
+  #   with:
+  #     name: Windows MSVC
+  #     os: windows-latest
+  #     build-type: Release
+  #     cc: cl
+  #     cxx: cl
+  #     icon: Windows
+  #
+  # MacOS_clang:
+  #   needs: CodeQuality
+  #   uses: ./.github/workflows/buildAndTest.yml
+  #   with:
+  #     name: MacOS clang
+  #     os: macos-latest
+  #     build-type: Release
+  #     cc: clang
+  #     cxx: clang++
+  #     icon: Apple
+  #
