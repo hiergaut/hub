@@ -23,7 +23,7 @@ set(HUB_INCLUDE_DIR ${PACKAGE_PREFIX_DIR}/include)
 
 set (HUB_VERSION "@hub_VERSION@")
 
-message(STATUS "Found hub: ${PACKAGE_PREFIX_DIR} (version \"${HUB_VERSION}\")")
+message(STATUS "Hub found: ${PACKAGE_PREFIX_DIR} (version \"${HUB_VERSION}\")")
 
 if(TARGET hub_shared OR TARGET hub_static)
 
