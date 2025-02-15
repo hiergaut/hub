@@ -21,17 +21,17 @@ jobs:
       fail-fast: false
       matrix:
         config:
-            - { name: "Ubuntu gcc", os: ubuntu-latest, cc: "gcc", cxx: "g++", hub_static: "ON", hub_shared: "ON" }
-            # - { name: "Ubuntu gcc", os: ubuntu-latest, cc: "gcc", cxx: "g++", hub_static: "ON", hub_shared: "OFF" }
-            # - { name: "Ubuntu gcc", os: ubuntu-latest, cc: "gcc", cxx: "g++", hub_static: "OFF", hub_shared: "ON" }
+            - { name: "Ubuntu gcc", os: ubuntu-latest, cc: "gcc", cxx: "g++", icon: "Linux", hub_static: "ON", hub_shared: "ON" }
+            - { name: "Ubuntu gcc", os: ubuntu-latest, cc: "gcc", cxx: "g++", icon: "Linux", hub_static: "ON", hub_shared: "OFF" }
+            - { name: "Ubuntu gcc", os: ubuntu-latest, cc: "gcc", cxx: "g++", icon: "Linux", hub_static: "OFF", hub_shared: "ON" }
             
-            - { name: "MacOS clang", os: macos-latest, cc: "clang", cxx: "clang++", hub_static: "ON", hub_shared: "ON" }
-            # - { name: "MacOS clang", os: macos-latest, cc: "clang", cxx: "clang++", hub_static: "ON", hub_shared: "OFF" }
-            # - { name: "MacOS clang", os: macos-latest, cc: "clang", cxx: "clang++", hub_static: "OFF", hub_shared: "ON" }
+            - { name: "MacOS clang", os: macos-latest, cc: "clang", cxx: "clang++", icon: "Apple", hub_static: "ON", hub_shared: "ON" }
+            - { name: "MacOS clang", os: macos-latest, cc: "clang", cxx: "clang++", icon: "Apple", hub_static: "ON", hub_shared: "OFF" }
+            - { name: "MacOS clang", os: macos-latest, cc: "clang", cxx: "clang++", icon: "Apple", hub_static: "OFF", hub_shared: "ON" }
            
-            - { name: "Windows MSVC", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", hub_static: "ON", hub_shared: "ON"}
-            # - { name: "Windows MSVC", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", hub_static: "ON", hub_shared: "OFF"}
-            # - { name: "Windows MSVC", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", hub_static: "OFF", hub_shared: "ON"}
+            - { name: "Windows MSVC", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", icon: "Windows", hub_static: "ON", hub_shared: "ON"}
+            - { name: "Windows MSVC", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", icon: "Windows", hub_static: "ON", hub_shared: "OFF"}
+            - { name: "Windows MSVC", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", icon: "Windows", hub_static: "OFF", hub_shared: "ON"}
 
             # - { name: "Windows MSVC Win32", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", hub_static: "ON", hub_shared: "ON", cmake_args: "-A Win32"}
             # - { name: "Windows MSVC ARM", os: windows-latest, cc: "cl.exe", cxx: "cl.exe", hub_static: "ON", hub_shared: "ON", cmake_args: "-A ARM"}
