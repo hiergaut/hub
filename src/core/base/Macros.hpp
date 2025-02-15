@@ -18,7 +18,6 @@
 
 namespace hub {
 
-
 // Compiler identification
 #if defined( __clang__ )
 #    define COMPILER_CLANG
@@ -53,7 +52,6 @@ namespace hub {
 #    define _USE_MATH_DEFINES
 
 #elif defined( __llvm__ )
-
 
 #else
 #    ifndef CPP_CHECK

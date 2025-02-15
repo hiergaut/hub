@@ -287,8 +287,6 @@ if(HUB_BUILD_SHARED)
                    SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR}
                    OUTPUT_NAME ${PROJECT_NAME})
 
-	# set_target_properties(${PROJECT_NAME}_shared PROPERTIES IMPORTED_IMPLIB_DEBUG "${_IMPORT_PREFIX}/x64/lib/hubd.lib")
-
     # ############################### INSTALL ###################################
 
     if(MSVC)
