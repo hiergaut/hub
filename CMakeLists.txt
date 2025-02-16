@@ -130,6 +130,11 @@ endif()
 set(HUB_PROJECT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 add_definitions(-DHUB_PROJECT_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/\")
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
+
+include(GetVersionFromGitTag)
+message(STATUS "${HEADER_MSG} Version: ${${PROJECT_NAME}_VERSION} (hash: ${${PROJECT_NAME}_HASH})")
+
 find_package(Boost QUIET NO_MODULE) # tcp socket communication
 if(Boost_FOUND)
     add_definitions(-DHUB_USE_BOOST)
@@ -164,17 +169,15 @@ if(CMAKE_CXX_STANDARD GREATER_EQUAL 20)
     add_definitions(-DHUB_USE_ZPP_BITS)
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
-
 # cmake-format: off
-# # set(HUB_MODULES "core")
+set(HUB_MODULES "core")
 # # set(HUB_MODULES "core" "net")
 # # set(HUB_MODULES "core" "net" "io")
 # # set(HUB_MODULES "core" "net" "io" "server")
 # # set(HUB_MODULES "core" "net" "io" "server" "client")
 # # set(HUB_MODULES "core" "net" "io" "server" "client" "native")
 # # set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor")
-set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
+# # set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
 
 set(ALL_HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
 # cmake-format: on
@@ -184,7 +187,7 @@ foreach(MODULE ${ALL_HUB_MODULES})
     if(${MODULE} IN_LIST HUB_MODULES)
         set(HUB_BUILD_${UPPER_MODULE} 1)
     else()
-        message(STATUS "${HEADER_MSG} ${Red}module ${MODULE}${ColourReset} disabled")
+        message(STATUS "${HEADER_MSG} module ${MODULE} ${Red}disabled${CoulourReset}")
         add_definitions(-DHUB_NON_BUILD_${UPPER_MODULE})
         set(HUB_BUILD_${UPPER_MODULE} 0)
     endif()
