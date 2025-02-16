@@ -83,8 +83,8 @@ jobs:
       run: cmake --build ${{ env.build_dir }} --target hub-coverage-saveStats
 
     - name: Save stats
-      if: github.event_name == 'push'
-      # uses: peaceiris/actions-gh-pages@v4
+      # if: github.event_name == 'push'
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ env.build_dir }}/stats
