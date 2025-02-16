@@ -13,11 +13,11 @@ on:
 
 jobs:
 
-  # CodeQuality:
-    # uses: ./.github/workflows/codeQuality.yml
+  CodeQuality:
+    uses: ./.github/workflows/codeQuality.yml
 
   Ubuntu_gcc:
-    # needs: CodeQuality
+    needs: CodeQuality
     uses: ./.github/workflows/buildAndTest.yml
     with:
       name: Ubuntu_gcc
@@ -28,7 +28,7 @@ jobs:
       coverage: ON
 
   Windows_MSVC:
-    # needs: CodeQuality
+    needs: CodeQuality
     uses: ./.github/workflows/buildAndTest.yml
     with:
       name: Windows_MSVC
@@ -39,7 +39,7 @@ jobs:
       coverage: OFF # always off because lcov to install
 
   MacOS_clang:
-    # needs: CodeQuality
+    needs: CodeQuality
     uses: ./.github/workflows/buildAndTest.yml
     with:
       name: MacOS_clang
@@ -49,24 +49,24 @@ jobs:
       build-type: Release
       coverage: OFF
 
-  # Doc:
-  #   needs: [ Ubuntu_gcc, Windows_MSVC, MacOS_clang ]
-  #   if: github.event_name == 'push'
-  #   uses: ./.github/workflows/deployDoc.yml
-  #
-  # External:
-  #   needs: Doc
-  #   if: github.event_name == 'push'
-  #   uses: ./.github/workflows/testAsExternalProject.yml
-  #
-  # Submodule:
-  #   needs: Doc
-  #   if: github.event_name == 'push'
-  #   uses: ./.github/workflows/testAsSubmodule.yml
-  #
-  # FetchContent:
-  #   needs: Doc
-  #   if: github.event_name == 'push'
-  #   uses: ./.github/workflows/testAsFetchContent.yml
-  #
-  #
+  Doc:
+    needs: [ Ubuntu_gcc, Windows_MSVC, MacOS_clang ]
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/deployDoc.yml
+
+  External:
+    needs: Doc
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/testAsExternalProject.yml
+
+  Submodule:
+    needs: Doc
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/testAsSubmodule.yml
+
+  FetchContent:
+    needs: Doc
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/testAsFetchContent.yml
+
+

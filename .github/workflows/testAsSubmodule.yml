@@ -1,13 +1,4 @@
 
-# name: Submodule
-#
-# defaults:
-#   run:
-#     shell: bash
-#
-# on:
-#   push:
-#     branches: [ main ]
 on:
   workflow_call:
 
@@ -44,7 +35,6 @@ jobs:
       run: git clone --branch gh-testAsSubmodule https://github.com/hiergaut/hub.git "${{github.workspace}}/hub"
 
     - name: Checkout hub (current branch)
-      # run: git clone --branch "${{github.head_ref}}" https://github.com/hiergaut/hub.git "${{github.workspace}}/hub/hub"
       run: git clone https://github.com/hiergaut/hub.git "${{github.workspace}}/hub/hub"
 
     - name: Configure CMake
