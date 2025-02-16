@@ -22,7 +22,6 @@ on:
         required: true
 env:
   build_dir: "${{ github.workspace }}/build"
-  # build_dir: "builds/${{ inputs.name }}-${{ inputs.build-type }}-${{ github.head_ref }}"
 
 jobs:
 
@@ -30,8 +29,6 @@ jobs:
     runs-on: ${{ inputs.os }}
     permissions:
       contents: write
-    # concurrency:
-      # group: ${{ github.workflow }}-${{ github.ref }}
 
     steps:
 
@@ -43,9 +40,7 @@ jobs:
         path: |
           ${{ env.build_dir }}/*
           !${{ env.build_dir }}/stats
-        # key: ${{ runner.os }}-${{ runner.arch }}-${{ github.head_ref }}
-        # key: ${{ inputs.name }}-${{ github.head_ref }}
-        key: ${{ inputs.name }}-${GITHUB_REF##*/}
+        key: ${{ inputs.name }}-${{ github.head_ref }}
 
     - name: Restore stats
       run: git clone --branch gh-stats https://github.com/hiergaut/hub.git ${{ env.build_dir }}/stats
@@ -69,7 +64,6 @@ jobs:
     - name: Test
       if: inputs.coverage == 'OFF'
       run: cmake --build ${{ env.build_dir }} --target hub-tests-bin
-      # run: cmake --build ${{ env.build_dir }} --target hub-tests
       timeout-minutes: 10
 
     - name: Build coverage
@@ -87,6 +81,10 @@ jobs:
       if: inputs.coverage == 'ON' && github.event_name == 'push'
       run: cmake --build ${{ env.build_dir }} --target hub-coverage-saveStats
 
+    - name: Fetch stats
+      if: github.event_name == 'push'
+      run: cd ${{ env.build_dir }}/stats && git pull
+
     - name: Save stats
       if: github.event_name == 'push'
       uses: peaceiris/actions-gh-pages@v4
@@ -96,10 +94,3 @@ jobs:
         publish_branch: gh-stats
         keep_files: true
 
-      # if: github.event_name == 'push'
-      # uses: JamesIves/github-pages-deploy-action@v4
-      # with:
-      #   folder: ${{ env.build_dir }}/stats # The folder the action should deploy.
-      #   clean: true
-      #   single-commit: true
-      #   branch: gh-stats

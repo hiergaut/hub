@@ -234,6 +234,12 @@ if(HUB_USE_FETCH OR Catch2_FOUND)
             COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
             USES_TERMINAL
             COMMENT "Running server")
+    else()
+        add_custom_target(
+            hub-tests-bin
+            COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
+            USES_TERMINAL
+            COMMENT "Running tests without server")
     endif()
 
     if(TARGET hub-tests-bin)

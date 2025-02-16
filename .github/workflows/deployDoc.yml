@@ -1,19 +1,6 @@
 
-# name: Doc
-
-# defaults:
-#   run:
-#     shell: bash
-#
-# on:
-#   push:
-#     branches: [ main ]
-
 on:
   workflow_call:
-
-# env:
-  # BUILD_TYPE: Release
 
 jobs:
   Deploy:

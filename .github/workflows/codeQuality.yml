@@ -24,7 +24,6 @@ jobs:
         cppcheck --version
         && cmake --build ${{github.workspace}}/build --target hub-cppCheck
 
-
   Doxygen:
     runs-on: ubuntu-latest
 
@@ -39,7 +38,6 @@ jobs:
       run:
         doxygen --version &&
         cmake --build ${{github.workspace}}/build --target hub-doc-doxygen
-
 
   Format:
     runs-on: ubuntu-latest
