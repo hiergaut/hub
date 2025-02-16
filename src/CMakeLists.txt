@@ -8,12 +8,12 @@ set(REQUIRED_LIBS ${HUB_TBB_TARGET})
 
 message(STATUS "${HEADER_MSG} Version: ${${PROJECT_NAME}_VERSION}")
 
-if (HUB_ENABLE_TESTS)
+if(HUB_ENABLE_TESTS)
     option(HUB_ENABLE_COVERAGE "Collect coverage from hub library (required tests enable)" OFF)
     if(HUB_ENABLE_COVERAGE)
         include(CodeCoverage)
 
-        ########################### LCOV VERSION
+        # ########################## LCOV VERSION
 
         execute_process(
             COMMAND ${LCOV_PATH} --version
@@ -21,11 +21,10 @@ if (HUB_ENABLE_TESTS)
             OUTPUT_VARIABLE LCOV_OUTPUT
             ERROR_VARIABLE LCOV_ERROR)
 
-        if (NOT LCOV_FOUND)
+        if(NOT LCOV_FOUND)
             string(REGEX MATCHALL "-.*$|[0-9]+" LCOV_VERSION_LIST ${LCOV_OUTPUT})
             list(GET LCOV_VERSION_LIST 0 LCOV_VERSION_MAJOR)
             list(GET LCOV_VERSION_LIST 1 LCOV_VERSION_MINOR)
-            # list(GET LCOV_VERSION_LIST 2 LCOV_VERSION_PATCH)
 
             message(STATUS "${HEADER_MSG} Found Lcov ${LCOV_VERSION_MAJOR}.${LCOV_VERSION_MINOR}")
         endif()
@@ -495,11 +494,11 @@ message(STATUS "${HEADER_MSG} CMake system name: ${CMAKE_SYSTEM_NAME}")
         else()
             set(parentMacro "${parentName}-")
         endif()
-        # if(NOT EXISTS "${PROJECT_SOURCE_DIR}/tests/${parentName}/test-${parentMacro}${name}.cpp")
-            # message("parentName: ${parentName}")
-            # message("name: ${name}")
-            # message(WARNING "${parentName}/test-${parentMacro}${name}.cpp not found in tests directory")
-        # endif()
+        # # if(NOT EXISTS "${PROJECT_SOURCE_DIR}/tests/${parentName}/test-${parentMacro}${name}.cpp")
+        # # message("parentName: ${parentName}")
+        # # message("name: ${name}")
+        # # message(WARNING "${parentName}/test-${parentMacro}${name}.cpp not found in tests directory")
+        # # endif()
 
         set(sourceOthers ${SOURCE_FILES})
         list(FILTER sourceOthers EXCLUDE REGEX ".*/${name}\\.cpp")

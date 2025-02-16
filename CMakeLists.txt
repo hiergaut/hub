@@ -169,7 +169,6 @@ if(CMAKE_CXX_STANDARD GREATER_EQUAL 20)
     add_definitions(-DHUB_USE_ZPP_BITS)
 endif()
 
-
 # cmake-format: off
 set(HUB_MODULES "core")
 # # set(HUB_MODULES "core" "net")
@@ -241,7 +240,7 @@ if(cppcheck_FOUND)
     list(GET CPP_CHECK_VERSION_LIST 0 CPP_CHECK_VERSION_MAJOR)
     list(GET CPP_CHECK_VERSION_LIST 1 CPP_CHECK_VERSION_MINOR)
 
-	message(STATUS "${HEADER_MSG} Found Cppcheck ${CPP_CHECK_VERSION_MAJOR}.${CPP_CHECK_VERSION_MINOR}")
+    message(STATUS "${HEADER_MSG} Found Cppcheck ${CPP_CHECK_VERSION_MAJOR}.${CPP_CHECK_VERSION_MINOR}")
 
     if(NOT ${CPP_CHECK_VERSION_MAJOR} EQUAL 2)
         message(FATAL_ERROR "${CPP_CHECK_OUTPUT} unsupported")
