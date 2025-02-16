@@ -173,14 +173,14 @@ if(CMAKE_CXX_STANDARD GREATER_EQUAL 20)
 endif()
 
 # cmake-format: off
-set(HUB_MODULES "core")
+# # set(HUB_MODULES "core")
 # # set(HUB_MODULES "core" "net")
 # # set(HUB_MODULES "core" "net" "io")
 # # set(HUB_MODULES "core" "net" "io" "server")
 # # set(HUB_MODULES "core" "net" "io" "server" "client")
 # # set(HUB_MODULES "core" "net" "io" "server" "client" "native")
 # # set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor")
-# # set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
+set(HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
 
 set(ALL_HUB_MODULES "core" "net" "io" "server" "client" "native" "sensor" "data")
 # cmake-format: on

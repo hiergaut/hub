@@ -50,23 +50,23 @@ jobs:
       coverage: OFF
 
   Doc:
-    needs: [ Ubuntu_gcc, Windows_MSVC, MacOS_clang ]
     if: github.event_name == 'push'
+    needs: [ Ubuntu_gcc, Windows_MSVC, MacOS_clang ]
     uses: ./.github/workflows/deployDoc.yml
 
   External:
-    needs: Doc
     if: github.event_name == 'push'
+    needs: Doc
     uses: ./.github/workflows/testAsExternalProject.yml
 
   Submodule:
-    needs: Doc
     if: github.event_name == 'push'
+    needs: Doc
     uses: ./.github/workflows/testAsSubmodule.yml
 
   FetchContent:
-    needs: Doc
     if: github.event_name == 'push'
+    needs: Doc
     uses: ./.github/workflows/testAsFetchContent.yml
 
 
