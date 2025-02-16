@@ -216,7 +216,7 @@ if(HUB_ENABLE_TESTS)
     # Tests need server and viewer to run
     set(HUB_ENABLE_BINS
         ON
-        CACHE BOOL "")
+        CACHE BOOL "" FORCE)
 endif()
 
 option(HUB_ENABLE_EXAMPLES "Enable examples" OFF)

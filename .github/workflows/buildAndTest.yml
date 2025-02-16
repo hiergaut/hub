@@ -44,7 +44,8 @@ jobs:
           ${{ env.build_dir }}/*
           !${{ env.build_dir }}/stats
         # key: ${{ runner.os }}-${{ runner.arch }}-${{ github.head_ref }}
-        key: ${{ inputs.name }}-${{ github.head_ref }}
+        # key: ${{ inputs.name }}-${{ github.head_ref }}
+        key: ${{ inputs.name }}-${GITHUB_REF##*/}
 
     - name: Restore stats
       run: git clone --branch gh-stats https://github.com/hiergaut/hub.git ${{ env.build_dir }}/stats
