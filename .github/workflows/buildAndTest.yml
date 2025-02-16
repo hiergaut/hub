@@ -67,8 +67,8 @@ jobs:
 
     - name: Test
       if: inputs.coverage == 'OFF'
-      # run: cmake --build ${{ env.build_dir }} --target hub-tests-bin
-      run: cmake --build ${{ env.build_dir }} --target hub-tests
+      run: cmake --build ${{ env.build_dir }} --target hub-tests-bin
+      # run: cmake --build ${{ env.build_dir }} --target hub-tests
       timeout-minutes: 10
 
     - name: Build coverage
