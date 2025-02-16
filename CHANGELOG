@@ -1,6 +1,6 @@
 
 ---
-Current head v.2.1.0 rc
+Current head v.2.1.0
 =====================
 - Community
   * Add CHANGELOG file (#14)
@@ -21,13 +21,16 @@ Current head v.2.1.0 rc
   * Add issue templates for bug report and feature request (#29)
   * Add PULL_REQUEST_TEMPLATE file (#30)
   * Add timeout for ci tests (#39)
-  * Add clean code (format, cppcheck, doxygen) asynchronous checks (#1)
+  * Add clean code ci (format, cppcheck, doxygen) asynchronous checks (#1)
   * Cleanup project (clang-format and cmake-format) (#2)
   * Check project use as submodule (#52)
-  * Check project use as external project (#53)
+  * Check project use as external project (#53, #5)
+  * Check project use as submodule project (#5)
+  * Check project use as fetchcontent project (#5)
+  * Fix coverage (#3)
 - Tests
   * Fix timeout error on macos (#33)
-  * Check coverage decline (#46)
+  * Check coverage decline (#46, #6)
 - Documentation
   * Fix doxygen (#20)
   * Fix sphinx (#26)
