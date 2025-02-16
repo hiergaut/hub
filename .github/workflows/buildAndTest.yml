@@ -28,6 +28,11 @@ jobs:
 
   BuildAndTest:
     runs-on: ${{ inputs.os }}
+    permissions:
+      contents: write
+    # concurrency:
+      # group: ${{ github.workflow }}-${{ github.ref }}
+
     steps:
 
     - name: Checkout repository
@@ -42,8 +47,7 @@ jobs:
         key: ${{ inputs.name }}-${{ github.head_ref }}
 
     - name: Restore stats
-      run: mkdir -p ${{ env.build_dir }} && git clone --branch gh-stats https://github.com/hiergaut/hub.git ${{ env.build_dir }}/stats
-      # && rm -fr ${{ env.build_dir }}/stats
+      run: git clone --branch gh-stats https://github.com/hiergaut/hub.git ${{ env.build_dir }}/stats
 
     - name: Install lcov
       if: inputs.coverage == 'ON'
@@ -83,7 +87,7 @@ jobs:
       run: cmake --build ${{ env.build_dir }} --target hub-coverage-saveStats
 
     - name: Save stats
-      # if: github.event_name == 'push'
+      if: github.event_name == 'push'
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}

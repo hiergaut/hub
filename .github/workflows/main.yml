@@ -25,7 +25,6 @@ jobs:
       cc: gcc
       cxx: g++
       build-type: Release
-      # coverage: OFF
       coverage: ON
  
   Windows_MSVC:
