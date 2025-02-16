@@ -187,6 +187,7 @@ void _checkValue( double value,
                 ", mean-σ(15.9%):" + std::to_string( mean - standardDeviation ) +
                 ", mean-2σ(2.3%):" + std::to_string( mean - 2 * standardDeviation ) +
                 ", mean-3σ(0.1%):" + std::to_string( mean - 3 * standardDeviation ) + "\033[0m";
+            CHECK(false);
         }
 
         _REPORT( "[" << name << "] " << report, filename, line );
