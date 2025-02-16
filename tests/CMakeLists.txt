@@ -2,7 +2,6 @@
 
 project(tests LANGUAGES CXX)
 
-
 set(LINK_LIBRARIES Catch2::Catch2WithMain hub)
 set(INCLUDE_LIBRARIES)
 
@@ -12,10 +11,11 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/external/src/Catch2-install/lib/cmake/Cat
         CACHE PATH "" FORCE)
 endif()
 
+# find_package(Catch2 3 REQUIRED)
 find_package(Catch2 CONFIG)
 
 option(HUB_USE_FETCH "Use fetch content to get Catch2" ON)
-if(HUB_USE_FETCH)
+if (HUB_USE_FETCH)
     if(NOT Catch2_FOUND)
         include(FetchContent)
         FetchContent_Declare(
@@ -28,7 +28,7 @@ if(HUB_USE_FETCH)
 
 else()
 
-    if(NOT Catch2_FOUND)
+    if (NOT Catch2_FOUND)
         include(ExternalProject)
 
         list(
@@ -40,7 +40,8 @@ else()
             "-DCATCH_BUILD_TESTING=OFF"
             "-DCATCH_DEVELOPMENT_BUILD=OFF"
             "-DCATCH_INSTALL_DOCS=OFF"
-            "-DCATCH_INSTALL_EXTRAS=OFF")
+            "-DCATCH_INSTALL_EXTRAS=OFF"
+        )
 
         message(STATUS "Preparing external project Catch2 with args:")
         foreach(CMAKE_ARG ${CMAKE_ARGS})
@@ -56,21 +57,21 @@ else()
             PREFIX "external"
             CMAKE_ARGS "${CMAKE_ARGS}")
 
-        # # Expose required variable (CATCH_INCLUDE_DIR) to parent scope ExternalProject_Get_Property(catch2 source_dir)
-    endif()
+        # # Expose required variable (CATCH_INCLUDE_DIR) to parent scope
+        # ExternalProject_Get_Property(catch2 source_dir)
+        # set(CATCH_INCLUDE_DIR ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch2")
+        # # add_subdirectory(${PROJECT_SOURCE_DIR}/lib/catch2)
+        # include_directories(${CATCH_INCLUDE_DIR})
+    endif ()
 endif()
 
 if(Catch2_FOUND)
     message(STATUS "${HEADER_MSG} Found Catch2 ${Catch2_VERSION} (${Catch2_DIR})")
 endif()
 
-enable_testing()
+#################################################################################################
 
-############################# FOR EACH TEST ######################
-
-foreach(testFile ${test_srcs})
-
-if(HUB_USE_FETCH OR Catch2_FOUND)
+if (HUB_USE_FETCH OR Catch2_FOUND)
     set(test_srcs)
     set(test_headers)
     foreach(HUB_MODULE ${HUB_MODULES})
@@ -113,8 +114,7 @@ if(HUB_USE_FETCH OR Catch2_FOUND)
         if(OpenImageIO_FOUND)
             set(LINK_LIBRARIES ${LINK_LIBRARIES} OpenImageIO)
             set(INCLUDE_LIBRARIES ${INCLUDE_LIBRARIES} ${OpenImageIO_INCLUDE_DIR}/OpenImageIO)
-            message(
-                STATUS "${HEADER_MSG} Found OIIO ${OIIO_USING_IMATH_VERSION_MAJOR}.${OIIO_USING_IMATH_VERSION_MINOR}")
+            message(STATUS "${HEADER_MSG} Found OIIO ${OIIO_USING_IMATH_VERSION_MAJOR}.${OIIO_USING_IMATH_VERSION_MINOR}")
         else()
             list(REMOVE_ITEM test_srcs ${CMAKE_CURRENT_SOURCE_DIR}/core/matrix/test-core-matrix-compatOIIO.cpp)
             message(WARNING "core/matrix/test-core-matrix-compatOIIO disabled")
@@ -191,10 +191,10 @@ if(HUB_USE_FETCH OR Catch2_FOUND)
         add_custom_target(
             hub-tests-bin-${test}
             COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                    ${HUB_SERVER_TEST_BIN_PORT} --daemon
-            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port
-                    ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
+            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                    --daemon
+            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port ${HUB_SERVER_TEST_BIN_PORT}
+                    --exitWhenServerLost
             COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-nativeViewer --port
                     ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
             COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V -R ${test}
@@ -208,10 +208,10 @@ if(HUB_USE_FETCH OR Catch2_FOUND)
         add_custom_target(
             hub-tests-bin
             COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                    ${HUB_SERVER_TEST_BIN_PORT} --daemon
-            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port
-                    ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
+            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                    --daemon
+            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port ${HUB_SERVER_TEST_BIN_PORT}
+                    --exitWhenServerLost
             COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-nativeViewer --port
                     ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
             COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
@@ -222,10 +222,10 @@ if(HUB_USE_FETCH OR Catch2_FOUND)
         add_custom_target(
             hub-tests-bin
             COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                    ${HUB_SERVER_TEST_BIN_PORT} --daemon
-            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port
-                    ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
+            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                    --daemon
+            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-viewer --port ${HUB_SERVER_TEST_BIN_PORT}
+                    --exitWhenServerLost
             COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
             USES_TERMINAL
             COMMENT "Running server")
@@ -234,11 +234,17 @@ if(HUB_USE_FETCH OR Catch2_FOUND)
         add_custom_target(
             hub-tests-bin
             COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port
-                    ${HUB_SERVER_TEST_BIN_PORT} --daemon
+            COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-server --port ${HUB_SERVER_TEST_BIN_PORT}
+                    --daemon
             COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
             USES_TERMINAL
             COMMENT "Running server")
+    else()
+        add_custom_target(
+            hub-tests-bin
+            COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
+            USES_TERMINAL
+            COMMENT "Running tests without server")
     endif()
 
     if(TARGET hub-tests-bin)
@@ -246,49 +252,17 @@ if(HUB_USE_FETCH OR Catch2_FOUND)
     endif()
 
     add_custom_target(
-        hub-tests-bin-${test}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-server --port ${HUB_SERVER_TEST_BIN_PORT} --daemon
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-viewer --port ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-nativeViewer --port ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
-        COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V -R test-start
-        COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V -R ${test}
-        COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V -R test-end
-        USES_TERMINAL
-        COMMENT "Running server")
-
-endforeach()
-
-############################# FOR ALL TEST ######################
-
-if(HUB_BUILD_NATIVE)
-    add_custom_target(
-        hub-tests-bin
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-server --port ${HUB_SERVER_TEST_BIN_PORT} --daemon
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-viewer --port ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-nativeViewer --port ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
+        hub-tests
         COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
         USES_TERMINAL
         COMMENT "Running tests")
     custom_target_added(tests)
 
-elseif(HUB_BUILD_CLIENT)
-    add_custom_target(
-        hub-tests-bin
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-server --port ${HUB_SERVER_TEST_BIN_PORT} --daemon
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-viewer --port ${HUB_SERVER_TEST_BIN_PORT} --exitWhenServerLost
-        COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
-        USES_TERMINAL
-        COMMENT "Running server")
+    add_custom_command(
+        TARGET test-common
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy "${HUB_PROJECT_DIR}/scripts/showDurationTest.sh" ${CMAKE_CURRENT_BINARY_DIR})
 
-elseif(HUB_BUILD_SERVER)
-    add_custom_target(
-        hub-tests-bin
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/generateServerPort.sh ${HUB_SERVER_TEST_BIN_PORT}
-        COMMAND bash ${HUB_PROJECT_DIR}/scripts/launcher.sh ${HUB_BIN_DIR}/hub-bin-server --port ${HUB_SERVER_TEST_BIN_PORT} --daemon
-        COMMAND ctest -C ${CMAKE_BUILD_TYPE} -V
-        USES_TERMINAL
-        COMMENT "Running server")
+else()
+    message(WARNING "No building tests, Catch2 is missing")
 endif()

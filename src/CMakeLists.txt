@@ -453,14 +453,14 @@ message(STATUS "${HEADER_MSG} CMake system name: ${CMAKE_SYSTEM_NAME}")
     add_custom_target(
         hub-coverage-checkDecline
         COMMAND
-        ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov ${CMAKE_BINARY_DIR}/stats/${CMAKE_SYSTEM_NAME} hub-coverage-lcov
+        ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov ${HUB_STATS_DIR} hub-coverage-lcov
     )
     custom_target_added(coverage-checkDecline)
 
     add_custom_target(
         hub-coverage-saveStats
         COMMAND
-        ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov ${CMAKE_BINARY_DIR}/stats/${CMAKE_SYSTEM_NAME} hub-coverage-lcov ${hub_HASH}
+        ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov ${HUB_STATS_DIR} hub-coverage-lcov ${hub_HASH}
     )
     custom_target_added(coverage-saveStats)
 
@@ -532,13 +532,13 @@ message(STATUS "${HEADER_MSG} CMake system name: ${CMAKE_SYSTEM_NAME}")
         add_custom_target(
             hub-coverage-${name}-checkDecline
             COMMAND
-            ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov-${name} ${CMAKE_BINARY_DIR}/stats/${CMAKE_SYSTEM_NAME} hub-coverage-lcov-${name}
+            ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov-${name} ${HUB_STATS_DIR} hub-coverage-lcov-${name}
         )
 
         add_custom_target(
             hub-coverage-${name}-saveStats
             COMMAND
-            ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov-${name} ${CMAKE_BINARY_DIR}/stats/${CMAKE_SYSTEM_NAME} hub-coverage-lcov-${name} ${hub_HASH}
+            ${CMAKE_SOURCE_DIR}/scripts/coverageDecline.sh ${CMAKE_BINARY_DIR}/hub-coverage-lcov-${name} ${HUB_STATS_DIR} hub-coverage-lcov-${name} ${hub_HASH}
         )
 
         add_dependencies(hub-coverage-${name} hub-coverage-lcov-${name})

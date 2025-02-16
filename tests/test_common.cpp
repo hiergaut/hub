@@ -29,12 +29,12 @@ void _checkValue( double value,
     constexpr int nRatio     = 8;
     CHECK( nRatio == std::pow( 2, nMaxMean - 1 ) );
 
-    const std::string declineFolder = HUB_STATS_DIR;
+    const std::string statsFolder = HUB_STATS_DIR;
 
     const std::string logFilename = filename2 + "_" + name2 + extension;
 
     {
-        std::ifstream inFile( declineFolder + logFilename.c_str() );
+        std::ifstream inFile( statsFolder + logFilename.c_str() );
         if ( inFile.is_open() ) {
             CHECK( inFile.is_open() );
 
@@ -79,7 +79,7 @@ void _checkValue( double value,
         std::vector<double> values( nRatio );
         std::string report;
 
-        std::ifstream inFile( declineFolder + logFilename.c_str() );
+        std::ifstream inFile( statsFolder + logFilename.c_str() );
         if ( inFile.is_open() ) {
             CHECK( inFile.is_open() );
 
@@ -194,10 +194,10 @@ void _checkValue( double value,
 
     if ( !decline ) {
         {
-            if ( !std::filesystem::exists( declineFolder ) ) {
-                std::filesystem::create_directories( declineFolder );
+            if ( !std::filesystem::exists( statsFolder ) ) {
+                std::filesystem::create_directories( statsFolder );
             }
-            std::ofstream logFile( declineFolder + logFilename.c_str(),
+            std::ofstream logFile( statsFolder + logFilename.c_str(),
                                    std::ios::out | std::ios::app );
             CHECK( logFile.is_open() );
 

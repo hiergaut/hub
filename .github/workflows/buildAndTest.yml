@@ -44,8 +44,7 @@ jobs:
           ${{ env.build_dir }}/*
           !${{ env.build_dir }}/stats
         # key: ${{ runner.os }}-${{ runner.arch }}-${{ github.head_ref }}
-        # key: ${{ inputs.name }}-${{ github.head_ref }}
-        key: ${{ inputs.name }}-${GITHUB_REF##*/}
+        key: ${{ inputs.name }}-${{ github.head_ref }}
 
     - name: Restore stats
       run: git clone --branch gh-stats https://github.com/hiergaut/hub.git ${{ env.build_dir }}/stats
@@ -85,11 +84,15 @@ jobs:
 
       # Save coverage stats only when pushing on main
     - name: Save coverage stats
-      if: inputs.coverage == 'ON' && github.event_name == 'push'
+      if: inputs.coverage == 'ON' 
+      # && github.event_name == 'push'
       run: cmake --build ${{ env.build_dir }} --target hub-coverage-saveStats
 
+    - name: Fetch stats
+      run: cd ${{ env.build_dir }}/stats && git pull
+
     - name: Save stats
-      if: github.event_name == 'push'
+      # if: github.event_name == 'push'
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
