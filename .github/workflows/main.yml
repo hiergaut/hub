@@ -16,36 +16,41 @@ jobs:
   CodeQuality:
     uses: ./.github/workflows/codeQuality.yml
 
-  Ubuntu_gcc:
+  DeployDoc:
     needs: CodeQuality
-    uses: ./.github/workflows/buildAndTest.yml
-    with:
-      name: Ubuntu_gcc
-      os: ubuntu-latest
-      cc: gcc
-      cxx: g++
-      build-type: Release
-      coverage: ON
- 
-  Windows_MSVC:
-    needs: CodeQuality
-    uses: ./.github/workflows/buildAndTest.yml
-    with:
-      name: Windows_MSVC
-      os: windows-latest
-      cc: cl
-      cxx: cl
-      build-type: Release
-      coverage: OFF # always off because lcov to install
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/deployDoc.yml
 
-  MacOS_clang:
-    needs: CodeQuality
-    uses: ./.github/workflows/buildAndTest.yml
-    with:
-      name: MacOS_clang
-      os: macos-latest
-      cc: clang
-      cxx: clang++
-      build-type: Release
-      coverage: OFF
-
+  # Ubuntu_gcc:
+  #   needs: CodeQuality
+  #   uses: ./.github/workflows/buildAndTest.yml
+  #   with:
+  #     name: Ubuntu_gcc
+  #     os: ubuntu-latest
+  #     cc: gcc
+  #     cxx: g++
+  #     build-type: Release
+  #     coverage: ON
+ #
+  # Windows_MSVC:
+  #   needs: CodeQuality
+  #   uses: ./.github/workflows/buildAndTest.yml
+  #   with:
+  #     name: Windows_MSVC
+  #     os: windows-latest
+  #     cc: cl
+  #     cxx: cl
+  #     build-type: Release
+  #     coverage: OFF # always off because lcov to install
+  #
+  # MacOS_clang:
+  #   needs: CodeQuality
+  #   uses: ./.github/workflows/buildAndTest.yml
+  #   with:
+  #     name: MacOS_clang
+  #     os: macos-latest
+  #     cc: clang
+  #     cxx: clang++
+  #     build-type: Release
+  #     coverage: OFF
+  #
