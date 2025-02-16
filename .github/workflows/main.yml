@@ -60,12 +60,12 @@ jobs:
   #   uses: ./.github/workflows/testAsExternalProject.yml
   #
   # Submodule:
-  #   needs: External
+  #   needs: Doc
   #   if: github.event_name == 'push'
   #   uses: ./.github/workflows/testAsSubmodule.yml
   #
   # FetchContent:
-  #   needs: Submodule
+  #   needs: Doc
   #   if: github.event_name == 'push'
   #   uses: ./.github/workflows/testAsFetchContent.yml
   #

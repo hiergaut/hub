@@ -62,8 +62,8 @@ if [ -z $coverageRefFile ]; then
 	linesRef=0
 	functionsRef=0
 else
-	linesRef=$(cat $coverageRefFile | head -n 1 | awk '{print $2}')
-	functionsRef=$(cat $coverageRefFile | head -n 1 | awk '{print $3}')
+	linesRef=$(cat $coverageRefFile | tail -n 1 | awk '{print $2}')
+	functionsRef=$(cat $coverageRefFile | tail -n 1 | awk '{print $3}')
 fi
 
 echo "lines coverage = $lines% >= $linesRef%"
