@@ -52,13 +52,11 @@ void _checkValue( double value,
             const int nValue = lastValues.size();
 
             if ( nValue >= nRatio ) {
-                const auto bInf = std::prev(lastValues.end(), nRatio);
-                assert(std::distance(bInf, lastValues.end()) == nRatio);
-                const auto standardDeviation = algo::StandardDeviation(
-                    bInf, lastValues.end() );
-                const auto mean =
-                    algo::Mean( bInf, lastValues.end() );
-                const auto minRatio = mean - standardDeviation * 2.0;
+                const auto bInf = std::prev( lastValues.end(), nRatio );
+                assert( std::distance( bInf, lastValues.end() ) == nRatio );
+                const auto standardDeviation = algo::StandardDeviation( bInf, lastValues.end() );
+                const auto mean              = algo::Mean( bInf, lastValues.end() );
+                const auto minRatio          = mean - standardDeviation * 2.0;
 #ifndef DEBUG
                 CHECK( minRatio <= value );
 #endif
@@ -83,7 +81,6 @@ void _checkValue( double value,
         if ( inFile.is_open() ) {
             CHECK( inFile.is_open() );
 
-            // get latests nRatio values in input file
             for ( int i = 0; i < nRatio; ++i ) {
                 values[i] = 0.0;
             }
@@ -107,7 +104,6 @@ void _checkValue( double value,
             ++iRatio;
         }
 
-        // get sum, min and max for each nMaxMean pack
         double sumRatios[nMaxMean];
         double minRatios[nMaxMean];
         double maxRatios[nMaxMean];
@@ -187,7 +183,7 @@ void _checkValue( double value,
                 ", mean-σ(15.9%):" + std::to_string( mean - standardDeviation ) +
                 ", mean-2σ(2.3%):" + std::to_string( mean - 2 * standardDeviation ) +
                 ", mean-3σ(0.1%):" + std::to_string( mean - 3 * standardDeviation ) + "\033[0m";
-            CHECK(false);
+            CHECK( false );
         }
 
         _REPORT( "[" << name << "] " << report, filename, line );

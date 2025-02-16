@@ -130,21 +130,8 @@ endif()
 set(HUB_PROJECT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 add_definitions(-DHUB_PROJECT_DIR=\"${HUB_PROJECT_DIR}/\")
 
-# set(HUB_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
-# add_definitions(-DHUB_BUILD_DIR=\"${HUB_BUILD_DIR}/\")
-
-# if(NOT HUB_STATS_DIR)
 set(HUB_STATS_DIR "${CMAKE_BINARY_DIR}/stats/${CMAKE_SYSTEM_NAME}")
-        # "${HUB_BUILD_DIR}/stats"
-        # CACHE PATH "Stats dir for build and tests")
-# else()
-#     # Windows CI failed path
-#     string(REPLACE "/" "\\" str ${HUB_STATS_DIR})
-#     set(HUB_STATS_DIR
-#         ${str}
-#         CACHE PATH "Stats dir for build and tests")
-# endif()
-add_definitions(-DHUB_STATS_DIR=\"${HUB_STATS_DIR}\/\")
+add_definitions(-DHUB_STATS_DIR=\"${HUB_STATS_DIR}/\")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 

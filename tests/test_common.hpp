@@ -82,7 +82,6 @@ static int getRandomPort( const char* filename ) {
     return randomPort;
 }
 
-
 #define START_REPORT()                  \
     std::ofstream file( "report.txt" ); \
     CHECK( file.is_open() );
