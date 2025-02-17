@@ -684,7 +684,7 @@ struct Dof6 {
     ///
     auto toString() const {
         return "x:" + std::to_string( x ) + " y:" + std::to_string( y ) +
-               " z:" + std::to_string( z ) + " w0:" + std::to_string( w0 ) +
+               " z:" + std::to_string( z ) + "\n" + "w0:" + std::to_string( w0 ) +
                " w1:" + std::to_string( w1 ) + " w2:" + std::to_string( w2 ) +
                " w3:" + std::to_string( w3 );
     }
