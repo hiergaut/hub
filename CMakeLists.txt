@@ -105,7 +105,7 @@ endif()
 
 # Set default value of CMake variables
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Debug")
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE) # set mode for all hub's user
 endif()
 message(STATUS "${HEADER_MSG} CMake build type: ${CMAKE_BUILD_TYPE}")
 
