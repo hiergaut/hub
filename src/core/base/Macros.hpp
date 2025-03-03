@@ -16,7 +16,9 @@
 
 #pragma once
 
+#ifdef __cplusplus
 namespace hub {
+#endif
 
 // Compiler identification
 #if defined( __clang__ )
@@ -232,10 +234,17 @@ namespace hub {
     "\033[" << std::to_string( 31 + reinterpret_cast<std::uintptr_t>( this ) % 7 ) << "m[" \
             << FILE_NAME_WITHOUT_EXTENSION << ":" << (uintptr_t)this % 100 << "]\033[0m "
 
+
+#ifdef __cplusplus
 #ifdef WIN32
-#    define MAX_STACK_SIZE 100'000
+#    define MAX_STACK_SIZE 100000 // 100'000 c compiler failed
 #else
-#    define MAX_STACK_SIZE 100'000 // 100Ko
+#    define MAX_STACK_SIZE 100000 // 100Ko
+#endif
+#else
+#    define MAX_STACK_SIZE 100000 // 100Ko
 #endif
 
+#ifdef __cplusplus
 } // namespace hub
+#endif

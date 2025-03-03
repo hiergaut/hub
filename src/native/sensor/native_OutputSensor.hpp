@@ -16,8 +16,10 @@
 
 #pragma once
 
-#include "core/Base.hpp"
+// #include "core/Base.hpp"
+#include "core/base/Macros.hpp"
 
+#ifdef __cplusplus
 namespace hub {
 
 #ifndef HUB_CPP_SOURCE
@@ -28,7 +30,6 @@ class OutputSensor;
 
 namespace native {
 
-#ifdef __cplusplus
 extern "C"
 {
 #endif
@@ -37,11 +38,15 @@ extern "C"
     /// \brief freeOutputSensor
     /// \param outputSensor
     ///
+#ifdef __cplusplus
     SRC_API void freeOutputSensor( sensor::OutputSensor* outputSensor );
+#else
+    SRC_API void freeOutputSensor( void* outputSensor );
+#endif
 
 #ifdef __cplusplus
 } // end extern "C"
-#endif
 
 } // namespace native
 } // namespace hub
+#endif
