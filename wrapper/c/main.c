@@ -8,6 +8,7 @@
 
 int main() {
 
+
     // using Resolution = hub::format::Dof6;
     // hub::sensor::SensorSpec sensorSpec( "sensorName", Resolution() );
 
