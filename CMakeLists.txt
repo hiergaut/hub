@@ -276,7 +276,7 @@ add_custom_target(
     COMMENT "Format project")
 custom_target_added(format)
 
-option(HUB_ENABLE_WRAPPER "Enable wrapper" OFF)
+option(HUB_ENABLE_WRAPPER "Enable wrapper" ON)
 if(HUB_ENABLE_WRAPPER)
     add_subdirectory(wrapper)
 endif()

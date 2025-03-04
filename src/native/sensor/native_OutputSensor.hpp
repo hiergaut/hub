@@ -34,6 +34,8 @@ extern "C"
 {
 #endif
 
+    SRC_API void helloWorld();
+
     ///
     /// \brief freeOutputSensor
     /// \param outputSensor

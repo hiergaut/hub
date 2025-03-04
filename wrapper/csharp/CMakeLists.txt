@@ -5,6 +5,12 @@ file(GLOB_RECURSE files "*.cs")
 add_executable(${PROJECT_NAME} ${files})
 target_link_libraries(${PROJECT_NAME} PUBLIC hub)
 
+add_custom_command(
+                TARGET ${PROJECT_NAME}
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hub_shared> $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+
 # set_target_properties(${PROJECT_NAME} PROPERTIES DOTNET_SDK "Microsoft.NET.Sdk")
 
 #   set_target_properties(${PROJECT_NAME} PROPERTIES

@@ -170,7 +170,9 @@ if(NOT XCODE) # unable to have object files as native build with Xcode
         if(NOT HUB_BUILD_STATIC AND HUB_BUILD_SHARED)
             target_compile_definitions(${TARGET_NAME} PUBLIC -DSRC_EXPORTS) # -> SRC_API = void, future shared
         else()
-            target_compile_definitions(${TARGET_NAME} PUBLIC -DSRC_STATIC) # -> SRC_API = void, future shared
+            # Todo check after added csharp wrapper, this one needs exported functions from dll to import
+            target_compile_definitions(${TARGET_NAME} PUBLIC -DSRC_EXPORTS) # -> SRC_API = void, future shared
+            # target_compile_definitions(${TARGET_NAME} PUBLIC -DSRC_STATIC) # -> SRC_API = void, future shared
         endif()
 
         # ############################ COMPILER SPECIFICS

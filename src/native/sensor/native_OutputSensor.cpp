@@ -7,6 +7,10 @@
 namespace hub {
 namespace native {
 
+void helloWorld() {
+	std::cout << "Hello world from C++" << std::endl;
+}
+
 void freeOutputSensor( sensor::OutputSensor* outputSensor ) {
     assert( outputSensor != nullptr );
     std::cout << "[Native] freeOutputSensor( " << outputSensor << ")" << std::endl;
