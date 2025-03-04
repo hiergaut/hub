@@ -1,5 +1,5 @@
 
-project(hubCpp)
+project(hub-wrapper-Cpp)
 
 file(GLOB_RECURSE files "*.cpp" "*.hpp")
 

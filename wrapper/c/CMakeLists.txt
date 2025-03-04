@@ -1,5 +1,5 @@
 
-project(hubC)
+project(hub-wrapper-C)
 
 file(GLOB_RECURSE files "*.c" "*.h")
 
