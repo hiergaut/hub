@@ -32,10 +32,10 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, world! from C#");
-            //Console.ReadLine();
 
             Hub.helloWorld();
             //Hub.freeOutputSensor(IntPtr.Zero);
+            Console.ReadLine();
         }
     }
 }

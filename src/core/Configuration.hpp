@@ -20,15 +20,17 @@
 
 namespace hub {
 
-#ifdef SRC_STATIC
-extern const int s_servicePort;
-extern const std::string s_serviceIpv4;
-extern const std::string s_extension;
-#else
+// Todo fix after adding csharp wrapper
+// #ifdef SRC_STATIC
+// #if defined( SRC_STATIC ) && ! defined( SRC_EXPORTS )
+// extern const int s_servicePort;
+// extern const std::string s_serviceIpv4;
+// extern const std::string s_extension;
+// #else
 static const int s_servicePort         = 4042;
 static const std::string s_serviceIpv4 = "127.0.0.1";
 static const std::string s_extension   = "hub";
-#endif
+// #endif
 
 } // namespace hub
 
