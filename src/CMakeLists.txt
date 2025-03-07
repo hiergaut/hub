@@ -329,6 +329,17 @@ if(HUB_BUILD_SHARED)
         DESTINATION share/${PROJECT_NAME}/cmake)
 
     list(APPEND HUB_LIBRARIES shared)
+    if (WIN32)
+        set(HUB_DLL_FILENAME "hub${CMAKE_POSTFIX}.dll" CACHE PATH "" FORCE)
+    elseif (LINUX)
+        set(HUB_DLL_FILENAME "libhub${CMAKE_POSTFIX}.so" CACHE PATH "" FORCE)
+    elseif (APPLE)
+        set(HUB_DLL_FILENAME "libhub${CMAKE_POSTFIX}.dlyb" CACHE PATH "" FORCE)
+    endif()
+    set(HUB_DLL ${CMAKE_CURRENT_BINARY_DIR}/${HUB_DLL_FILENAME} CACHE PATH "" FORCE)
+    if (NOT EXISTS ${HUB_DLL})
+        message(FATAL_ERROR "hub dll not found")
+    endif()
 
 endif() # (HUB_BUILD_SHARED)
 

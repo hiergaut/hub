@@ -1,4 +1,5 @@
 
+#include "Hello.h"
 #include "OutputSensor.h"
 #include <Python.h>
 
@@ -23,7 +24,10 @@ PyMODINIT_FUNC PyInit_hubPy() {
 
     PyObject* const module = PyModule_Create( &config );
 
-    if ( module != NULL && add_object( module, &outputSensor_object, "OutputSensor" ) ) {
+    if ( module != NULL
+         && add_object( module, &hello_object, "Hello" )
+         && add_object( module, &outputSensor_object, "OutputSensor" )
+         ) {
         return module;
     }
     Py_DECREF( module );

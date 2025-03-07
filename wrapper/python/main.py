@@ -2,6 +2,8 @@
 import time
 import hubPy
 
+hubPy.Hello()
+
 # from hubPy import *
 from time import sleep
 

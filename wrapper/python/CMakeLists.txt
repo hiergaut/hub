@@ -14,6 +14,18 @@ if (Python_FOUND)
     add_library(${PROJECT_NAME} SHARED ${files} ${tests})
     set_property(TARGET ${PROJECT_NAME} PROPERTY OUTPUT_NAME hubPy)
 
+    if (WIN32)
+        set(HUB_PYTHON_DLL_FILENAME "hubPy.dll" CACHE PATH "" FORCE)
+    elseif (LINUX)
+        set(HUB_PYTHON_DLL_FILENAME "hubPy.so" CACHE PATH "" FORCE)
+    elseif (APPLE)
+        set(HUB_PYTHON_DLL_FILENAME "hubPy.dlyb" CACHE PATH "" FORCE)
+    endif()
+    set(HUB_PYTHON_DLL ${CMAKE_CURRENT_BINARY_DIR}/${HUB_PYTHON_DLL_FILENAME} CACHE PATH "" FORCE)
+    if (NOT EXISTS ${HUB_PYTHON_DLL})
+        message(FATAL_ERROR "hub python dll not found")
+    endif()
+
     target_include_directories(${PROJECT_NAME} PRIVATE ${PYTHON_INCLUDE_PATH})
 
     target_link_libraries(${PROJECT_NAME} PRIVATE ${PYTHON_LIBRARIES} Python::NumPy hub)
