@@ -1,5 +1,5 @@
 
-project(hubPy)
+project(hub-wrapper-Python)
 # set(_PROJECT_NAME "hub-python")
 
 find_package(Python COMPONENTS NumPy QUIET)
@@ -12,21 +12,22 @@ if (Python_FOUND)
     set(CMAKE_DEBUG_POSTFIX "")
     set(CMAKE_SHARED_LIBRARY_PREFIX "")
     add_library(${PROJECT_NAME} SHARED ${files} ${tests})
+    set_property(TARGET ${PROJECT_NAME} PROPERTY OUTPUT_NAME hubPy)
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${PYTHON_INCLUDE_PATH})
 
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${PYTHON_LIBRARIES} Python::NumPy)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${PYTHON_LIBRARIES} Python::NumPy hub)
 
-    add_custom_command(
-        TARGET ${PROJECT_NAME}
-        POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/test.py" $<TARGET_FILE_DIR:${PROJECT_NAME}>
-        COMMAND ${PYTHON_EXECUTABLE} test.py
-    )
+    # add_custom_command(
+    #     TARGET ${PROJECT_NAME}
+    #     POST_BUILD
+    #     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/main.py" $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    #     COMMAND ${PYTHON_EXECUTABLE} main.py
+    # )
 
     add_custom_target(
-        wrapper-python-test # WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        COMMAND ${PYTHON_EXECUTABLE} test.py
+        hub-wrapper-python-test # WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        COMMAND ${PYTHON_EXECUTABLE} main.py
         COMMENT "Running python tests")
 
 

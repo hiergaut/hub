@@ -3,33 +3,38 @@
 #error "not c wrapper"
 #endif
 
-// #include <sensor/OutputSensor.hpp>
+#include <unistd.h>
+
 #include <native/sensor/native_OutputSensor.hpp>
 
 int main() {
+    helloWorld();
 
+    HUB_OUTPUT_SENSOR* outputSensor = createOutputSensorDof6( "sensorName", "streamName" );
 
-    // using Resolution = hub::format::Dof6;
-    // hub::sensor::SensorSpec sensorSpec( "sensorName", Resolution() );
+    HUB_ACQUISITION* acq = outputSensorGetAcq( outputSensor );
 
-    // hub::sensor::OutputSensor outputSensor( sensorSpec, "streamName" );
+    HUB_DOF6 * dof6 = acquisition_getDof6(acq);
+    HUB_CLOCK * start = acquisition_getStart(acq);
+    HUB_CLOCK * end = acquisition_getEnd(acq);
 
-    // auto acq            = outputSensor.acqMsg();
-    // auto [start, end]   = acq.clocks();
-    // auto & dof6 = acq.get<Resolution&>();
+    for ( int i = 0; i < 10; ++i ) {
+        *start = i;
+        *end = i;
+        dof6->x = i;
+        dof6->y = i;
+        dof6->z = i;
+        dof6->w0 = i;
+        dof6->w1 = i;
+        dof6->w2 = i;
+        dof6->w3 = i;
+        outputSensorSendAcq( outputSensor, acq );
+        usleep(100000);
+    }
 
-    // size_t iFrame = 0;
-    // while ( 1 ) {
-    //     start = iFrame;
-    //     end = iFrame;
+    freeAcquisition( acq );
+    freeOutputSensor( outputSensor );
 
-    //     dof6.x = iFrame % 100;
-    //     dof6.y = iFrame % 100;
-    //     dof6.z = iFrame % 100;
-
-    //     outputSensor << acq;
-    //     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    // }
 
     return 0;
 }

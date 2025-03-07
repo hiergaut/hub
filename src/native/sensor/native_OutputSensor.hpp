@@ -18,33 +18,44 @@
 
 // #include "core/Base.hpp"
 #include "core/base/Macros.hpp"
+#include "native_Acquisition.hpp"
+// #include "core/Format.hpp"
 
 #ifdef __cplusplus
+#define HUB_OUTPUT_SENSOR hub::sensor::OutputSensor
+
 namespace hub {
 
-#ifndef HUB_CPP_SOURCE
+#    ifndef HUB_CPP_SOURCE
 namespace sensor {
 class OutputSensor;
 }
-#endif
+#    endif
 
 namespace native {
 
 extern "C"
 {
+#else
+#define HUB_OUTPUT_SENSOR void
 #endif
 
     SRC_API void helloWorld();
+
+    SRC_API HUB_OUTPUT_SENSOR* createOutputSensorDof6( const char* sensorName, const char* streamName );
+
+    SRC_API HUB_ACQUISITION* outputSensorGetAcq( HUB_OUTPUT_SENSOR* outputSensor );
+
+    SRC_API void outputSensorSendAcq( HUB_OUTPUT_SENSOR* outputSensor, HUB_ACQUISITION * acquisition );
+
+
+    // SRC_API void freeAcquisition( void* acquisition );
 
     ///
     /// \brief freeOutputSensor
     /// \param outputSensor
     ///
-#ifdef __cplusplus
-    SRC_API void freeOutputSensor( sensor::OutputSensor* outputSensor );
-#else
-    SRC_API void freeOutputSensor( void* outputSensor );
-#endif
+    SRC_API void freeOutputSensor( HUB_OUTPUT_SENSOR* outputSensor );
 
 #ifdef __cplusplus
 } // end extern "C"

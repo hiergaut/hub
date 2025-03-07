@@ -136,7 +136,7 @@ add_definitions(-DHUB_STATS_DIR=\"${HUB_STATS_DIR}/\")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
 include(GetVersionFromGitTag)
-message(STATUS "${HEADER_MSG} Version: ${${PROJECT_NAME}_VERSION} (hash: ${${PROJECT_NAME}_HASH})")
+message(STATUS "${HEADER_MSG} Version: ${${PROJECT_NAME}_VERSION}")
 
 find_package(Boost QUIET NO_MODULE) # tcp socket communication
 if(Boost_FOUND)

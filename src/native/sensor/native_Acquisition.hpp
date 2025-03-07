@@ -16,12 +16,15 @@
 
 #pragma once
 
-#include "core/Base.hpp"
+#include "core/base/Macros.hpp"
+// #include "core/Base.hpp"
+
+#ifdef __cplusplus
+#define HUB_ACQUISITION hub::sensor::Acquisition
 
 namespace hub {
 
 #ifndef HUB_CPP_SOURCE
-
 namespace sensor {
 class Acquisition;
 }
@@ -29,16 +32,29 @@ class Acquisition;
 
 namespace native {
 
-#ifdef __cplusplus
 extern "C"
 {
+#else
+#define HUB_ACQUISITION void
 #endif
+
+    typedef struct {
+        float x;
+        float y;
+        float z;
+        float w0; // w
+        float w1; // x
+        float w2; // y
+        float w3; // z
+    } HUB_DOF6;
+
+    typedef long long HUB_CLOCK;
 
     ///
     /// \brief freeAcquisition
     /// \param acquisition
     ///
-    SRC_API void freeAcquisition( sensor::Acquisition* acquisition );
+    SRC_API void freeAcquisition( HUB_ACQUISITION* acquisition );
 
     ///
     /// \brief acquisition_getMeasure
@@ -46,16 +62,19 @@ extern "C"
     /// \param data
     /// \param iMeasure
     ///
-    SRC_API void acquisition_getMeasure( const sensor::Acquisition* acquisition,
+    SRC_API void acquisition_getMeasure( const HUB_ACQUISITION* acquisition,
                                          unsigned char* data,
-                                         int iMeasure = 0 );
+                                         int iMeasure );
 
+    SRC_API HUB_DOF6 * acquisition_getDof6( HUB_ACQUISITION* acquisition);
     ///
     /// \brief acquisition_getStart
     /// \param acquisition
     /// \return
     ///
-    SRC_API long long acquisition_getStart( const sensor::Acquisition* acquisition );
+    SRC_API HUB_CLOCK* acquisition_getStart( HUB_ACQUISITION* acquisition );
+
+    SRC_API HUB_CLOCK* acquisition_getEnd( HUB_ACQUISITION* acquisition );
 
     ///
     /// \brief acquisition_to_string
@@ -64,11 +83,11 @@ extern "C"
     /// \param strLen
     ///
     SRC_API void
-    acquisition_to_string( const sensor::Acquisition* acquisition, char* str, int* strLen );
+    acquisition_to_string( const HUB_ACQUISITION* acquisition, char* str, int* strLen );
 
 #ifdef __cplusplus
 } // end extern "C"
-#endif
 
 } // namespace native
 } // namespace hub
+#endif

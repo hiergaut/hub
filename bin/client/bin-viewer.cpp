@@ -19,6 +19,7 @@ Run viewer.
     bool exitWhenServerLost = false;
     int port                = HUB_SERVICE_PORT;
     std::string ipv4        = "127.0.0.1";
+    bool verbose            = true;
 
     const auto helperMsg =
         "bin-viewer usage: [--port <int>] [--ipv4 <string>] [--exitWhenServerLost]\n"
@@ -128,8 +129,25 @@ Run viewer.
 #ifndef HUB_NON_BUILD_SENSOR
     viewerHandler.onNewAcq = [&]( const std::string& streamName,
                                   const hub::sensor::Acquisition& acq ) {
-        std::cout << "\033[" << std::to_string( std::hash<std::string> {}( streamName ) % 10 + 40 )
-                  << "ma\033[0m" << std::flush;
+        if ( verbose ) {
+            std::cout << "\033["
+                      << std::to_string( std::hash<std::string> {}( streamName ) % 10 + 40 ) << "m";
+            if ( acq.nType() == 3 ) {
+                if (acq.hasType<hub::format::Dof6>()) {
+                    std::cout << acq.getStart() << ":" << acq.getEnd() << "\t" << acq.get<const hub::format::Dof6&>();
+                }
+                else {
+                    std::cout << acq;
+                }
+            }
+            else { std::cout << acq; }
+            std::cout << "\033[0m" << std::endl;
+        }
+        else {
+            std::cout << "\033["
+                      << std::to_string( std::hash<std::string> {}( streamName ) % 10 + 40 )
+                      << "ma\033[0m" << std::flush;
+        }
         m_streamLives.at( streamName )->newData();
     };
 #endif
@@ -174,6 +192,10 @@ Run viewer.
                 break;
             case hub::utils::Key::h:
                 std::cout << helperMsg << std::endl;
+                break;
+            case hub::utils::Key::v:
+                verbose = !verbose;
+                std::cout << "verbose " << verbose << std::endl;
                 break;
             default:
                 std::cout << "unrecognized key : " << key << std::endl;

@@ -12,6 +12,8 @@ namespace hub {
 namespace native {
 
 void freeAcquisition( sensor::Acquisition* acquisition ) {
+    assert( acquisition != nullptr );
+    std::cout << "[Native] freeAcquisition( " << acquisition << ")" << std::endl;
     delete acquisition;
 }
 
@@ -28,8 +30,13 @@ void acquisition_getMeasure( const sensor::Acquisition* acquisition,
     memcpy( data, acqData, node.getSize() );
 }
 
-long long acquisition_getStart( const sensor::Acquisition* acquisition ) {
-    return acquisition->getStart();
+HUB_CLOCK * acquisition_getStart( HUB_ACQUISITION* acquisition ) {
+    return &acquisition->start();
+}
+
+HUB_CLOCK *acquisition_getEnd(HUB_ACQUISITION *acquisition)
+{
+    return &acquisition->end();
 }
 
 void acquisition_to_string( const sensor::Acquisition* acquisition, char* str, int* strLen ) {
@@ -45,6 +52,14 @@ void acquisition_to_string( const sensor::Acquisition* acquisition, char* str, i
 #endif
     str[*strLen] = 0;
 }
+
+HUB_DOF6 *acquisition_getDof6(HUB_ACQUISITION *acquisition)
+{
+    hub::sensor::Acquisition * acquisition2 = static_cast<hub::sensor::Acquisition*>(acquisition);
+    auto & dof6 = acquisition2->get<hub::format::Dof6&>();
+    return reinterpret_cast<HUB_DOF6*>(&dof6);
+}
+
 
 } // namespace native
 } // namespace hub

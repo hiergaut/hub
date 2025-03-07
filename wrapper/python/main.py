@@ -4,10 +4,42 @@ import time
 
 import hubPy
 
-print("hub wrapper worked")
+print("hub wrapper python worked")
 
 
-# from Hub import *
+from hubPy import *
+from time import sleep
+
+
+# hubPy
+outputSensor = hubPy.OutputSensor('pySensor', 'pyStream')
+# outputSensor.helloWorld()
+
+for i in range(0, 10):
+    print(i)
+    outputSensor.start = i
+    outputSensor.end = i
+    outputSensor.x = i
+    outputSensor.y = i
+    outputSensor.z = i
+    outputSensor.w0 = i
+    outputSensor.w1 = i
+    outputSensor.w2 = i
+    outputSensor.w3 = i
+    outputSensor.newAcq()
+    sleep(0.1)
+
+# outputSensor.acq = outputSensor.Acq(
+#     # imufusion.CONVENTION_NWU,  # convention
+#     0,
+#     0.5,  # gain
+#     2000,  # gyroscope range
+#     10,  # acceleration rejection
+#     10,  # magnetic rejection
+#     5  # recovery trigger period = 5 seconds
+# )
+
+
 
 # import numpy as np
 # from matplotlib import pyplot as plt
