@@ -22,9 +22,6 @@ if (Python_FOUND)
         set(HUB_PYTHON_DLL_FILENAME "hubPy.dlyb" CACHE PATH "" FORCE)
     endif()
     set(HUB_PYTHON_DLL ${CMAKE_CURRENT_BINARY_DIR}/${HUB_PYTHON_DLL_FILENAME} CACHE PATH "" FORCE)
-    if (NOT EXISTS ${HUB_PYTHON_DLL})
-        message(FATAL_ERROR "hub python dll not found")
-    endif()
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${PYTHON_INCLUDE_PATH})
 
