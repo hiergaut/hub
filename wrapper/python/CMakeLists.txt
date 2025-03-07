@@ -18,12 +18,12 @@ if (Python_FOUND)
 
     target_link_libraries(${PROJECT_NAME} PRIVATE ${PYTHON_LIBRARIES} Python::NumPy hub)
 
-    # add_custom_command(
-    #     TARGET ${PROJECT_NAME}
-    #     POST_BUILD
-    #     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/main.py" $<TARGET_FILE_DIR:${PROJECT_NAME}>
-    #     COMMAND ${PYTHON_EXECUTABLE} main.py
-    # )
+    add_custom_command(
+        TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/main.py" $<TARGET_FILE_DIR:${PROJECT_NAME}>
+        # COMMAND ${PYTHON_EXECUTABLE} main.py
+    )
 
     add_custom_target(
         hub-wrapper-python-test # WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
