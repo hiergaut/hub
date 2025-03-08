@@ -19,7 +19,7 @@ Run viewer.
     bool exitWhenServerLost = false;
     int port                = HUB_SERVICE_PORT;
     std::string ipv4        = "127.0.0.1";
-    bool verbose            = true;
+    bool verbose            = false;
 
     const auto helperMsg =
         "bin-viewer usage: [--port <int>] [--ipv4 <string>] [--exitWhenServerLost]\n"
